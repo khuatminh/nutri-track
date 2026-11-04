@@ -6,6 +6,7 @@ import { Badge, Card, EmptyState, PageHeader } from "@/components/ui/misc";
 import { addDays, fmtShortDate, todayIn } from "@/lib/dates";
 import { fmtDec1, fmtInt } from "@/lib/format";
 import { requireUser } from "@/server/auth";
+import { db } from "@/server/db";
 import { getPeriodReport } from "@/server/reports/service";
 
 export const metadata: Metadata = { title: "Báo cáo" };
@@ -23,7 +24,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ v
   const view = sp.view === "month" ? "month" : "week";
   const today = todayIn(u.timezone);
   const anchor = sp.date && /^\d{4}-\d{2}-\d{2}$/.test(sp.date) ? sp.date : today;
-  const r = await getPeriodReport(u.userId, view, anchor);
+  const [r, prof] = await Promise.all([getPeriodReport(u.userId, view, anchor), db.profile.findUnique({ where: { userId: u.userId }, select: { hideWeight: true } })]);
   const s = r.summary;
   const link = (v: string, d: string) => `/bao-cao?view=${v}&date=${d}`;
   const ref = s.references;
@@ -72,10 +73,10 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ v
             </dl>
             {s.missingMicroDays > 0 && <p className="mt-2 text-xs text-muted">Một số món chưa có dữ liệu natri/đường/xơ nên được tính là 0.</p>}
           </Card>
-          <Card>
+          {!prof?.hideWeight && (<Card>
             <h2 className="mb-1 text-lg font-semibold">Cân nặng</h2>
             {r.weight.changeKg === null ? <p className="text-sm text-muted">Chưa đủ dữ liệu trong khoảng này. <Link href="/can-nang" className="text-primary underline">Ghi cân nặng</Link></p> : <p className="text-sm">Thay đổi: <strong>{r.weight.changeKg > 0 ? "+" : r.weight.changeKg < 0 ? "−" : ""}{fmtDec1(Math.abs(r.weight.changeKg))} kg</strong> · <Link href="/can-nang" className="text-primary underline">Xem xu hướng</Link></p>}
-          </Card>
+          </Card>)}
         </>
       )}
     </div>

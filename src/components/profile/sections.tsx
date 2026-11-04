@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   changePasswordAction, deleteAccountAction, recalculateTargetsAction, saveProfileAction, saveReminderAction,
   setCustomTargetsAction, setHideWeightAction, setThemeAction,
@@ -122,7 +122,9 @@ export function RemindersCard({ reminders }: { reminders: ReminderDto[] }) {
   const [water, setWater] = useState({ enabled: w?.enabled ?? false, start: w?.startTime ?? "08:00", end: w?.endTime ?? "20:00", every: String(w?.intervalHours ?? 2), days: w?.daysOfWeek ?? [1, 2, 3, 4, 5, 6, 7] });
   const [meals, setMeals] = useState(() => Object.fromEntries(MEALS.map(({ m, t }) => { const r = reminders.find((x) => x.type === "meal" && x.meal === m); return [m, { enabled: r?.enabled ?? false, time: r?.times[0] ?? t, days: r?.daysOfWeek ?? [1, 2, 3, 4, 5, 6, 7] }]; })));
   const [errs, setErrs] = useState<Record<string, string>>({});
-  const [perm, setPerm] = useState<"unsupported" | NotificationPermission>(typeof Notification === "undefined" ? "unsupported" : Notification.permission);
+  const [perm, setPerm] = useState<"unsupported" | NotificationPermission>("unsupported");
+  // Read after mount to avoid a server/client hydration mismatch.
+  useEffect(() => { if (typeof Notification !== "undefined") setPerm(Notification.permission); }, []);
   const [explain, setExplain] = useState(false);
 
   const toggleDay = (days: number[], n: number) => (days.includes(n) ? days.filter((d) => d !== n) : [...days, n]);

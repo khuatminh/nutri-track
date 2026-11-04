@@ -59,3 +59,34 @@ docker compose exec -T db pg_dump -U nutritrack -d nutritrack -Fc > /tmp/nutritr
 Nếu migration thất bại, dừng app, giữ bản dump và log để Tech Lead xử lý migration. Prisma không tự rollback migration. Không chạy `docker compose down -v` trên dữ liệu cần giữ vì lệnh này xóa volume. Không có deploy hoặc release production trong cấu hình này.
 
 Tham khảo: [Docker Compose healthcheck](https://docs.docker.com/compose/how-tos/startup-order/), [Mailpit Docker](https://mailpit.axllent.org/docs/install/docker/).
+
+## Ứng dụng (Next.js)
+
+Stack theo [ADR-0001](docs/adr/0001-nutritrack-mvp-architecture.md): Next.js 15 (App Router) + TypeScript strict + Tailwind v4 + Prisma/PostgreSQL 16 + Vitest + Playwright.
+
+### Cấu trúc
+| Thư mục | Nội dung |
+|---|---|
+| `src/lib/nutrition/` | Hàm thuần: BMR/TDEE/kcal/macro/nước/khẩu phần/công thức/báo cáo; hằng số ở `constants.ts` |
+| `src/server/*` | Service theo miền (auth, profile, foods, food-log, recipes, water, weight, reminders, dashboard, reports); **luôn nhận `userId` từ session** |
+| `src/app/(auth)`, `(app)`, `onboarding` | Route UI; Server Actions ở `(app)/actions.ts` |
+| `src/components/*` | UI kit (`ui/`), layout, và component theo tính năng |
+| `prisma/` | Schema, migrations, seed món Việt |
+
+### Lệnh
+```sh
+pnpm lint && pnpm typecheck && pnpm test && pnpm build
+pnpm test:cov        # coverage src/lib/nutrition (ngưỡng ≥ 90% dòng)
+pnpm test:e2e        # cần app + DB đang chạy, và `pnpm exec playwright install chromium`
+```
+
+### Kiểm thử tích hợp (DB thật)
+Các file `*.int.test.ts` chỉ chạy khi có `DATABASE_URL` (bị bỏ qua nếu không):
+```sh
+DATABASE_URL="postgresql://nutritrack:nutritrack_local_only@localhost:5432/nutritrack?schema=public" pnpm test
+```
+Cần `docker compose up -d` và `pnpm dev:setup` trước. Kiểm tra `DATABASE_URL` trỏ đúng cổng **5432** của docker-compose (không phải một Postgres khác trên máy).
+
+### Lưu ý
+- Nhắc nhở chỉ hoạt động khi tab đang mở (ADR §2.6); reset mật khẩu gửi mail vào Mailpit (http://localhost:8025).
+- Truy vết yêu cầu: [`docs/product/TRACEABILITY.md`](docs/product/TRACEABILITY.md). Ảnh chụp màn hình: `docs/screenshots/app/`.
