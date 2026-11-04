@@ -2,9 +2,10 @@ import { expect, test } from "@playwright/test";
 
 const SHOTS = process.env.SHOTS_DIR; // when set, also capture screenshots (light/dark × mobile/desktop)
 
-test("đăng ký → onboarding → ghi bữa → dashboard", async ({ page }) => {
+test("đăng ký → onboarding → ghi bữa → dashboard", async ({ page }, testInfo) => {
   await page.emulateMedia({ colorScheme: process.env.SCHEME === "dark" ? "dark" : "light" });
-  const email = `e2e-${Date.now()}@example.test`;
+  // Projects run in parallel: make the email unique per project + run to avoid duplicate-registration races.
+  const email = `e2e-${testInfo.project.name}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@example.test`;
   await page.goto("/dang-ky");
   await expect(page.getByRole("heading", { name: /tạo tài khoản/i })).toBeVisible();
   await page.getByLabel("Email").fill(email);
