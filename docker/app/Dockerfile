@@ -29,6 +29,11 @@ RUN pnpm exec prisma generate \
   && mkdir -p public \
   && NODE_ENV=production pnpm build
 
+# Next's tracer follows @node-rs/argon2 but not its platform-specific optional package.
+# Materialise both under a stable path so the runtime stage does not pin a pnpm version.
+RUN mkdir -p /app/relocate/@node-rs \
+  && cp -a node_modules/.pnpm/@node-rs+argon2-linux-x64-gnu@*/node_modules/@node-rs/argon2-linux-x64-gnu /app/relocate/@node-rs/
+
 FROM node:22-bookworm-slim AS runtime
 RUN apt-get update \
   && apt-get install -y --no-install-recommends openssl ca-certificates curl \
@@ -40,15 +45,13 @@ ENV NODE_ENV=production \
     PORT=3000 \
     HOSTNAME=0.0.0.0
 
-# Standalone server + static assets.
+# Standalone server + static assets. Prisma client, its query engine and
+# @node-rs/argon2 are already part of the traced output; only the argon2 native
+# platform package has to be added.
 COPY --from=build /app/.next/standalone ./
 COPY --from=build /app/.next/static ./.next/static
 COPY --from=build /app/public ./public
-# Prisma engines and argon2 are external native packages; keep them out of the bundle
-# but present at runtime.
-COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=build /app/node_modules/@prisma ./node_modules/@prisma
-COPY --from=build /app/node_modules/@node-rs ./node_modules/@node-rs
+COPY --from=build /app/relocate/@node-rs/ ./node_modules/@node-rs/
 
 RUN chown -R node:node /app
 USER node
