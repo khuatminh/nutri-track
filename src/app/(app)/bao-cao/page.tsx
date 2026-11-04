@@ -35,12 +35,12 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ v
       <PageHeader title="Báo cáo" subtitle={`${fmtShortDate(r.from)} – ${fmtShortDate(r.to)}`} />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <nav aria-label="Kiểu báo cáo" className="flex rounded-md bg-surface-2 p-1">
-          {(["week", "month"] as const).map((v) => <Link key={v} href={link(v, anchor)} aria-current={v === view ? "page" : undefined} className={`min-h-9 content-center rounded-sm px-4 text-sm font-semibold ${v === view ? "bg-surface shadow-[var(--shadow-1)]" : "text-muted"}`}>{v === "week" ? "Tuần" : "Tháng"}</Link>)}
+          {(["week", "month"] as const).map((v) => <Link key={v} href={link(v, anchor)} aria-current={v === view ? "page" : undefined} className={`min-h-11 content-center rounded-sm px-4 text-sm font-semibold ${v === view ? "bg-surface shadow-[var(--shadow-1)]" : "text-muted"}`}>{v === "week" ? "Tuần" : "Tháng"}</Link>)}
         </nav>
         <div className="flex items-center gap-2">
           <Link href={link(view, shift(anchor, view, -1))} className="grid size-11 place-items-center rounded-full bg-surface-2" aria-label={view === "week" ? "Tuần trước" : "Tháng trước"}><ChevronLeft className="size-5" aria-hidden /></Link>
           <Link href={link(view, shift(anchor, view, 1))} className="grid size-11 place-items-center rounded-full bg-surface-2" aria-label={view === "week" ? "Tuần sau" : "Tháng sau"}><ChevronRight className="size-5" aria-hidden /></Link>
-          {anchor !== today && <Link href={`/bao-cao?view=${view}`} className="text-sm font-semibold text-primary underline">Hiện tại</Link>}
+          {anchor !== today && <Link href={`/bao-cao?view=${view}`} className="inline-flex min-h-11 min-w-11 items-center text-sm font-semibold text-primary underline">Hiện tại</Link>}
         </div>
       </div>
 
@@ -75,7 +75,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ v
           </Card>
           {!prof?.hideWeight && (<Card>
             <h2 className="mb-1 text-lg font-semibold">Cân nặng</h2>
-            {r.weight.changeKg === null ? <p className="text-sm text-muted">Chưa đủ dữ liệu trong khoảng này. <Link href="/can-nang" className="text-primary underline">Ghi cân nặng</Link></p> : <p className="text-sm">Thay đổi: <strong>{r.weight.changeKg > 0 ? "+" : r.weight.changeKg < 0 ? "−" : ""}{fmtDec1(Math.abs(r.weight.changeKg))} kg</strong> · <Link href="/can-nang" className="text-primary underline">Xem xu hướng</Link></p>}
+            {r.weight.changeKg === null ? <p className="text-sm text-muted">Chưa đủ dữ liệu trong khoảng này. <Link href="/can-nang" className="inline-flex min-h-11 min-w-11 items-center text-primary underline">Ghi cân nặng</Link></p> : <p className="text-sm">Thay đổi: <strong>{r.weight.changeKg > 0 ? "+" : r.weight.changeKg < 0 ? "−" : ""}{fmtDec1(Math.abs(r.weight.changeKg))} kg</strong> · <Link href="/can-nang" className="inline-flex min-h-11 min-w-11 items-center text-primary underline">Xem xu hướng</Link></p>}
           </Card>)}
         </>
       )}

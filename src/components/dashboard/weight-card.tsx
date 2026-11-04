@@ -31,7 +31,7 @@ export function WeightCard({ weight, hidden: initialHidden }: { weight: WeightDt
       ) : (
         <p className="text-sm text-muted">Chưa có bản ghi cân nặng.</p>
       )}
-      {!hidden && <Link href="/can-nang" className="min-h-11 content-center text-sm font-semibold text-primary underline">Ghi cân nặng & xem xu hướng</Link>}
+      {!hidden && <Link href="/can-nang" className="inline-flex min-h-11 items-center text-sm font-semibold text-primary underline">Ghi cân nặng & xem xu hướng</Link>}
     </Card>
   );
 }
