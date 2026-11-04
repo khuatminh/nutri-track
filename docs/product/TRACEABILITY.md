@@ -30,4 +30,4 @@ Trạng thái: ✅ đã làm + có test/chạy thử · 🟡 làm một phần �
 | 26 Web notification (P1) | `RemindersCard` (giải thích trước khi xin quyền) | `Notification` API | 🟡 |
 | 12, 21 (P1) | Ghi nhanh calo ✅ (`AddFood`); Insights ⬜ | `addQuickLog` | 🟡 |
 
-**Chưa kiểm chứng:** Lighthouse/axe, kiểm tay trình đọc màn hình, e2e tự động, hiệu năng p95 tìm món trên 10.000 món (đã đo < 300 ms trên 289 món).
+**Đã kiểm chứng:** e2e Playwright đăng ký → onboarding → ghi bữa → dashboard (mobile + desktop, light + dark) pass. **Chưa kiểm chứng:** Lighthouse/axe, kiểm tay trình đọc màn hình, hiệu năng p95 tìm món trên 10.000 món (đã đo < 300 ms trên 289 món).

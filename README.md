@@ -89,4 +89,4 @@ Cần `docker compose up -d` và `pnpm dev:setup` trước. Kiểm tra `DATABASE
 
 ### Lưu ý
 - Nhắc nhở chỉ hoạt động khi tab đang mở (ADR §2.6); reset mật khẩu gửi mail vào Mailpit (http://localhost:8025).
-- Truy vết yêu cầu: [`docs/product/TRACEABILITY.md`](docs/product/TRACEABILITY.md). Ảnh chụp màn hình: `docs/screenshots/app/`.
+- Truy vết yêu cầu: [`docs/product/TRACEABILITY.md`](docs/product/TRACEABILITY.md). Ảnh chụp màn hình app thật (light/dark × mobile/desktop): `docs/screenshots/app-ui/`; ảnh mockup thiết kế: `docs/screenshots/app/`. Chạy kèm DB: `DISABLE_RATE_LIMIT=1` chỉ dùng cho e2e local.
