@@ -1,7 +1,8 @@
 import { dateToIso, isoToDate, todayIn } from "@/lib/dates";
-import { fieldErrors } from "@/lib/validation/auth";
+import type { WaterLog } from "@prisma/client";import { fieldErrors } from "@/lib/validation/auth";
 import { waterSchema } from "@/lib/validation/food";
 import { db } from "@/server/db";
+import { isUniqueViolation } from "@/server/idempotency";
 
 type R<T = object> = ({ ok: true } & T) | { ok: false; error: string; fields?: Record<string, string> };
 
@@ -24,7 +25,23 @@ export async function addWater(userId: string, timezone: string, raw: unknown): 
   const p = waterSchema.safeParse(raw);
   if (!p.success) return { ok: false, error: "Lượng nước chưa hợp lệ", fields: fieldErrors(p.error) };
   const date = p.data.date ?? todayIn(timezone);
-  const log = await db.waterLog.create({ data: { userId, loggedAt: new Date(), logDate: isoToDate(date), amountMl: p.data.amountMl } });
+  if (p.data.clientRequestId) {
+    const existing = await db.waterLog.findFirst({ where: { userId, clientRequestId: p.data.clientRequestId } });
+    if (existing) return { ok: true, log: dto(existing), totalMl: await waterTotal(userId, date) };
+  }
+  let log: WaterLog;
+  try {
+    log = await db.waterLog.create({
+      data: { userId, loggedAt: new Date(), logDate: isoToDate(date), amountMl: p.data.amountMl, clientRequestId: p.data.clientRequestId ?? null },
+    });
+  } catch (e) {
+    // NFR-09: a retried request that raced another attempt must not add the amount twice.
+    if (p.data.clientRequestId && isUniqueViolation(e)) {
+      const existing = await db.waterLog.findFirst({ where: { userId, clientRequestId: p.data.clientRequestId } });
+      if (existing) return { ok: true, log: dto(existing), totalMl: await waterTotal(userId, date) };
+    }
+    throw e;
+  }
   return { ok: true, log: dto(log), totalMl: await waterTotal(userId, date) };
 }
 

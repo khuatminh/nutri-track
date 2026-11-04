@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/dialog";
 import { Input, Select } from "@/components/ui/field";
 import { Badge, EmptyState } from "@/components/ui/misc";
+import { RetryNotice } from "@/components/ui/retry";
 import { useToast } from "@/components/ui/toast";
 import { cn } from "@/lib/cn";
 import { fmtDec1, fmtInt, parseDecimal } from "@/lib/format";
+import { friendlyError, newRequestId } from "@/lib/network";
 import { MEAL_LABEL, MEAL_ORDER } from "@/lib/meals";
 import type { Meal } from "@prisma/client";
 import type { FoodHit } from "@/server/foods/search";
@@ -55,7 +57,10 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
   const [added, setAdded] = useState(0);
   const [panel, setPanel] = useState<"quick" | "custom" | null>(null);
   const [offline, setOffline] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const reqId = useRef(0);
+  // Reused for an offline retry so the server returns the original row instead of adding twice (NFR-09).
+  const saveKey = useRef<string | null>(null);
 
   // Debounced search (150 ms, ADR §2.5) with stale-response guard.
   useEffect(() => {
@@ -88,6 +93,8 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
     setServingId((last ?? def)?.id ?? "");
     setQty(String(h.lastQuantity ?? 1).replace(".", ","));
     setQtyErr("");
+    setSaveError("");
+    saveKey.current = null;
   };
 
   const qn = parseDecimal(qty);
@@ -96,28 +103,44 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
   const add = (allowFuture = false) => {
     if (!sel) return;
     if (!(qn > 0)) return setQtyErr("Nhập số lượng lớn hơn 0");
+    setSaveError("");
+    const key = saveKey.current ?? newRequestId();
+    saveKey.current = key;
     start(async () => {
-      const r = await addLogAction({ date, meal, kind: sel.kind, itemId: sel.id, servingId: sel.kind === "food" && servingId ? servingId : undefined, quantity: qn, source: tab === "recent" ? "recent" : "search" }, { allowFuture });
-      if (!r.ok) {
-        if (r.fields?.date === "future") {
-          if (window.confirm("Ngày này ở tương lai xa. Bạn vẫn muốn ghi vào ngày này?")) add(true);
-          return;
+      try {
+        const r = await addLogAction({ date, meal, kind: sel.kind, itemId: sel.id, servingId: sel.kind === "food" && servingId ? servingId : undefined, quantity: qn, source: tab === "recent" ? "recent" : "search", clientRequestId: key }, { allowFuture });
+        if (!r.ok) {
+          if (r.fields?.date === "future") {
+            if (window.confirm("Ngày này ở tương lai xa. Bạn vẫn muốn ghi vào ngày này?")) add(true);
+            return;
+          }
+          saveKey.current = null;
+          return setQtyErr(r.fields?.quantity ?? r.error);
         }
-        return setQtyErr(r.fields?.quantity ?? r.error);
+        saveKey.current = null;
+        setSaveError("");
+        setAdded((n) => n + 1);
+        setSel(null);
+        toast.show(`Đã thêm ${sel.name} vào ${MEAL_LABEL[meal]}`, { actionLabel: "Hoàn tác", onAction: () => void undoLogsAction([r.log.id]).then(() => { setAdded((n) => Math.max(0, n - 1)); router.refresh(); }) });
+        router.refresh();
+      } catch (e) {
+        // Offline / lost response: keep the sheet, the chosen item and the quantity untouched.
+        setSaveError(friendlyError(e));
       }
-      setAdded((n) => n + 1);
-      setSel(null);
-      toast.show(`Đã thêm ${sel.name} vào ${MEAL_LABEL[meal]}`, { actionLabel: "Hoàn tác", onAction: () => void undoLogsAction([r.log.id]).then(() => { setAdded((n) => Math.max(0, n - 1)); router.refresh(); }) });
-      router.refresh();
     });
   };
 
   const fav = (h: FoodHit) =>
     start(async () => {
-      await favoriteAction(h.id, !h.isFavorite);
-      h.isFavorite = !h.isFavorite;
-      setHits((x) => (x ? [...x] : x));
-      router.refresh();
+      try {
+        const r = await favoriteAction(h.id, !h.isFavorite);
+        if (!r.ok) return toast.show(r.error, { tone: "error" });
+        h.isFavorite = !h.isFavorite;
+        setHits((x) => (x ? [...x] : x));
+        router.refresh();
+      } catch (e) {
+        toast.show(friendlyError(e), { tone: "error" });
+      }
     });
 
   return (
@@ -132,7 +155,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Chọn bữa">
         {MEAL_ORDER.map((m) => (
-          <button key={m} aria-pressed={meal === m} onClick={() => setMeal(m)} className={cn("min-h-11 rounded-full border px-4 text-sm font-semibold", meal === m ? "border-primary bg-primary-soft text-primary-soft-text" : "border-border-strong bg-surface")}>{MEAL_LABEL[m]}</button>
+          <button key={m} aria-pressed={meal === m} onClick={() => { setMeal(m); setSaveError(""); saveKey.current = null; }} className={cn("min-h-11 rounded-full border px-4 text-sm font-semibold", meal === m ? "border-primary bg-primary-soft text-primary-soft-text" : "border-border-strong bg-surface")}>{MEAL_LABEL[m]}</button>
         ))}
       </div>
 
@@ -192,9 +215,9 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
         {sel && (
           <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); add(); }}>
             <div className="grid grid-cols-2 gap-3">
-              <Input label="Số lượng" inputMode="decimal" value={qty} onChange={(e) => { setQty(e.target.value); setQtyErr(""); }} error={qtyErr} />
+              <Input label="Số lượng" inputMode="decimal" value={qty} onChange={(e) => { setQty(e.target.value); setQtyErr(""); setSaveError(""); saveKey.current = null; }} error={qtyErr} />
               {sel.kind === "food" ? (
-                <Select label="Đơn vị" value={servingId} onChange={(e) => setServingId(e.target.value)} options={[...sel.servings.map((s) => ({ value: s.id, label: `${s.label} (${fmtInt(s.grams)} g)` })), { value: "", label: "gam (g)" }]} />
+                <Select label="Đơn vị" value={servingId} onChange={(e) => { setServingId(e.target.value); setSaveError(""); saveKey.current = null; }} options={[...sel.servings.map((s) => ({ value: s.id, label: `${s.label} (${fmtInt(s.grams)} g)` })), { value: "", label: "gam (g)" }]} />
               ) : (
                 <Select label="Đơn vị" value={sel.servings[0]?.id ?? ""} onChange={() => undefined} options={[{ value: sel.servings[0]?.id ?? "", label: `phần (${fmtInt(sel.servings[0]?.grams ?? 0)} g)` }]} />
               )}
@@ -204,6 +227,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
                 <strong className="text-lg">{fmtInt(pv.kcal)} kcal</strong> · <span className="text-protein-text">■ P {fmtDec1(pv.p)} g</span> · <span className="text-carb-text">● C {fmtDec1(pv.c)} g</span> · <span className="text-fat-text">◆ F {fmtDec1(pv.f)} g</span>
               </p>
             )}
+            {saveError && <RetryNotice message={saveError} onRetry={() => add()} busy={pending} />}
             <Button type="submit" loading={pending}>Thêm vào nhật ký</Button>
           </form>
         )}
@@ -220,11 +244,40 @@ function QuickSheet({ open, onClose, date, meal, onDone }: { open: boolean; onCl
   const [pending, start] = useTransition();
   const [v, setV] = useState({ name: "", kcal: "" });
   const [err, setErr] = useState("");
+  const [netErr, setNetErr] = useState("");
+  const keyRef = useRef<string | null>(null);
+
+  const submit = () => {
+    const k = parseDecimal(v.kcal);
+    if (!(k >= 0 && k <= 5000)) return setErr("Nhập kcal từ 0 đến 5.000");
+    setErr("");
+    setNetErr("");
+    const key = keyRef.current ?? newRequestId();
+    keyRef.current = key;
+    start(async () => {
+      try {
+        const r = await addQuickLogAction({ date, meal, name: v.name || undefined, kcal: k, clientRequestId: key });
+        if (!r.ok) {
+          keyRef.current = null;
+          return setErr(r.fields?.kcal ?? r.error);
+        }
+        keyRef.current = null;
+        toast.show("Đã ghi nhanh");
+        setV({ name: "", kcal: "" });
+        onDone();
+        onClose();
+      } catch (e) {
+        setNetErr(friendlyError(e));
+      }
+    });
+  };
+
   return (
     <Sheet open={open} onOpenChange={(o) => !o && onClose()} title="Ghi nhanh calo" description="Không biết món? Nhập số kcal ước tính.">
-      <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); const k = parseDecimal(v.kcal); if (!(k >= 0 && k <= 5000)) return setErr("Nhập kcal từ 0 đến 5.000"); start(async () => { const r = await addQuickLogAction({ date, meal, name: v.name || undefined, kcal: k }); if (!r.ok) return setErr(r.fields?.kcal ?? r.error); toast.show("Đã ghi nhanh"); setV({ name: "", kcal: "" }); onDone(); onClose(); }); }}>
-        <Input label="Tên (tùy chọn)" value={v.name} onChange={(e) => setV({ ...v, name: e.target.value })} />
-        <Input label="Năng lượng" unit="kcal" inputMode="decimal" value={v.kcal} onChange={(e) => { setV({ ...v, kcal: e.target.value }); setErr(""); }} error={err} />
+      <form className="flex flex-col gap-4" onSubmit={(e) => { e.preventDefault(); submit(); }}>
+        <Input label="Tên (tùy chọn)" value={v.name} onChange={(e) => { setV({ ...v, name: e.target.value }); keyRef.current = null; setNetErr(""); }} />
+        <Input label="Năng lượng" unit="kcal" inputMode="decimal" value={v.kcal} onChange={(e) => { setV({ ...v, kcal: e.target.value }); setErr(""); setNetErr(""); keyRef.current = null; }} error={err} />
+        {netErr && <RetryNotice message={netErr} onRetry={submit} busy={pending} />}
         <Button type="submit" loading={pending}>Ghi vào {MEAL_LABEL[meal].toLowerCase()}</Button>
       </form>
     </Sheet>
@@ -250,14 +303,18 @@ function CustomFoodSheet({ open, onClose, onCreated }: { open: boolean; onClose:
     // Values are entered per serving; the API stores per 100 g (PRD §7).
     const k = 100 / g;
     start(async () => {
-      const r = await createFoodAction({
-        name: v.name, energyKcal: parseDecimal(v.kcal) * k, proteinG: parseDecimal(v.p) * k, carbG: parseDecimal(v.c) * k, fatG: parseDecimal(v.f) * k,
-        fiberG: num(v.fiber) !== undefined ? num(v.fiber)! * k : undefined, sugarG: num(v.sugar) !== undefined ? num(v.sugar)! * k : undefined, sodiumMg: num(v.sodium) !== undefined ? num(v.sodium)! * k : undefined,
-        servings: [{ label: v.unit.trim() || "phần", grams: g, isDefault: true }],
-      });
-      if (!r.ok) return setErrs(r.fields ?? { name: r.error });
-      setWarn(r.warnKcalMismatch);
-      onCreated(r.food);
+      try {
+        const r = await createFoodAction({
+          name: v.name, energyKcal: parseDecimal(v.kcal) * k, proteinG: parseDecimal(v.p) * k, carbG: parseDecimal(v.c) * k, fatG: parseDecimal(v.f) * k,
+          fiberG: num(v.fiber) !== undefined ? num(v.fiber)! * k : undefined, sugarG: num(v.sugar) !== undefined ? num(v.sugar)! * k : undefined, sodiumMg: num(v.sodium) !== undefined ? num(v.sodium)! * k : undefined,
+          servings: [{ label: v.unit.trim() || "phần", grams: g, isDefault: true }],
+        });
+        if (!r.ok) return setErrs(r.fields ?? { name: r.error });
+        setWarn(r.warnKcalMismatch);
+        onCreated(r.food);
+      } catch (e) {
+        setErrs({ name: friendlyError(e) });
+      }
     });
   };
 

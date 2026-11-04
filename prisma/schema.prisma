@@ -259,6 +259,8 @@ model FoodLog {
   /// True when the source food lacked fiber/sugar/sodium data (PRD §8.5).
   missingMicro Boolean   @default(false) @map("missing_micro")
   source       LogSource @default(search)
+  /// Client-generated retry key (NFR-09); a retried save returns the original row instead of duplicating it.
+  clientRequestId String? @map("client_request_id")
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
 
@@ -266,6 +268,7 @@ model FoodLog {
   food   Food?   @relation(fields: [foodId], references: [id], onDelete: SetNull)
   recipe Recipe? @relation(fields: [recipeId], references: [id], onDelete: SetNull)
 
+  @@unique([userId, clientRequestId])
   @@index([userId, logDate])
   @@index([userId, foodId])
   @@map("food_logs")
@@ -321,8 +324,11 @@ model WaterLog {
   loggedAt DateTime @map("logged_at")
   logDate  DateTime @map("log_date") @db.Date
   amountMl Int      @map("amount_ml")
+  /// Client-generated retry key (NFR-09); a retried save returns the original row instead of duplicating it.
+  clientRequestId String? @map("client_request_id")
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@unique([userId, clientRequestId])
   @@index([userId, logDate])
   @@map("water_logs")
 }
