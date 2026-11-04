@@ -1,0 +1,82 @@
+# VPS deployment stack (QLD-51) — NutriTrack.
+#
+# Every published port is bound to the VPS loopback interface. The app is reachable
+# through an SSH tunnel until the board approves a public hostname + TLS:
+#
+#   ssh -N -L 3200:127.0.0.1:3200 vps   →   http://127.0.0.1:3200
+#
+# This stack is independent from the other Compose projects on the host (it has its own
+# project name, network and volume) and never touches the host-level ports 80/443.
+name: nutritrack_vps
+
+x-app-env: &app-env
+  DATABASE_URL: postgresql://nutritrack:${POSTGRES_PASSWORD:?run scripts/vps/deploy.sh}@db:5432/nutritrack?schema=public
+  APP_URL: ${APP_URL:-http://127.0.0.1:3200}
+  SMTP_HOST: ${SMTP_HOST:-mailpit}
+  SMTP_PORT: ${SMTP_PORT:-1025}
+  MAIL_FROM: ${MAIL_FROM:-NutriTrack Staging <no-reply@nutritrack.local>}
+  TZ: ${TZ:-Asia/Ho_Chi_Minh}
+  PORT: "3000"
+  NODE_ENV: production
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nutritrack
+      POSTGRES_USER: nutritrack
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?run scripts/vps/deploy.sh}
+      TZ: ${TZ:-Asia/Ho_Chi_Minh}
+    volumes:
+      - vps_db:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d:ro
+    # Loopback only: used by the migration tunnel and by backups, never public.
+    ports:
+      - "127.0.0.1:${DB_TUNNEL_PORT:-55432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    logging: *logging
+
+  mailpit:
+    image: axllent/mailpit:v1.27.4
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MAILPIT_PORT:-8026}:8025"
+    logging: *logging
+
+  app:
+    image: ${IMAGE_REPO:-nutritrack}:${IMAGE_TAG:?run scripts/vps/deploy.sh}
+    restart: unless-stopped
+    environment: *app-env
+    ports:
+      - "127.0.0.1:${APP_PORT:-3200}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_started
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/dang-nhap').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging: *logging
+
+volumes:
+  vps_db:

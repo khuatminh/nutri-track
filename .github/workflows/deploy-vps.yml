@@ -1,0 +1,187 @@
+name: Deploy VPS
+
+# Manual only. Deployments to the shared VPS are deliberate, reviewed releases
+# (QLD-51 rule: no production deploy without board approval). A push trigger can be
+# enabled later, but it must go through the `staging` environment reviewers first.
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Existing image tag to redeploy (empty = build from this ref)"
+        required: false
+        default: ""
+      skip_migrate:
+        description: "Skip prisma migrate deploy (docs/UI-only release)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/app
+  APP_PORT: "3200"
+  DB_TUNNEL_PORT: "55432"
+  REMOTE_DIR: /opt/nutritrack
+
+jobs:
+  build:
+    name: build amd64 image
+    if: inputs.image_tag == ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      repo: ${{ steps.meta.outputs.repo }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: meta
+        run: |
+          echo "tag=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+          echo "repo=${REGISTRY}/${IMAGE_NAME}" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/app/Dockerfile
+          platforms: linux/amd64
+          push: true
+          build-args: GIT_SHA=${{ steps.meta.outputs.tag }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.tag }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:staging
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: deploy to VPS
+    needs: build
+    if: always() && (needs.build.result == 'success' || inputs.image_tag != '')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve image
+        id: img
+        run: |
+          tag="${{ inputs.image_tag }}"
+          [[ -n "$tag" ]] || tag="${{ needs.build.outputs.tag }}"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "repo=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
+
+      - name: Configure SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<EOF
+          Host vps
+            HostName ${{ secrets.VPS_HOST }}
+            User ${{ secrets.VPS_USER }}
+            IdentityFile ~/.ssh/id_deploy
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+            ServerAliveInterval 30
+          EOF
+          ssh -o BatchMode=yes vps true
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Sync deploy files
+        run: |
+          ssh vps "mkdir -p $REMOTE_DIR/postgres-init $REMOTE_DIR/releases $REMOTE_DIR/backups"
+          scp scripts/vps/compose.yml scripts/vps/backup.sh scripts/vps/healthcheck.sh vps:$REMOTE_DIR/
+          scp docker/postgres/init/*.sql vps:$REMOTE_DIR/postgres-init/
+          ssh vps "chmod 755 $REMOTE_DIR/backup.sh $REMOTE_DIR/healthcheck.sh"
+
+      - name: Ensure remote .env and log in to GHCR
+        run: |
+          ssh vps "REMOTE_DIR=$REMOTE_DIR APP_PORT=$APP_PORT DB_TUNNEL_PORT=$DB_TUNNEL_PORT bash -s" <<'REMOTE_ENV'
+          set -euo pipefail
+          cd "$REMOTE_DIR"
+          if [[ ! -f .env ]]; then
+            umask 077
+            {
+              echo "POSTGRES_PASSWORD=$(openssl rand -hex 24)"
+              echo "APP_URL=http://127.0.0.1:${APP_PORT}"
+              echo "SMTP_HOST=mailpit"
+              echo "SMTP_PORT=1025"
+              echo "MAIL_FROM=NutriTrack Staging <no-reply@nutritrack.local>"
+              echo "TZ=Asia/Ho_Chi_Minh"
+              echo "APP_PORT=${APP_PORT}"
+              echo "DB_TUNNEL_PORT=${DB_TUNNEL_PORT}"
+              echo "MAILPIT_PORT=8026"
+            } > .env
+          fi
+          REMOTE_ENV
+          echo "${{ secrets.GITHUB_TOKEN }}" | ssh vps "docker login ghcr.io -u ${{ github.actor }} --password-stdin"
+
+      - name: Pull image
+        run: |
+          ssh vps "cd $REMOTE_DIR && IMAGE_REPO=${{ steps.img.outputs.repo }} IMAGE_TAG=${{ steps.img.outputs.tag }} docker compose pull app"
+          ssh vps "docker tag ${{ steps.img.outputs.repo }}:${{ steps.img.outputs.tag }} nutritrack:${{ steps.img.outputs.tag }}"
+
+      - name: Start db + mailpit and back up
+        run: |
+          ssh vps "cd $REMOTE_DIR && IMAGE_REPO=${{ steps.img.outputs.repo }} IMAGE_TAG=${{ steps.img.outputs.tag }} docker compose up -d --wait db mailpit"
+          ssh vps "cd $REMOTE_DIR && ./backup.sh" || echo "no backup this run (first deploy)"
+
+      - name: Migrate through SSH tunnel
+        if: inputs.skip_migrate == false
+        run: |
+          ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:$DB_TUNNEL_PORT:127.0.0.1:$DB_TUNNEL_PORT vps &
+          for _ in $(seq 1 20); do nc -z 127.0.0.1 $DB_TUNNEL_PORT && break; sleep 1; done
+          DB_PASSWORD="$(ssh vps "sed -n 's/^POSTGRES_PASSWORD=//p' $REMOTE_DIR/.env")"
+          export DATABASE_URL="postgresql://nutritrack:${DB_PASSWORD}@127.0.0.1:${DB_TUNNEL_PORT}/nutritrack?schema=public"
+          pnpm exec prisma migrate deploy
+          if ! ssh vps "test -s $REMOTE_DIR/releases/current"; then
+            pnpm exec prisma generate
+            pnpm exec prisma db seed
+          fi
+
+      - name: Switch app
+        id: switch
+        run: |
+          ssh vps "cd $REMOTE_DIR && if [[ -s releases/current ]]; then cp releases/current releases/previous; fi"
+          ssh vps "cd $REMOTE_DIR && IMAGE_REPO=${{ steps.img.outputs.repo }} IMAGE_TAG=${{ steps.img.outputs.tag }} docker compose up -d --wait --wait-timeout 180 app"
+          ssh vps "cd $REMOTE_DIR && APP_PORT=$APP_PORT ./healthcheck.sh"
+
+      - name: Rollback on failure
+        if: failure()
+        run: bash scripts/vps/rollback.sh --auto "${{ steps.img.outputs.tag }}" || true
+
+      - name: Record release
+        if: success()
+        run: ssh vps "cd $REMOTE_DIR && echo '${{ steps.img.outputs.tag }}' > releases/current && date -u +%FT%TZ >> releases/current"
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### VPS deploy"
+            echo "- image: \`${{ steps.img.outputs.repo }}:${{ steps.img.outputs.tag }}\`"
+            echo "- result: ${{ job.status }}"
+            echo "- verify: \`ssh -N -L $APP_PORT:127.0.0.1:$APP_PORT vps\` then http://127.0.0.1:$APP_PORT/dang-nhap"
+          } >> "$GITHUB_STEP_SUMMARY"

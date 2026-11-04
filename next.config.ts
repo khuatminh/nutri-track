@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   reactStrictMode: true,
+  // VPS release builds set NEXT_OUTPUT=standalone (docker/app/Dockerfile) so the runtime
+  // image only ships traced files. Local dev, CI and the Docker staging stack stay default.
+  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
   serverExternalPackages: ["@node-rs/argon2"],
   async headers() {
     return [
