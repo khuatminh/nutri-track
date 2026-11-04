@@ -1,0 +1,65 @@
+<!doctype html><html lang="vi" data-theme="light"><head><meta charset="utf-8"><title>Nước & cân nặng — Desktop</title>
+<link rel="stylesheet" href="../tokens.css"><style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0}
+body{font-family:var(--font-sans);background:#E7EAE5;color:var(--text);font-size:14px;line-height:1.45;padding:24px}
+h1.pg{font-size:20px;margin-bottom:4px} p.sub{color:#4A5A50;margin-bottom:20px;font-size:13px}
+.row{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap}
+.lbl{font-size:12px;font-weight:600;color:#4A5A50;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.phone{width:390px;height:844px;background:var(--bg);border:1px solid var(--border-strong);border-radius:28px;overflow:hidden;position:relative;display:flex;flex-direction:column;flex:none}
+.desk{width:1440px;height:900px;background:var(--bg);border:1px solid var(--border-strong);border-radius:10px;overflow:hidden;display:flex;position:relative}
+.scroll{flex:1;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:12px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 16px 4px;font-weight:700;font-size:var(--fs-lg)}
+.top .sp{flex:1}
+.bnav{display:flex;border-top:1px solid var(--border);background:var(--surface);padding:6px 4px 14px}
+.bnav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--text-muted);padding:6px 0;min-height:44px}
+.bnav a.on{color:var(--primary);font-weight:700}
+.side{width:var(--sidebar-w);background:var(--surface);border-right:1px solid var(--border);padding:20px 12px;display:flex;flex-direction:column;gap:4px;flex:none}
+.side .brand{font-weight:700;font-size:18px;color:var(--primary);padding:0 12px 16px}
+.side a{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:var(--r-md);color:var(--text-muted);min-height:44px}
+.side a.on{background:var(--primary-soft);color:var(--primary-soft-text);font-weight:600}
+.main{flex:1;padding:28px 32px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+.main h1{font-size:var(--fs-2xl)}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:2fr 1fr}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:16px;box-shadow:var(--shadow-1);display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:var(--fs-md);font-weight:600}
+.muted{color:var(--text-muted)} .faint{color:var(--text-faint);font-size:12px}
+.big{font-size:var(--fs-3xl);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 18px;border-radius:var(--r-md);background:var(--primary);color:var(--primary-contrast);font-weight:600;border:0;font-family:inherit;font-size:14px}
+.btn.sec{background:var(--surface);color:var(--text);border:1px solid var(--border-strong)}.btn.ghost{background:transparent;color:var(--link)}.btn.block{width:100%}
+.btn.dng{background:var(--danger-soft);color:var(--danger)}
+.in{min-height:44px;border:1.5px solid var(--border-strong);border-radius:var(--r-md);background:var(--surface);padding:10px 12px;display:flex;align-items:center;gap:8px;color:var(--text-muted)}
+.fld{display:flex;flex-direction:column;gap:4px}.fld b{font-size:13px;font-weight:600}
+.seg{display:flex;border:1.5px solid var(--border-strong);border-radius:var(--r-md);overflow:hidden}.seg span{flex:1;text-align:center;padding:10px 4px;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.seg .on{background:var(--primary-soft);color:var(--primary-soft-text);font-weight:700}
+.chip{display:inline-flex;align-items:center;padding:6px 12px;border-radius:999px;background:var(--surface-2);font-size:13px;min-height:32px;border:1px solid var(--border)}
+.chip.on{background:var(--primary-soft);color:var(--primary-soft-text);border-color:var(--primary);font-weight:600}
+.li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);min-height:56px}
+.li:last-child{border:0}.li .t{flex:1}.li .t b{display:block;font-weight:600}.li .t span{font-size:12px;color:var(--text-muted)}
+.li .k{font-weight:600;font-variant-numeric:tabular-nums}
+.thumb{width:40px;height:40px;border-radius:var(--r-sm);background:var(--surface-2);border:1px dashed var(--border-strong);flex:none}
+.bar{height:10px;border-radius:99px;background:var(--track);overflow:hidden}.bar i{display:block;height:100%;border-radius:99px}
+.p{background:var(--macro-protein);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 3px,transparent 3px 7px)}
+.c{background:var(--macro-carb);background-image:radial-gradient(rgba(255,255,255,.55) 1.2px,transparent 1.6px);background-size:6px 6px}
+.f{background:var(--macro-fat);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 2px,transparent 2px 6px),repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0 2px,transparent 2px 6px)}
+.w{background:var(--water)}
+.mac{display:flex;flex-direction:column;gap:4px}.mac .h{display:flex;justify-content:space-between;font-size:13px;font-weight:600}
+.tP{color:var(--macro-protein-text)}.tC{color:var(--macro-carb-text)}.tF{color:var(--macro-fat-text)}
+.ring{width:180px;height:180px;border-radius:50%;background:conic-gradient(var(--kcal) 0 64%,var(--track) 0);display:grid;place-items:center;flex:none}
+.ring>div{width:144px;height:144px;border-radius:50%;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring.sm{width:96px;height:96px}.ring.sm>div{width:74px;height:74px}
+.fab{position:absolute;right:16px;bottom:84px;width:56px;height:56px;border-radius:50%;background:var(--primary);color:var(--primary-contrast);display:grid;place-items:center;box-shadow:var(--shadow-2)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:24px 24px 0 0;box-shadow:var(--shadow-3);padding:12px 16px 20px;display:flex;flex-direction:column;gap:12px}
+.sheet:before{content:"";width:40px;height:4px;border-radius:2px;background:var(--border-strong);margin:0 auto}
+.ov{position:absolute;inset:0;background:var(--overlay)}
+.chartbox{height:150px;border:1px dashed var(--border-strong);border-radius:var(--r-md);position:relative;overflow:hidden;background:repeating-linear-gradient(0deg,transparent 0 29px,var(--chart-grid) 29px 30px)}
+.chartbox svg{position:absolute;inset:0;width:100%;height:100%}
+.empty{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:20px;color:var(--text-muted)}
+.toast{background:var(--text);color:var(--bg);padding:12px 16px;border-radius:var(--r-md);display:flex;gap:10px;align-items:center;box-shadow:var(--shadow-2)}
+.tag{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--warning-soft);color:var(--warning);font-weight:600}
+.note{font-size:12px;color:#4A5A50;max-width:390px;margin-top:8px}
+.steps{display:flex;gap:6px}.steps i{flex:1;height:4px;border-radius:2px;background:var(--track)}.steps i.on{background:var(--primary)}
+table.t{width:100%;border-collapse:collapse}table.t td,table.t th{padding:8px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}
+.tog{width:44px;height:26px;border-radius:99px;background:var(--primary);position:relative;flex:none}.tog:after{content:"";position:absolute;right:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--primary-contrast)}
+.tog.off{background:var(--border-strong)}.tog.off:after{right:auto;left:3px;background:#fff}
+</style></head><body style="width:1490px"><h1 class="pg">Nước & cân nặng — Desktop</h1><p class="sub">Wireframe low-fi · desktop 1440px · token từ tokens.css (light)</p><div><div class="lbl">4 · Nước & cân nặng desktop</div><div class="desk"><aside class="side"><div class="brand">NutriTrack</div><a class=""><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Hôm nay</a><a class=""><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 8h8"/></svg>Nhật ký & tìm món</a><a class="on"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>Nước & cân nặng</a><a class=""><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></svg>Báo cáo</a><a class=""><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14a4 4 0 1 1 2-7 4 4 0 0 1 8 0 4 4 0 1 1 2 7v6H6z"/></svg>Công thức & thực đơn</a><a class=""><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>Cài đặt</a><div style="flex:1"></div><a><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10z"/></svg>Sáng / Tối</a></aside><div class="main"><h1>Nước & cân nặng</h1><div class="grid g2"><div class="card"><h3>Nước uống hôm nay</h3><span class="big" style="color:var(--water)">1.200 <small style="font-size:16px" class="muted">/ 2.000 ml</small></span><div class="bar"><i class="w" style="width:60%"></i></div><div style="display:flex;gap:8px"><span class="btn sec">+200</span><span class="btn sec">+250</span><span class="btn sec">+500</span><span class="btn sec">Tuỳ chỉnh</span></div></div><div class="card"><h3>Cân nặng</h3><span class="big">58,2 kg</span><div class="fld"><b>Ghi cân nặng</b><div class="in">58,2</div></div><span class="btn" style="align-self:flex-start">Lưu</span></div></div><div class="card"><h3>Xu hướng cân nặng</h3><div style="display:flex;gap:8px"><span class="chip">7 ngày</span><span class="chip on">30 ngày</span><span class="chip">90 ngày</span></div><div class="chartbox"><svg viewBox="0 0 300 150" preserveAspectRatio="none"><polyline fill="none" stroke="var(--chart-line)" stroke-width="3" points="0,40 40,48 80,55 120,52 160,70 200,78 240,92 300,100"/><polyline fill="none" stroke="var(--text-faint)" stroke-dasharray="5 4" stroke-width="2" points="0,45 300,105"/></svg></div></div></div></div><p class="note" style="max-width:none"></p></div></body></html>
