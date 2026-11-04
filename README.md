@@ -2,7 +2,7 @@
 
 ## Chạy local
 
-Yêu cầu: Docker Engine/Desktop đang chạy, Docker Compose v2 hỗ trợ `--wait`, Node.js **22**, pnpm theo phiên bản được khai báo trong scaffold ứng dụng.
+Yêu cầu: Docker Engine/Desktop đang chạy, Docker Compose v2 hỗ trợ `--wait`, Node.js **22**, pnpm **10** (đã kiểm chứng với 10.20.0).
 
 Scaffold ứng dụng cần cung cấp `package.json`, lockfile, Prisma schema/migrations và seed. Hai script hạ tầng trong mục `scripts` của `package.json`:
 
