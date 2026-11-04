@@ -12,7 +12,7 @@ const VARIANT: Record<Variant, string> = {
   ghost: "bg-transparent text-primary hover:bg-primary-soft border-transparent",
   danger: "bg-danger text-surface border-transparent hover:opacity-90",
 };
-const SIZE: Record<Size, string> = { md: "min-h-11 px-5 text-base", sm: "min-h-9 px-3 text-sm" };
+const SIZE: Record<Size, string> = { md: "min-h-11 px-5 text-base", sm: "min-h-11 px-3 text-sm" };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
@@ -31,7 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <Comp
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md border font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-45",
+        "inline-flex min-w-11 shrink-0 items-center justify-center gap-2 rounded-md border font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-45",
         VARIANT[variant],
         SIZE[size],
         block && "w-full",

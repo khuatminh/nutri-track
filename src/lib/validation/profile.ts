@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ageFromBirthDate } from "@/lib/nutrition/bmr";
 import { RANGES } from "@/lib/nutrition/constants";
 
 export const profileInputSchema = z.object({
@@ -22,6 +23,33 @@ export const profileInputSchema = z.object({
   targetWeightKg: z.number().min(RANGES.weightKg.min).max(RANGES.weightKg.max).optional(),
 });
 export type ProfileInput = z.infer<typeof profileInputSchema>;
+
+export const UNDERAGE_WEIGHT_LOSS_MESSAGE =
+  "Người dưới 18 tuổi không được chọn mục tiêu giảm cân. Bạn nên chọn giữ cân và tham khảo chuyên gia dinh dưỡng.";
+
+export interface UnderageWeightLossError {
+  ok: false;
+  code: "UNDERAGE_WEIGHT_LOSS_BLOCKED";
+  weightLossBlocked: true;
+  suggestedGoal: "maintain";
+  error: string;
+  message: string;
+  fields: Record<string, string> & { goal: string };
+}
+
+/** Validate against the caller's local calendar date, never the server timezone. */
+export function underageWeightLossError(input: ProfileInput, today: string): UnderageWeightLossError | null {
+  if (input.goal !== "lose" || ageFromBirthDate(input.birthDate, today) >= 18) return null;
+  return {
+    ok: false,
+    code: "UNDERAGE_WEIGHT_LOSS_BLOCKED",
+    weightLossBlocked: true,
+    suggestedGoal: "maintain",
+    error: UNDERAGE_WEIGHT_LOSS_MESSAGE,
+    message: UNDERAGE_WEIGHT_LOSS_MESSAGE,
+    fields: { goal: UNDERAGE_WEIGHT_LOSS_MESSAGE },
+  };
+}
 
 export const customTargetsSchema = z.object({
   kcal: z.number({ error: "Vui lòng nhập kcal" }).int("Kcal phải là số nguyên"),

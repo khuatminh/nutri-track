@@ -45,7 +45,7 @@ export type AddLogInput = z.infer<typeof addLogSchema>;
 
 export const updateLogSchema = z.object({
   quantity: quantity.optional(),
-  servingId: z.string().min(1).optional(),
+  servingId: z.string().min(1).nullable().optional(),
   meal: mealSchema.optional(),
   date: isoDateSchema.optional(),
 });
