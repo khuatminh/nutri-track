@@ -90,3 +90,6 @@ Cần `docker compose up -d` và `pnpm dev:setup` trước. Kiểm tra `DATABASE
 ### Lưu ý
 - Nhắc nhở chỉ hoạt động khi tab đang mở (ADR §2.6); reset mật khẩu gửi mail vào Mailpit (http://localhost:8025).
 - Truy vết yêu cầu: [`docs/product/TRACEABILITY.md`](docs/product/TRACEABILITY.md). Ảnh chụp màn hình app thật (light/dark × mobile/desktop): `docs/screenshots/app-ui/`; ảnh mockup thiết kế: `docs/screenshots/app/`. Chạy kèm DB: `DISABLE_RATE_LIMIT=1` chỉ dùng cho e2e local.
+
+### Cổng mạng
+App chạy ở cổng **3000** (đổi bằng biến `PORT`, ví dụ `PORT=3055 pnpm dev`). **Không dùng cổng 3100** — đó là cổng của Paperclip. Khi đổi cổng, cập nhật `APP_URL` trong `.env` (dùng cho liên kết đặt lại mật khẩu) và `E2E_BASE_URL` khi chạy e2e.
