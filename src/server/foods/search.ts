@@ -21,6 +21,9 @@ export interface FoodHit {
   proteinG: number;
   carbG: number;
   fatG: number;
+  fiberG: number | null;
+  sugarG: number | null;
+  sodiumMg: number | null;
   servings: ServingDto[];
 }
 
@@ -105,6 +108,9 @@ export async function hydrate(userId: string, foodIds: string[], recipeIds: stri
         proteinG: f.proteinG,
         carbG: f.carbG,
         fatG: f.fatG,
+        fiberG: f.fiberG,
+        sugarG: f.sugarG,
+        sodiumMg: f.sodiumMg,
         servings: f.servings.map((s) => ({ id: s.id, label: s.label, grams: s.grams, isDefault: s.isDefault })),
       },
     ];
@@ -120,6 +126,9 @@ export async function hydrate(userId: string, foodIds: string[], recipeIds: stri
     proteinG: r.proteinPerServing,
     carbG: r.carbPerServing,
     fatG: r.fatPerServing,
+    fiberG: r.fiberPerServing,
+    sugarG: r.sugarPerServing,
+    sodiumMg: r.sodiumPerServing,
     servings: [recipeServing(r)],
   }));
   return [...recipeHits, ...foodHits];
