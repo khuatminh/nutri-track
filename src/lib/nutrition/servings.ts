@@ -29,6 +29,50 @@ export function gramsForServing(quantity: number, servingGrams: number): number 
   return quantity * servingGrams;
 }
 
+export interface PreviewFood {
+  kind: "food" | "recipe";
+  /** Per 100 g for foods; per serving for recipes. */
+  energyKcal: number;
+  proteinG: number;
+  carbG: number;
+  fatG: number;
+  fiberG: number | null;
+  sugarG: number | null;
+  sodiumMg: number | null;
+  servings: ReadonlyArray<{ id: string; grams: number }>;
+}
+
+export interface PortionPreview {
+  grams: number;
+  kcal: number;
+  proteinG: number;
+  carbG: number;
+  fatG: number;
+  /** null when the source food has no value for that micronutrient. */
+  fiberG: number | null;
+  sugarG: number | null;
+  sodiumMg: number | null;
+}
+
+/** US-07.1: nutrition of the selected serving/quantity, including fiber, sugar and sodium. */
+export function previewPortion(food: PreviewFood, servingId: string, quantity: number): PortionPreview {
+  const serving = food.servings.find((s) => s.id === servingId);
+  const grams = serving ? quantity * serving.grams : quantity;
+  // Foods are stored per 100 g; a recipe is stored per serving.
+  const factor = food.kind === "recipe" ? quantity : grams / 100;
+  const micro = (value: number | null) => (value === null ? null : value * factor);
+  return {
+    grams,
+    kcal: food.energyKcal * factor,
+    proteinG: food.proteinG * factor,
+    carbG: food.carbG * factor,
+    fatG: food.fatG * factor,
+    fiberG: micro(food.fiberG),
+    sugarG: micro(food.sugarG),
+    sodiumMg: micro(food.sodiumMg),
+  };
+}
+
 /** Unrounded nutrition for an amount in grams. Missing micro values count as 0 (PRD §8.5). */
 export function nutrientsForGrams(food: FoodPer100g, grams: number): Nutrients {
   const k = grams / 100;
