@@ -1,7 +1,7 @@
 # NutriTrack — Design Spec v1.0
 
 Mockup (HTML tĩnh, mở bằng trình duyệt): `docs/design/mockups/index.html` · Token: `docs/design/tokens.css` · Ảnh chụp: `docs/design/screenshots/*.png` · Kiểm tra tương phản: `docs/design/tools/contrast.mjs` (kết quả: `tools/contrast-report.md`, 64/64 cặp đạt).
-> Lưu ý: PRD (QLD-10) chưa có khi hoàn thành; mockup bám theo danh sách tính năng MVP trong task. Cần đối chiếu user stories khi PRD xong (xem "Việc tiếp theo").
+> Lưu ý: mockup được dựng bám danh sách tính năng MVP của task; PRD (QLD-10, nhánh `ba/qld-10-nutritrack-prd`, `docs/product/PRD.md`) xuất hiện khi gần xong nên **mới đối chiếu mức nhóm tính năng (9 nhóm), chưa đối chiếu từng user story/AC** (xem mục 7).
 
 ## 1. Nguyên tắc
 Mobile-first · tiếng Việt (Be Vietnam Pro, fallback Inter/system) · WCAG 2.1 AA · không chỉ dùng màu để truyền thông tin · ghi một món ≤ 3 chạm từ Dashboard (Gần đây → khẩu phần → Thêm).
@@ -106,6 +106,6 @@ Luồng chính: **Đăng ký → Onboarding 4 bước → Dashboard → nút "+"
 - Responsive: layout dùng `<1024` mobile; kiểm tra 360px, 390px, 768px, 1024px, 1280px.
 
 ## 7. Hạn chế / việc tiếp theo
-- Chưa đối chiếu PRD/user stories (QLD-10 chưa có document `prd` lúc hoàn thành). BA/PM cần xác nhận phạm vi; màn Công thức (tạo/sửa công thức) mới có trong IA, **chưa có mockup chi tiết** — đề xuất task bổ sung.
+- Chưa đối chiếu từng user story/AC trong PRD (chỉ ở mức 9 nhóm tính năng); cần một vòng review với BA; màn Công thức (tạo/sửa công thức) mới có trong IA, **chưa có mockup chi tiết** — đề xuất task bổ sung.
 - Font Be Vietnam Pro tải từ Google Fonts trong mockup; production nên self-host.
 - Chưa chạy kiểm tra trình đọc màn hình thực tế; chỉ audit theo tiêu chí + đo tương phản bằng script.
