@@ -19,7 +19,7 @@ export default async function Page() {
       <PageHeader title="Hồ sơ & cài đặt" subtitle={u.email} />
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <ProfileForm p={data} />
+          <ProfileForm p={data} tz={u.timezone} />
           <TargetsCard p={data} />
           <Card className="flex flex-col gap-1"><h2 className="text-lg font-semibold">Lối tắt</h2>
             <Link href="/cong-thuc" className="min-h-11 content-center text-primary underline">Công thức của tôi</Link>

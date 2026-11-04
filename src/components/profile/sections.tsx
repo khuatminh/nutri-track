@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import {
   changePasswordAction, deleteAccountAction, recalculateTargetsAction, saveProfileAction, saveReminderAction,
   setCustomTargetsAction, setHideWeightAction, setThemeAction,
@@ -12,8 +12,11 @@ import { Input, Select } from "@/components/ui/field";
 import { Badge, Card, Disclaimer } from "@/components/ui/misc";
 import { useToast } from "@/components/ui/toast";
 import { cn } from "@/lib/cn";
+import { todayIn } from "@/lib/dates";
 import { fmtInt, parseDecimal } from "@/lib/format";
+import { ageFromBirthDate } from "@/lib/nutrition";
 import type { ThemePref } from "@/lib/theme";
+import { UNDERAGE_WEIGHT_LOSS_MESSAGE } from "@/lib/validation/profile";
 import type { ReminderDto } from "@/server/reminders/service";
 
 const ACTIVITY = [
@@ -31,13 +34,18 @@ export interface ProfileData {
 
 const dec = (n: number) => String(n).replace(".", ",");
 
-export function ProfileForm({ p }: { p: ProfileData }) {
+export function ProfileForm({ p, tz }: { p: ProfileData; tz: string }) {
   const router = useRouter();
   const toast = useToast();
   const [pending, start] = useTransition();
   const [v, setV] = useState({ name: p.displayName, sex: p.sex, birth: p.birthDate, height: dec(p.heightCm), weight: dec(p.weightKg), activity: p.activityLevel, goal: p.goal, target: p.targetWeightKg ? dec(p.targetWeightKg) : "" });
   const [errs, setErrs] = useState<Record<string, string>>({});
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setV({ ...v, [k]: e.target.value });
+  // US-05.8: block choosing weight loss for under-18 profiles.
+  const underage = useMemo(
+    () => /^\d{4}-\d{2}-\d{2}$/.test(v.birth) && ageFromBirthDate(v.birth, todayIn(tz)) < 18,
+    [v.birth, tz],
+  );
   const save = () =>
     start(async () => {
       const t = parseDecimal(v.target);
@@ -58,7 +66,8 @@ export function ProfileForm({ p }: { p: ProfileData }) {
         <Input label="Cân nặng" unit="kg" inputMode="decimal" value={v.weight} onChange={set("weight")} error={errs.weightKg} />
         <Input label="Cân nặng mục tiêu (tùy chọn)" unit="kg" inputMode="decimal" value={v.target} onChange={set("target")} />
         <Select label="Mức vận động" value={v.activity} onChange={set("activity")} options={ACTIVITY} />
-        <Select label="Mục tiêu" value={v.goal} onChange={set("goal")} options={GOALS} />
+        <Select label="Mục tiêu" value={v.goal} onChange={set("goal")} options={GOALS.map((g) => ({ ...g, disabled: underage && g.value === "lose" }))} error={errs.goal} hint={underage ? "Không áp dụng mục tiêu giảm cân cho người dưới 18 tuổi." : undefined} />
+        {underage && <p role="alert" className="text-sm font-semibold text-warning sm:col-span-2">⚠ {UNDERAGE_WEIGHT_LOSS_MESSAGE}</p>}
         <Button type="submit" loading={pending} className="sm:col-span-2">Lưu thay đổi</Button>
       </form>
     </Card>
