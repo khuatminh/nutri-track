@@ -13,6 +13,7 @@ import { Badge, Card, Disclaimer } from "@/components/ui/misc";
 import { useToast } from "@/components/ui/toast";
 import { cn } from "@/lib/cn";
 import { fmtInt, parseDecimal } from "@/lib/format";
+import { balanceCarb, hasMacroMismatch } from "@/lib/nutrition/custom-targets";
 import type { ThemePref } from "@/lib/theme";
 import type { ReminderDto } from "@/server/reminders/service";
 
@@ -38,19 +39,26 @@ export function ProfileForm({ p }: { p: ProfileData }) {
   const [v, setV] = useState({ name: p.displayName, sex: p.sex, birth: p.birthDate, height: dec(p.heightCm), weight: dec(p.weightKg), activity: p.activityLevel, goal: p.goal, target: p.targetWeightKg ? dec(p.targetWeightKg) : "" });
   const [errs, setErrs] = useState<Record<string, string>>({});
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => setV({ ...v, [k]: e.target.value });
-  const save = () =>
+  const [confirmTargets, setConfirmTargets] = useState(false);
+  const affectsTargets = v.sex !== p.sex || v.birth !== p.birthDate || parseDecimal(v.height) !== p.heightCm || parseDecimal(v.weight) !== p.weightKg || v.activity !== p.activityLevel || v.goal !== p.goal;
+  const save = (recalculate = false) =>
     start(async () => {
       const t = parseDecimal(v.target);
       const r = await saveProfileAction({ displayName: v.name, sex: v.sex, birthDate: v.birth, heightCm: parseDecimal(v.height), weightKg: parseDecimal(v.weight), activityLevel: v.activity, goal: v.goal, goalRateKgPerWeek: p.goalRateKgPerWeek ?? undefined, targetWeightKg: t > 0 ? t : undefined });
-      if (!r.ok) return setErrs(r.fields ?? { displayName: r.error });
+      if (!r.ok) { setConfirmTargets(false); return setErrs(r.fields ?? { displayName: r.error }); }
+      if (recalculate) {
+        const result = await recalculateTargetsAction();
+        if (!result.ok) return setErrs({ displayName: result.error });
+      }
+      setConfirmTargets(false);
       setErrs({});
-      toast.show(p.targetsMode === "custom" ? "Đã lưu hồ sơ (mục tiêu tùy chỉnh được giữ nguyên)" : "Đã lưu hồ sơ và tính lại mục tiêu");
+      toast.show(p.targetsMode === "custom" && !recalculate ? "Đã lưu hồ sơ (mục tiêu tùy chỉnh được giữ nguyên)" : "Đã lưu hồ sơ và tính lại mục tiêu");
       router.refresh();
     });
   return (
     <Card>
       <h2 className="mb-3 text-lg font-semibold">Thông tin cá nhân</h2>
-      <form className="grid gap-3 sm:grid-cols-2" noValidate onSubmit={(e) => { e.preventDefault(); save(); }}>
+      <form className="grid gap-3 sm:grid-cols-2" noValidate onSubmit={(e) => { e.preventDefault(); if (p.targetsMode === "custom" && affectsTargets) setConfirmTargets(true); else save(); }}>
         <Input label="Tên hiển thị" value={v.name} onChange={set("name")} error={errs.displayName} />
         <Select label="Giới tính" value={v.sex} onChange={set("sex")} options={SEXES} />
         <Input label="Ngày sinh" type="date" value={v.birth} onChange={set("birth")} error={errs.birthDate} />
@@ -61,6 +69,11 @@ export function ProfileForm({ p }: { p: ProfileData }) {
         <Select label="Mục tiêu" value={v.goal} onChange={set("goal")} options={GOALS} />
         <Button type="submit" loading={pending} className="sm:col-span-2">Lưu thay đổi</Button>
       </form>
+      <Sheet open={confirmTargets} onOpenChange={(open) => { if (!pending) setConfirmTargets(open); }} title="Cập nhật mục tiêu?" description="Hồ sơ đã thay đổi. Bạn muốn giữ mục tiêu tùy chỉnh hay tính lại theo hồ sơ mới?">
+        <Button variant="secondary" loading={pending} onClick={() => save()}>Giữ mục tiêu tùy chỉnh</Button>
+        <Button loading={pending} onClick={() => save(true)}>Tính lại tự động</Button>
+        {errs.displayName && <p role="alert">{errs.displayName}</p>}
+      </Sheet>
     </Card>
   );
 }
@@ -74,6 +87,10 @@ export function TargetsCard({ p }: { p: ProfileData }) {
   const [errs, setErrs] = useState<Record<string, string>>({});
   const [confirm, setConfirm] = useState(false);
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement>) => { setV({ ...v, [k]: e.target.value }); setConfirm(false); };
+
+  const macroInput = { kcal: parseDecimal(v.kcal), proteinG: parseDecimal(v.p), carbG: parseDecimal(v.c), fatG: parseDecimal(v.f) };
+  const mismatch = hasMacroMismatch(macroInput);
+  const suggestedCarb = balanceCarb(macroInput);
 
   const save = (confirmed = false) =>
     start(async () => {
@@ -102,7 +119,11 @@ export function TargetsCard({ p }: { p: ProfileData }) {
           <Input label="Đạm" unit="g" inputMode="numeric" value={v.p} onChange={set("p")} error={errs.proteinG} />
           <Input label="Tinh bột" unit="g" inputMode="numeric" value={v.c} onChange={set("c")} error={errs.carbG} />
           <Input label="Béo" unit="g" inputMode="numeric" value={v.f} onChange={set("f")} error={errs.fatG} />
-          {(() => { const k = parseDecimal(v.p) * 4 + parseDecimal(v.c) * 4 + parseDecimal(v.f) * 9; const t = parseDecimal(v.kcal); return k > 0 && t > 0 && Math.abs(k - t) / t > 0.1 ? <Badge tone="warn" className="self-center">Macro cộng lại ≈ {fmtInt(k)} kcal, lệch &gt;10% so với mục tiêu.</Badge> : null; })()}
+          {mismatch && <div role="status" className="rounded-md bg-warning-soft p-3 text-sm text-warning sm:col-span-2">
+            <p className="font-semibold">Macro không khớp kcal</p>
+            <p>Tổng kcal từ macro lệch hơn 5%. Gợi ý tinh bột: {fmtInt(suggestedCarb)} g. Bạn vẫn có thể lưu mục tiêu hiện tại.</p>
+            <Button type="button" variant="secondary" size="sm" onClick={() => { setV({ ...v, c: String(suggestedCarb) }); setConfirm(false); }}>Áp dụng cân bằng carb</Button>
+          </div>}
           {confirm && <p role="alert" className="rounded-md bg-warning-soft p-3 text-sm font-semibold text-warning sm:col-span-2">⚠ Mức này thấp hơn mức tối thiểu khuyến nghị. Bấm “Xác nhận lưu” nếu bạn chắc chắn (nên hỏi chuyên gia).</p>}
           <Button type="submit" loading={pending} className="sm:col-span-2">{confirm ? "Xác nhận lưu" : "Lưu mục tiêu"}</Button>
         </form>
