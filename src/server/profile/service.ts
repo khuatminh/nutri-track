@@ -1,12 +1,12 @@
 import type { Prisma } from "@prisma/client";
 import { computeTargets, checkCustomKcal, type ComputedTargets } from "@/lib/nutrition";
 import { dateToIso, isoToDate, todayIn } from "@/lib/dates";
-import { customTargetsSchema, profileInputSchema, type CustomTargetsInput, type ProfileInput } from "@/lib/validation/profile";
+import { customTargetsSchema, profileInputSchema, underageWeightLossError, type UnderageWeightLossError, type CustomTargetsInput, type ProfileInput } from "@/lib/validation/profile";
 import { fieldErrors } from "@/lib/validation/auth";
 import { db } from "@/server/db";
 import { WEIGHT_SUGGEST_DELTA_KG } from "@/lib/nutrition/constants";
 
-export type ServiceResult<T = object> = ({ ok: true } & T) | { ok: false; error: string; fields?: Record<string, string> };
+export type ServiceResult<T = object> = ({ ok: true } & T) | UnderageWeightLossError | { ok: false; error: string; fields?: Record<string, string> };
 
 export interface TargetSet {
   kcal: number;
@@ -44,6 +44,8 @@ export async function saveProfile(userId: string, timezone: string, raw: unknown
   if (!parsed.success) return { ok: false, error: "Thông tin chưa hợp lệ", fields: fieldErrors(parsed.error) };
   const input: ProfileInput = parsed.data;
   const today = todayIn(timezone);
+  const restriction = underageWeightLossError(input, today);
+  if (restriction) return restriction;
   const targets = computeTargets({ ...input, rateKgPerWeek: input.goalRateKgPerWeek, today });
   if (targets.age < 13 || targets.age > 100) {
     return { ok: false, error: "Tuổi phải từ 13 đến 100", fields: { birthDate: "Tuổi phải từ 13 đến 100" } };
