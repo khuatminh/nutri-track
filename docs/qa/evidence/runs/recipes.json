@@ -1,0 +1,77 @@
+[
+  {
+    "id": "US-22.5",
+    "status": "Pass",
+    "expected": "Không nguyên liệu / số khẩu phần ≤0 → báo lỗi",
+    "actual": "Thiếu tên+nguyên liệu=true; số phần 0 báo lỗi=true",
+    "evidence": [
+      "docs/qa/evidence/recipe/01-validation-light.png"
+    ]
+  },
+  {
+    "id": "US-22.2",
+    "status": "Pass",
+    "expected": "Realtime tổng cả nồi + mỗi khẩu phần cho 7 chỉ số",
+    "actual": "2×100 g Phở bò tái: cả nồi 144,4 kcal, mỗi phần 72,2 kcal, xơ 0,15 g, đường 0,5 g, natri 260 mg. Text: Mỗi khẩu phần | 72 kcal | ■ P 5,5 g · ● C 8,5 g · ◆ F 1,8 g | Xơ 0,3 g · Đường 0,5 g · Natri 260 mg ",
+    "evidence": [
+      "docs/qa/evidence/recipe/02-realtime-nutrition-light.png"
+    ]
+  },
+  {
+    "id": "US-22.1",
+    "status": "Pass",
+    "expected": "Tạo công thức tên + 2 phần + ≥1 nguyên liệu → lưu",
+    "actual": "Danh sách: \"QA Công thức | 2,0 phần · 72 kcal/phần \"",
+    "evidence": [
+      "docs/qa/evidence/recipe/03-list-light.png"
+    ]
+  },
+  {
+    "id": "US-22.3",
+    "status": "Pass",
+    "expected": "Công thức xuất hiện trong tìm kiếm/Món của tôi, đơn vị phần",
+    "actual": "Có \"QA Công thức\"=true; nhãn \"Công thức · mỗi phần\"=true",
+    "evidence": []
+  },
+  {
+    "id": "US-22.4",
+    "status": "Pass",
+    "expected": "Ghi 1,5 phần → 1,5 × dinh dưỡng/phần",
+    "actual": "Preview: \"108 kcal · ■ P 8,3 g · ● C 12,8 g · ◆ F 2,7 g\"; oracle 108,3 kcal",
+    "evidence": [
+      "docs/qa/evidence/recipe/04-log-1.5-portion-light.png"
+    ]
+  },
+  {
+    "id": "US-23.1",
+    "status": "Pass",
+    "expected": "Sửa số phần → tính lại nhưng FoodLog cũ giữ snapshot",
+    "actual": "Log cũ vẫn 108 kcal=true",
+    "evidence": []
+  },
+  {
+    "id": "US-23.3",
+    "status": "Pass",
+    "expected": "P1: nhân bản tên '… (bản sao)'",
+    "actual": "Có \"(bản sao)\"=true",
+    "evidence": [
+      "docs/qa/evidence/recipe/05-duplicate-light.png"
+    ]
+  },
+  {
+    "id": "US-23.2",
+    "status": "Fail",
+    "expected": "Xóa công thức → log cũ vẫn hiển thị; không còn trong tìm kiếm",
+    "actual": "Log cũ còn=true; panel sau xóa: \"🤷 Không tìm thấy “QA Công thức”  Bạn có thể tự tạo món mới hoặc ghi nhanh calo.  Tạo món mới\"",
+    "evidence": [
+      "docs/qa/evidence/recipe/06-deleted-log-kept-light.png"
+    ]
+  },
+  {
+    "id": "US-23.4",
+    "status": "Pass",
+    "expected": "Không cho công thức lồng chính nó (nguyên liệu chỉ là Food)",
+    "actual": "Picker sau khi xóa công thức: không thấy; picker lọc kind=food",
+    "evidence": []
+  }
+]

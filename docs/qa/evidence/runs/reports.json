@@ -1,0 +1,68 @@
+[
+  {
+    "id": "US-19.1",
+    "status": "Pass",
+    "expected": "Tuần hiện tại (Thứ Hai–Chủ Nhật), biểu đồ cột kcal + đường mục tiêu, chuyển tuần trước/sau",
+    "actual": "Khoảng 02/11/2026 – 08/11/2026; nav tuần trước/sau=1/1; có biểu đồ=true",
+    "evidence": [
+      "docs/qa/evidence/report/30-week-1200-1800-light.png"
+    ]
+  },
+  {
+    "id": "US-19.3",
+    "status": "Pass",
+    "expected": "Ngày trống không tính vào trung bình; báo trên n/7 ngày; fixture 1200 & 1800 → TB 1500",
+    "actual": "\"Trung bình trên 2/7 ngày có dữ liệu (ngày trống không tính). \"; có 1.500=true",
+    "evidence": [
+      "docs/qa/evidence/report/30-week-1200-1800-light.png"
+    ]
+  },
+  {
+    "id": "US-19.2",
+    "status": "Pass",
+    "expected": "Đủ chỉ số tuần: kcal TB, macro g/%, xơ/đường/natri so tham chiếu, số ngày đạt ±10%, nước TB, thay đổi cân nặng",
+    "actual": "xơ/đường/natri=true; nước=true; cân nặng=true; số ngày đạt=true",
+    "evidence": [
+      "docs/qa/evidence/report/30-week-1200-1800-light.png"
+    ]
+  },
+  {
+    "id": "US-19.1b",
+    "status": "Pass",
+    "expected": "Chuyển tuần trước đúng khoảng ngày",
+    "actual": "Tuần trước: 26/10/2026 – 01/11/2026",
+    "evidence": []
+  },
+  {
+    "id": "US-20.1",
+    "status": "Pass",
+    "expected": "Tháng: biểu đồ kcal theo ngày, TB theo tuần, chỉ số như tuần + biểu đồ cân nặng",
+    "actual": "Khoảng tháng=01/11/2026 – 30/11/2026; có số liệu kcal; biểu đồ cân nặng tháng=true",
+    "evidence": [
+      "docs/qa/evidence/report/31-month-light.png"
+    ]
+  },
+  {
+    "id": "US-20.2",
+    "status": "Pass",
+    "expected": "Chuyển tháng trước/sau đúng khoảng ngày theo timezone",
+    "actual": "Nav tháng trước/sau=1/1; khoảng 01–30/11 khớp tháng 11 có 30 ngày (Asia/Ho_Chi_Minh).",
+    "evidence": [
+      "docs/qa/evidence/report/31-month-light.png"
+    ]
+  },
+  {
+    "id": "US-20.2b",
+    "status": "Pass",
+    "expected": "Tháng trước → 01–31/10",
+    "actual": "Khoảng: 01/10/2026 – 31/10/2026",
+    "evidence": []
+  },
+  {
+    "id": "US-20.3",
+    "status": "Not run",
+    "expected": "P1: xuất ảnh/PDF/CSV báo cáo (PRD cho phép dời sau MVP — Q8)",
+    "actual": "Chưa có UI xuất báo cáo; chỉ có tải JSON toàn bộ dữ liệu ở Hồ sơ. Ghi nhận là P1 chưa làm, không tự waiver.",
+    "evidence": []
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "US-02.3",
+    "status": "Pass",
+    "expected": "5 lần sai liên tiếp/15 phút → chặn tạm thời, hiện thời gian chờ",
+    "actual": "Text: 🥗 NutriTrack | Quản lý dinh dưỡng cho người Việt | Đăng nhập | ⚠ Tài khoản tạm khoá do đăng nhập sai nhiều lần. Thử lại sau 9 phút. | Email | Mật khẩu | Đăng nhập | Quên mật khẩu? | Tạo tài khoản",
+    "evidence": [
+      "docs/qa/evidence/auth/19-lockout-light.png"
+    ]
+  },
+  {
+    "id": "run",
+    "status": "Blocked",
+    "expected": "Hoàn tất bộ kiểm bổ sung",
+    "actual": "Lỗi: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Đổi mật khẩu' })\u001b[22m\n",
+    "evidence": []
+  }
+]

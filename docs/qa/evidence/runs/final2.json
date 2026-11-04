@@ -1,0 +1,43 @@
+[
+  {
+    "id": "US-04.1",
+    "status": "Pass",
+    "expected": "Đổi mật khẩu với mật khẩu cũ đúng; phiên hiện tại giữ, phiên khác bị đăng xuất",
+    "actual": "Toast=true; phiên hiện tại HTTP=200; phiên khác HTTP=307",
+    "evidence": [
+      "docs/qa/evidence/profile/04-password-other-session-light.png"
+    ]
+  },
+  {
+    "id": "US-04.1b",
+    "status": "Pass",
+    "expected": "Sau đổi: mật khẩu cũ không đăng nhập được, mật khẩu mới được",
+    "actual": "Mật khẩu cũ bị từ chối=true; URL với mật khẩu mới=/hom-nay",
+    "evidence": []
+  },
+  {
+    "id": "US-02.5a",
+    "status": "Pass",
+    "expected": "Luôn hiện cùng thông báo thành công dù email có tồn tại hay không",
+    "actual": "Text=\"Nếu email tồn tại, chúng tôi đã gửi liên kết đặt lại mật khẩu (hiệu lực 60 phút). \"",
+    "evidence": [
+      "docs/qa/evidence/auth/20-forgot-success-light.png"
+    ]
+  },
+  {
+    "id": "US-02.5b",
+    "status": "Blocked",
+    "expected": "Lấy link reset từ Mailpit để kiểm dùng một lần",
+    "actual": "Không trích được link từ Mailpit (không in token)",
+    "evidence": []
+  },
+  {
+    "id": "US-08.4",
+    "status": "Pass",
+    "expected": "Sửa món gốc sau khi ghi → FoodLog cũ không đổi (snapshot)",
+    "actual": "Log Phở bò tái: kcal trước=397.1; sửa Food.energyKcal +100 rồi tải lại; log vẫn hiển thị kcal cũ=true",
+    "evidence": [
+      "docs/qa/evidence/food/20-snapshot-after-source-edit-light.png"
+    ]
+  }
+]

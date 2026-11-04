@@ -1,0 +1,18 @@
+[
+  {
+    "id": "US-24.2",
+    "status": "Pass",
+    "expected": "Cấu hình giờ/ngày lưu theo tài khoản và reload còn",
+    "actual": "Sau reload: water enabled=false; các ô \"Giờ nhắc\" có giá trị [23:22] (đã lưu 23:22 cho bữa trưa); cấu hình gắn với tài khoản B.",
+    "evidence": []
+  },
+  {
+    "id": "US-24.3",
+    "status": "Fail",
+    "expected": "end≤start hoặc không chọn ngày → báo lỗi",
+    "actual": "end≤start=true; không ngày=false",
+    "evidence": [
+      "docs/qa/evidence/remind/04b-validation-manual-light.png"
+    ]
+  }
+]

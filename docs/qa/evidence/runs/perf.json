@@ -1,0 +1,60 @@
+[
+  {
+    "id": "NFR-06/baseline",
+    "status": "Pass",
+    "expected": "Tìm kiếm p95 ≤300ms trên seed hiện tại",
+    "actual": "n=20; p50=22ms; p95=33.3ms; max=83.5ms; dataset hiện tại (chưa 10k)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-06/dataset",
+    "status": "Pass",
+    "expected": "Dataset synthetic 10.000 món trong DB QA",
+    "actual": "Số món qaperf=10000",
+    "evidence": []
+  },
+  {
+    "id": "NFR-06/10k",
+    "status": "Pass",
+    "expected": "Tìm kiếm server p95 ≤300ms với 10.000 món",
+    "actual": "10k dataset: n=30; p50=66.9ms; p95=104.4ms; max=127.7ms; từ khóa phổ biến \"pho\" p95=44.6ms",
+    "evidence": []
+  },
+  {
+    "id": "US-06.3/10k",
+    "status": "Pass",
+    "expected": "Kết quả tìm ≥2 ký tự p95 ≤300ms (US-06.3) với 10k món",
+    "actual": "15 truy vấn \"pho\": p50=40ms; p95=44.6ms; max=44.6ms",
+    "evidence": []
+  },
+  {
+    "id": "NFR-06/cleanup",
+    "status": "Pass",
+    "expected": "Xóa dữ liệu synthetic sau đo",
+    "actual": "Còn lại=0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-05/LCP",
+    "status": "Pass",
+    "expected": "Mobile 4G: LCP ≤2,5s",
+    "actual": "CDP throttle 1,6Mbps/150ms, cache disabled; LCP=1136ms (P); FCP=1136ms; DCL=1025ms; load=2130ms",
+    "evidence": [
+      "docs/qa/evidence/perf/01-dashboard-mobile-4g.png"
+    ]
+  },
+  {
+    "id": "NFR-05/TTI",
+    "status": "Blocked",
+    "expected": "Mobile 4G: TTI ≤4s",
+    "actual": "Không có chỉ số TTI chuẩn trong Chromium headless; mới đo LCP/FCP. Cần Lighthouse/field data hoặc định nghĩa TTI rõ.",
+    "evidence": []
+  },
+  {
+    "id": "NFR-05/optimistic",
+    "status": "Fail",
+    "expected": "Cập nhật lạc quan khi thêm nước ≤100ms",
+    "actual": "UI đổi sau 220ms (bao gồm round-trip server action + router.refresh; ngưỡng 100ms)",
+    "evidence": []
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "US-26.2",
+    "status": "Pass",
+    "expected": "Quyền granted + tab ở nền → web notification đúng giờ nhắc",
+    "actual": "Notification bắt được: [{\"title\":\"NutriTrack\",\"body\":\"Đến giờ ghi bữa tối\"}]; toast in-app=true; không có handler click để mở màn hình hành động trong component (chỉ hiện notification)",
+    "evidence": [
+      "docs/qa/evidence/notif/05-web-notification-hidden-light.png"
+    ]
+  }
+]

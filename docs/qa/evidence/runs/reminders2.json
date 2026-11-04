@@ -1,0 +1,30 @@
+[
+  {
+    "id": "US-24.1",
+    "status": "Fail",
+    "expected": "Hai loại nhắc độc lập; nước khung giờ + mỗi 1/2/3 giờ; bữa mặc định 07:30/12:00/19:00",
+    "actual": "Thấy đủ 08:00/20:00/07:30/12:00/19:00=false; có lựa chọn tần suất=true; switch bữa=3",
+    "evidence": [
+      "docs/qa/evidence/reminder/10-defaults-enabled-light.png"
+    ]
+  },
+  {
+    "id": "US-24.2",
+    "status": "Fail",
+    "expected": "Cấu hình nhắc lưu theo tài khoản, reload còn; áp dụng theo timezone",
+    "actual": "DB: 09:00-21:00 mỗi 3h, enabled=true, days=1234567; UI sau reload 09:00/21:00=false; timezone=Asia/Ho_Chi_Minh",
+    "evidence": [
+      "docs/qa/evidence/reminder/11-saved-persist-light.png"
+    ]
+  },
+  {
+    "id": "US-26.1",
+    "status": "Pass",
+    "expected": "Giải thích lý do trước, không xin quyền khi vào trang; chỉ gọi requestPermission sau khi bấm Tiếp tục",
+    "actual": "Quyền ban đầu=default; requestPermission trước khi mở sheet=0; khi sheet mở=0; sau Tiếp tục=1, quyền=granted; text=\"Bật thông báo trình duyệt?  Chúng tôi chỉ dùng thông báo để nhắc bạn uống nước và ghi bữa ăn khi NutriTrack đang mở ở nền. Trình duyệt sẽ hỏi quyền ở bước tiếp \"",
+    "evidence": [
+      "docs/qa/evidence/reminder/12-notification-explain-light.png",
+      "docs/qa/evidence/reminder/13-notification-granted-light.png"
+    ]
+  }
+]

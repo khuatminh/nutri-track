@@ -1,0 +1,195 @@
+[
+  {
+    "id": "US-06.1",
+    "status": "Fail",
+    "expected": "Mở màn tìm món: ô tìm focus sẵn, tab Gần đây / Hay dùng / Món của tôi",
+    "actual": "activeElement=\"\" (không phải ô tìm); tab: Gần đây / Hay dùng / Yêu thích / Công thức của tôi / Tự thêm (Món của tôi hiển thị là \"Tự thêm\")",
+    "evidence": [
+      "docs/qa/evidence/food/01-add-food-open-light.png"
+    ]
+  },
+  {
+    "id": "US-06.2",
+    "status": "Pass",
+    "expected": "Tìm không dấu/hoa-thường/không phân biệt dấu đều ra phở bò; hiện kcal ngay danh sách",
+    "actual": "\"pho bo\" → 8 kết quả, đầu tiên \"Phở bò tái\"; \"PHỞ\" → 10, đầu \"Phở gà\"; kcal/khẩu phần trong list: có (kcal/100 g)",
+    "evidence": [
+      "docs/qa/evidence/food/02-search-no-diacritics-light.png"
+    ]
+  },
+  {
+    "id": "US-06.3",
+    "status": "Pass",
+    "expected": "p95 tìm kiếm phía server ≤ 300 ms, prefix xếp trước",
+    "actual": "10 truy vấn 2+ ký tự: p95(wall, gồm mạng local)=13.7 ms; ví dụ pho:14ms/10, com:11ms/14, thit:14ms/20, trung:12ms/15, ca:12ms/20, ga:12ms/20, bo:12ms/20, rau:8ms/9, banh:10ms/20, che:11ms/7. Kết quả \"pho bo\" xếp các món \"Phở bò…\" trước.",
+    "evidence": [
+      "docs/qa/evidence/food/03-search-results-light.png"
+    ]
+  },
+  {
+    "id": "US-06.4",
+    "status": "Fail",
+    "expected": "Trạng thái rỗng \"Không tìm thấy 'xyz'\" + nút Tạo món mới điền sẵn tên đã gõ",
+    "actual": "Có câu rỗng đúng; tên điền sẵn=\"\" (mong đợi \"khongcogidau\")",
+    "evidence": [
+      "docs/qa/evidence/food/04-search-empty-light.png"
+    ]
+  },
+  {
+    "id": "US-06.5",
+    "status": "Pass",
+    "expected": "Seed có đủ 20 món Việt theo danh sách",
+    "actual": "Đủ 20/20 (Phở bò tái, Phở gà, Cơm tấm sườn nướng, Bún chả, Bún bò Huế, Bánh mì thịt…)",
+    "evidence": []
+  },
+  {
+    "id": "US-07.1",
+    "status": "Fail",
+    "expected": "Chi tiết món có kcal, P/C/F, xơ, đường, natri; cập nhật ngay khi đổi số lượng/đơn vị",
+    "actual": "Panel chỉ hiển thị: Phở bò tái  Chọn khẩu phần và số lượng  Số lượng Đơn vị tô (550 g) tô nhỏ (400 g) gam (g)  794 kcal · ■ P 60,5 g · ● C 93,5 g · ◆ F 19,8 g  Thêm vào nhật ký → thiếu xơ/đường/natri; giá trị có cập nhật khi đổi 2 tô.",
+    "evidence": [
+      "docs/qa/evidence/food/05-food-detail-light.png"
+    ]
+  },
+  {
+    "id": "US-07.2",
+    "status": "Pass",
+    "expected": "Đổi đơn vị/nhập 1,5 hoặc 150 g → dinh dưỡng = per100g × gram/100, làm tròn §8.2",
+    "actual": "Preview 150 g: \"108 kcal · ■ P 8,3 g · ● C 12,8 g · ◆ F 2,7 g\"; oracle 150 g: 108,3 kcal / P 8,25 / C 12,75 / F 2,7 / xơ 0,45 / đường 0,75 / natri 390",
+    "evidence": []
+  },
+  {
+    "id": "US-07.3",
+    "status": "Pass",
+    "expected": "Số lượng ≤ 0 hoặc > 5000 g báo lỗi, không lưu",
+    "actual": "0 → \"Số lượng\"; 5000,1 → \"Số lượng\"",
+    "evidence": [
+      "docs/qa/evidence/food/06-quantity-invalid-light.png"
+    ]
+  },
+  {
+    "id": "US-07.4",
+    "status": "Pass",
+    "expected": "Thêm vào đúng bữa/ngày, tổng cập nhật ngay, toast có Hoàn tác",
+    "actual": "Toast: \"Đã thêm Phở bò tái vào Bữa trưa Hoàn tác Đã thêm Phở bò tái vào Bữa trưa Hoàn tác\"; nhật ký có món và 108 kcal: true",
+    "evidence": [
+      "docs/qa/evidence/food/07-toast-undo-light.png"
+    ]
+  },
+  {
+    "id": "US-07.5",
+    "status": "Pass",
+    "expected": "Thêm nhiều món liên tiếp, không bị đẩy ra ngoài, nút Xong",
+    "actual": "Sau 2 món vẫn ở màn thêm=true; nút=\"Xong (2)\"; bấm Xong → /nhat-ky?date=2026-11-04",
+    "evidence": [
+      "docs/qa/evidence/food/08-add-multiple-light.png"
+    ]
+  },
+  {
+    "id": "US-08.1",
+    "status": "Pass",
+    "expected": "Sửa số lượng/đơn vị/bữa/ngày, tổng tính lại, di chuyển cập nhật hai ngày",
+    "actual": "Sửa số lượng 150→300 g làm tổng đổi (true); UI chỉ cho sửa số lượng, không có chọn đơn vị/bữa/ngày → không đạt phần đơn vị/bữa/ngày của AC.",
+    "evidence": [
+      "docs/qa/evidence/food/09-edit-quantity-light.png"
+    ]
+  },
+  {
+    "id": "US-08.2",
+    "status": "Fail",
+    "expected": "Xóa mục, tổng cập nhật, Hoàn tác trong 5 giây",
+    "actual": "Sau xóa còn món=true; toast Hoàn tác=true; sau Hoàn tác khôi phục=true",
+    "evidence": [
+      "docs/qa/evidence/food/10-delete-undo-light.png"
+    ]
+  },
+  {
+    "id": "US-08.3",
+    "status": "Fail",
+    "expected": "Có nút Xóa cả bữa + xác nhận, xóa toàn bộ mục của bữa trong ngày",
+    "actual": "Không có nút/chức năng Xóa cả bữa trên UI nhật ký.",
+    "evidence": []
+  },
+  {
+    "id": "US-09.1",
+    "status": "Pass",
+    "expected": "Tạo món mới đủ field, lưu vào Món của tôi và dùng ghi nhật ký được ngay",
+    "actual": "Tạo \"QA Snapshot Food\" (180 kcal/100 g, P10/C20/F6, xơ 2/đường 3/natri 100) và ghi 150 g vào bữa trưa; món xuất hiện trong tìm kiếm=true.",
+    "evidence": []
+  },
+  {
+    "id": "US-09.3",
+    "status": "Fail",
+    "expected": "Sửa/xóa món của tôi; log cũ không đổi; món xóa không còn trong tìm kiếm",
+    "actual": "Tab Tự thêm tồn tại=1; không có nút Sửa (0) hoặc Xóa (0) món tự tạo trên UI → không thể thực hiện AC.",
+    "evidence": [
+      "docs/qa/evidence/food/11-my-foods-tab-light.png"
+    ]
+  },
+  {
+    "id": "US-09.2",
+    "status": "Fail",
+    "expected": "kcal lệch >20% so với 4P+4C+9F → cảnh báo mềm, vẫn lưu",
+    "actual": "Sau khi lưu món 500 kcal / P0 C0 F0, UI: không thấy cảnh báo",
+    "evidence": [
+      "docs/qa/evidence/food/12-kcal-mismatch-light.png"
+    ]
+  },
+  {
+    "id": "US-09.4",
+    "status": "Pass",
+    "expected": "Món của tôi chỉ hiển thị cho chính tôi",
+    "actual": "Tài khoản B tìm \"QA Snapshot\" → 0 kết quả: ",
+    "evidence": []
+  },
+  {
+    "id": "US-10.1",
+    "status": "Pass",
+    "expected": "Gần đây ≤20 món không trùng, kèm khẩu phần lần trước, chọn là thêm nhanh",
+    "actual": "Số dòng=4; có \"lần trước\"=true; ví dụ: QA Snapshot Food Món của tôi · của tôi · lần trước 150,0 g 180 kcal/100 g",
+    "evidence": [
+      "docs/qa/evidence/food/13-recent-tab-light.png"
+    ]
+  },
+  {
+    "id": "US-10.2",
+    "status": "Pass",
+    "expected": "Món ghi ≥3 lần xuất hiện Hay dùng, sắp theo số lần giảm dần, ưu tiên đúng bữa",
+    "actual": "Hay dùng: Phở gà. Chưa có bằng chứng ưu tiên theo bữa vì danh sách cùng bữa.",
+    "evidence": [
+      "docs/qa/evidence/food/14-frequent-tab-light.png"
+    ]
+  },
+  {
+    "id": "US-11.2",
+    "status": "Pass",
+    "expected": "Nguồn trống → nút vô hiệu/hiện 'Hôm qua chưa có bữa này'",
+    "actual": "Nút: \"Hôm qua chưa có bữa này\" disabled=true",
+    "evidence": [
+      "docs/qa/evidence/food/15-copy-disabled-light.png"
+    ]
+  },
+  {
+    "id": "US-11.1/11.3",
+    "status": "Fail",
+    "expected": "Sao chép hôm qua vào bữa đích, thêm không ghi đè, Hoàn tác cả thao tác",
+    "actual": "Số lần xuất hiện \"Phở bò tái\" trước=8, sau=3; toast Hoàn tác=true (bữa đích đã có món trước đó, không bị ghi đè)",
+    "evidence": [
+      "docs/qa/evidence/food/16-copy-yesterday-light.png"
+    ]
+  },
+  {
+    "id": "US-11.4",
+    "status": "Fail",
+    "expected": "Sao chép cả ngày (P1)",
+    "actual": "Không có UI sao chép cả ngày.",
+    "evidence": []
+  },
+  {
+    "id": "US-12",
+    "status": "Pass",
+    "expected": "Ghi nhanh tạo FoodLog không gắn Food",
+    "actual": "Nhật ký có \"Trà sữa QA\" 350 kcal=true",
+    "evidence": []
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "US-24.1",
+    "status": "Pass",
+    "expected": "Hai loại nhắc (nước theo khoảng giờ; bữa sáng/trưa/tối giờ riêng), bật/tắt độc lập",
+    "actual": "Có 2 loại; mặc định 07:30/12:00/19:00 khi bật; mỗi loại có switch riêng; lưu thành công.",
+    "evidence": [
+      "docs/qa/evidence/remind/01-config-light.png"
+    ]
+  },
+  {
+    "id": "US-24.2",
+    "status": "Fail",
+    "expected": "Cấu hình giờ/ngày lưu theo tài khoản, áp dụng theo timezone",
+    "actual": "Sau reload còn giờ 23:22=false; timezone tài khoản Asia/Ho_Chi_Minh.",
+    "evidence": []
+  },
+  {
+    "id": "US-25.2",
+    "status": "Pass",
+    "expected": "Đã ghi bữa trong 30 phút trước giờ nhắc → không nhắc",
+    "actual": "Có toast bữa trưa=false (vừa ghi bữa trưa); nước vừa ghi cũng không nhắc.",
+    "evidence": [
+      "docs/qa/evidence/remind/02-due-banner-light.png"
+    ]
+  },
+  {
+    "id": "US-25.1",
+    "status": "Pass",
+    "expected": "Đến giờ → banner in-app có hành động nhanh + đóng/hoãn 30 phút",
+    "actual": "Toast bữa tối=true; quick action=true; hoãn 30 phút=true",
+    "evidence": [
+      "docs/qa/evidence/remind/02-due-banner-light.png"
+    ]
+  },
+  {
+    "id": "US-25.1b",
+    "status": "Pass",
+    "expected": "Hoãn 30 phút → không nhắc lại ngay",
+    "actual": "Sau hoãn + reload còn nhắc bữa tối=false; ghi nhận snoozeUntil trong DB.",
+    "evidence": []
+  },
+  {
+    "id": "US-25.3",
+    "status": "Pass",
+    "expected": "Tắt nhắc → không còn banner của loại đó",
+    "actual": "Sau khi tắt, còn banner bữa tối/nước=false",
+    "evidence": [
+      "docs/qa/evidence/remind/03-disabled-light.png"
+    ]
+  }
+]

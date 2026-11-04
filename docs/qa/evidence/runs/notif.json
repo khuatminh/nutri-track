@@ -1,0 +1,43 @@
+[
+  {
+    "id": "US-26.1",
+    "status": "Pass",
+    "expected": "Không xin quyền khi vào trang; bấm 'Bật thông báo trình duyệt' → giải thích lý do trước → mới requestPermission",
+    "actual": "Số lần xin quyền khi tải trang=0; có nút=1; sheet giải thích trước=true; trước \"Tiếp tục\"=0; sau=1",
+    "evidence": [
+      "docs/qa/evidence/notif/01-default-permission-light.png"
+    ]
+  },
+  {
+    "id": "US-26.3a",
+    "status": "Pass",
+    "expected": "Quyền bị từ chối → hướng dẫn mở lại quyền, nhắc in-app vẫn hoạt động",
+    "actual": "Có hướng dẫn=true; còn nhắc in-app=true",
+    "evidence": [
+      "docs/qa/evidence/notif/03-denied-guidance-light.png"
+    ]
+  },
+  {
+    "id": "US-26.3b",
+    "status": "Pass",
+    "expected": "Trình duyệt không hỗ trợ Notification API → ẩn tùy chọn",
+    "actual": "Mục \"Thông báo trình duyệt\" hiển thị=false",
+    "evidence": []
+  },
+  {
+    "id": "US-26.2",
+    "status": "Fail",
+    "expected": "Quyền granted + tab chạy nền → web notification khi đến giờ; bấm mở đúng màn hình hành động",
+    "actual": "Notification bắt được: []; toast in-app=false; (điều hướng khi bấm notification không có handler trong MVP — chỉ hiện notification).",
+    "evidence": [
+      "docs/qa/evidence/notif/04-web-notification-light.png"
+    ]
+  },
+  {
+    "id": "US-26.4",
+    "status": "Not run",
+    "expected": "Ghi chú kỹ thuật: notification khi app đóng cần Push API + service worker; MVP chỉ nhắc khi tab/PWA chạy nền",
+    "actual": "Đây là ghi chú phạm vi, không phải hành vi Pass/Fail. Code chỉ dùng Notification API, không có service worker/push subscription.",
+    "evidence": []
+  }
+]

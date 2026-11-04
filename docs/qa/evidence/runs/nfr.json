@@ -1,0 +1,91 @@
+[
+  {
+    "id": "NFR-01a",
+    "status": "Fail",
+    "expected": "4 viewport (360/393/768/1440) không tràn ngang trên 7 màn chính",
+    "actual": "Tràn: 360px/hom-nay (scroll 456>360); 393px/hom-nay (scroll 456>393)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01b",
+    "status": "Fail",
+    "expected": "Mọi target tương tác ≥44×44 px ở mobile 360",
+    "actual": "45 phần tử <44px, ví dụ: BUTTON:Đi(31x44); A:Thêm món vào Bữa sáng(89x36); A:Thêm món vào Bữa trưa(89x36); A:Thêm món vào Bữa tối(89x36); A:Thêm món vào Bữa phụ(89x36); BUTTON:Thêm 150 ml(60x36); BUTTON:Thêm 250 ml(63x36); BUTTON:Thêm 330 ml(63x36)",
+    "evidence": [
+      "docs/qa/evidence/nfr/01-mobile-360-dashboard-light.png",
+      "docs/qa/evidence/nfr/02-mobile-360-add-food-light.png"
+    ]
+  },
+  {
+    "id": "NFR-02a",
+    "status": "Pass",
+    "expected": "Keyboard: focus rõ ràng trên các phần tử tương tác",
+    "actual": "Tab 10 lần: A:Hôm nay → A:Nhật ký → A:Công thức → A:Cân nặng → A:Báo cáo → A:Hồ sơ & cài đặt → A:Thêm món → A:Ngày trước → INPUT: → INPUT:; phần tử không thấy outline/shadow=0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02b",
+    "status": "Blocked",
+    "expected": "Screen reader thực (NVDA/VoiceOver) đọc đúng toàn bộ màn",
+    "actual": "Không có môi trường screen reader và người dùng thật trong phiên QA; chỉ có axe + accessibility snapshot. Không suy ra Pass.",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02c",
+    "status": "Pass",
+    "expected": "Zoom 200% (layout 720×450 tương đương) không tràn ngang",
+    "actual": "Mô phỏng bằng viewport 720×450: 0/7 màn tràn. (Không dùng browser zoom thật; ghi rõ phương pháp.)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02d",
+    "status": "Pass",
+    "expected": "Theme tối áp dụng và giữ sau reload",
+    "actual": "data-theme sau chọn=dark, sau reload=dark, body bg=rgba(0, 0, 0, 0)",
+    "evidence": [
+      "docs/qa/evidence/nfr/04-mobile-360-dashboard-dark.png"
+    ]
+  },
+  {
+    "id": "NFR-02e",
+    "status": "Pass",
+    "expected": "Chế độ Theo hệ thống bỏ data-theme, theo prefers-color-scheme",
+    "actual": "data-theme=null",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02f",
+    "status": "Pass",
+    "expected": "System theme theo OS dark",
+    "actual": "prefers-color-scheme dark=true, body bg=rgba(0, 0, 0, 0)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03a",
+    "status": "Pass",
+    "expected": "Progressbar có role + aria-valuenow/max",
+    "actual": "4 progressbar: [{\"label\":\"Đạm (P): 38,5 trên 120 gram\",\"now\":\"39\",\"max\":\"120\"},{\"label\":\"Tinh bột (C): 59,5 trên 200 gram\",\"now\":\"60\",\"max\":\"200\"},{\"label\":\"Béo (F): 12,6 trên 60 gram\",\"now\":\"13\",\"max\":\"60\"},{\"label\":\"Nước uống hôm nay\",\"now\":\"2981\",\"max\":\"6000\"}]",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03b",
+    "status": "Pass",
+    "expected": "Biểu đồ có bảng dữ liệu tương đương",
+    "actual": "Bảng trên báo cáo tuần=1; biểu đồ cân nặng cũng có bảng (US-17.2).",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02g",
+    "status": "Pass",
+    "expected": "Reduced motion được tôn trọng",
+    "actual": "mq=true; transitionDuration nút=0s",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03c",
+    "status": "Fail",
+    "expected": "axe WCAG 2.1 AA không vi phạm (không thay thế kiểm tay)",
+    "actual": "4 node vi phạm trên 7 màn; critical/serious=1. Chi tiết: docs/qa/evidence/runs/axe.json. Ví dụ: label-content-name-mismatch(4)",
+    "evidence": []
+  }
+]

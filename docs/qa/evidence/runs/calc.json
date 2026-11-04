@@ -1,0 +1,122 @@
+[
+  {
+    "id": "US-03.3",
+    "status": "Fail",
+    "expected": "Chỉ mức hợp lệ 0,25/0,5/0,75 (giảm) và 0,25/0,5 (tăng), mô tả 'Giảm ~0,5 kg/tuần'",
+    "actual": "Giảm cân: [0,25 kg/tuần, 0,5 kg/tuần, 0,75 kg/tuần]. Đúng bộ mức hợp lệ, nhưng chỉ ghi \"0,5 kg/tuần\" + hint chung, không có mô tả \"Giảm ~0,5 kg/tuần\" như AC.",
+    "evidence": []
+  },
+  {
+    "id": "US-05.1",
+    "status": "Pass",
+    "expected": "Nam 30, 175 cm, 70 kg → BMR 1648,75 → 1649",
+    "actual": "\"BMR 1.649 kcal · TDEE 2.556 kcal \"",
+    "evidence": [
+      "docs/qa/evidence/calc/01-male-30-175-70-light.png"
+    ]
+  },
+  {
+    "id": "US-05.2",
+    "status": "Pass",
+    "expected": "PAL 1,55 → TDEE 2555,56 → 2556",
+    "actual": "\"TDEE 2.556 kcal \"",
+    "evidence": [
+      "docs/qa/evidence/calc/01-male-30-175-70-light.png"
+    ]
+  },
+  {
+    "id": "US-05.3",
+    "status": "Pass",
+    "expected": "Mục tiêu = TDEE − 550 (0,5 kg/tuần, dưới trần 25%), làm tròn bội 10; macro 126/241/60 g",
+    "actual": "Mục tiêu 2.010 kcal; macro P126/C241/F60=true; oracle độc lập: 2555,56−550=2005,56→2010, P=min(126; 175,9)=126, F=60, C=241.",
+    "evidence": [
+      "docs/qa/evidence/calc/01-male-30-175-70-light.png"
+    ]
+  },
+  {
+    "id": "US-05.7",
+    "status": "Fail",
+    "expected": "Hiển thị BMR, TDEE, mức điều chỉnh, mục tiêu cuối + ghi chú 'Ước tính, không thay thế tư vấn y tế'",
+    "actual": "Có BMR/TDEE/mục tiêu và disclaimer tương đương; KHÔNG hiển thị riêng mức điều chỉnh (−550 kcal) như AC yêu cầu.",
+    "evidence": [
+      "docs/qa/evidence/calc/01-male-30-175-70-light.png"
+    ]
+  },
+  {
+    "id": "US-05.1b",
+    "status": "Pass",
+    "expected": "Nữ 28, 162 cm, 62 kg → BMR 1331,5 → 1332",
+    "actual": "\"BMR 1.332 kcal · TDEE 2.064 kcal \"",
+    "evidence": [
+      "docs/qa/evidence/calc/02-female-28-162-62-light.png"
+    ]
+  },
+  {
+    "id": "US-05.2b",
+    "status": "Pass",
+    "expected": "TDEE = 1331,5 × 1,55 = 2063,8 → 2064",
+    "actual": "\"TDEE 2.064 kcal \"",
+    "evidence": [
+      "docs/qa/evidence/calc/02-female-28-162-62-light.png"
+    ]
+  },
+  {
+    "id": "US-05.3b",
+    "status": "Pass",
+    "expected": "Yêu cầu 0,5 kg/tuần nhưng thâm hụt 550 > trần 25% TDEE (516) → hạ còn 0,25 kg/tuần; mục tiêu 1790, macro 112/215/54",
+    "actual": "App hiển thị 1.790 kcal + cảnh báo \"Đã hạ tốc độ xuống mức an toàn\"; macro P112/C215/F54. Oracle: 2063,8−275=1788,8→1790.",
+    "evidence": [
+      "docs/qa/evidence/calc/02-female-28-162-62-light.png"
+    ]
+  },
+  {
+    "id": "US-14.1",
+    "status": "Pass",
+    "expected": "Nước 62 kg → 2170 → 2150 ml",
+    "actual": "\"Mục tiêu nước: 2.150 ml/ngày. Bạn có thể chỉnh lại trong Hồ sơ. \"",
+    "evidence": [
+      "docs/qa/evidence/calc/02-female-28-162-62-light.png"
+    ]
+  },
+  {
+    "id": "US-05.8",
+    "status": "Fail",
+    "expected": "Tuổi <18: cảnh báo tham khảo chuyên gia và KHÔNG đề xuất giảm cân",
+    "actual": "Có cảnh báo \"Bạn dưới 18 tuổi — nên hỏi người lớn/bác sĩ trước khi giảm cân\"=true; nhưng vẫn hiển thị mục tiêu giảm cân cụ thể (Mục tiêu mỗi ngày | 1.670 kcal ) → chưa đạt \"không đề xuất giảm cân\".",
+    "evidence": [
+      "docs/qa/evidence/calc/03-under18-light.png"
+    ]
+  },
+  {
+    "id": "US-03.2a",
+    "status": "Pass",
+    "expected": "Giá trị ngoài khoảng 8.1 bị chặn tại trường",
+    "actual": "Chiều cao=99,9: chặn OK; Chiều cao=250,1: chặn OK; Cân nặng hiện tại=19,9: chặn OK; Cân nặng hiện tại=300,1: chặn OK",
+    "evidence": [
+      "docs/qa/evidence/calc/04-boundary-error-light.png"
+    ]
+  },
+  {
+    "id": "US-03.2b",
+    "status": "Pass",
+    "expected": "Biên 100/250 cm, 20/300 kg được qua",
+    "actual": "250 cm + 300 kg qua bước=true",
+    "evidence": []
+  },
+  {
+    "id": "US-03.2c",
+    "status": "Pass",
+    "expected": "Tuổi 12 và 101 bị từ chối",
+    "actual": "2014-01-01: chặn OK; 1925-01-01: chặn OK",
+    "evidence": [
+      "docs/qa/evidence/calc/05-age-block-light.png"
+    ]
+  },
+  {
+    "id": "US-03.2d",
+    "status": "Pass",
+    "expected": "Ngày sinh tương lai bị chặn",
+    "actual": "Thông báo: Tuổi phải từ 13 đến 100",
+    "evidence": []
+  }
+]

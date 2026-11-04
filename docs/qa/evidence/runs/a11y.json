@@ -1,0 +1,376 @@
+[
+  {
+    "id": "NFR-04/axe:hom-nay",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-hom-nay-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:nhat-ky",
+    "status": "Fail",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "1 loại vi phạm: label-content-name-mismatch (9 nút, serious)",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-nhat-ky-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:them-mon",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-them-mon-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:can-nang",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-can-nang-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:bao-cao",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-bao-cao-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:cong-thuc",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-cong-thuc-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:ho-so",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA trên trang chính",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-ho-so-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:dang-nhap",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-dang-nhap-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:dang-ky",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-dang-ky-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe:quen-mat-khau",
+    "status": "Pass",
+    "expected": "Không có vi phạm axe WCAG 2.1 A/AA",
+    "actual": "0 vi phạm",
+    "evidence": [
+      "docs/qa/evidence/a11y/axe-quen-mat-khau-light.png"
+    ]
+  },
+  {
+    "id": "NFR-04/axe-summary",
+    "status": "Fail",
+    "expected": "Tổng hợp axe 10 trang",
+    "actual": "1 loại vi phạm trên 1 trang; chi tiết từng trang ở các dòng trên",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:hom-nay",
+    "status": "Fail",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=840, clientWidth=360 (TRÀN); phần tử <44px: 8 ví dụ Đi(31x44), Thêm(89x36), Thêm(89x36), Thêm(89x36), Thêm(89x36), +150(60x36), +250(63x36), +330(63x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:nhat-ky",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 8 ví dụ Đi(31x44), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36), Sao chép từ hôm qua(196x36), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:them-mon",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 2 ví dụ Ghi nhanh calo(153x36), Tạo món mới(116x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:can-nang",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:bao-cao",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 3 ví dụ Tuần(66x36), Tháng(76x36), Ghi cân nặng(286x38)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:cong-thuc",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/360x800:ho-so",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 360x800",
+    "actual": "scrollWidth=360, clientWidth=360; phần tử <44px: 7 ví dụ Chỉnh tay(92x36), Tính lại tự động(133x36), Bật nhắc uống nước(48x28), Bật nhắc ghi bữa sáng(48x28), Bật nhắc ghi bữa trưa(48x28), Bật nhắc ghi bữa tối(48x28), INPUT(23x24)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:hom-nay",
+    "status": "Fail",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=840, clientWidth=393 (TRÀN); phần tử <44px: 8 ví dụ Đi(31x44), Thêm(89x36), Thêm(89x36), Thêm(89x36), Thêm(89x36), +150(60x36), +250(63x36), +330(63x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:nhat-ky",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 8 ví dụ Đi(31x44), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36), Sao chép từ hôm qua(196x36), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:them-mon",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 2 ví dụ Ghi nhanh calo(153x36), Tạo món mới(116x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:can-nang",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:bao-cao",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 3 ví dụ Tuần(66x36), Tháng(76x36), Ghi cân nặng(89x18)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:cong-thuc",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/393x851:ho-so",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 393x851",
+    "actual": "scrollWidth=393, clientWidth=393; phần tử <44px: 7 ví dụ Chỉnh tay(92x36), Tính lại tự động(133x36), Bật nhắc uống nước(48x28), Bật nhắc ghi bữa sáng(48x28), Bật nhắc ghi bữa trưa(48x28), Bật nhắc ghi bữa tối(48x28), INPUT(24x24)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:hom-nay",
+    "status": "Fail",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=848, clientWidth=768 (TRÀN); phần tử <44px: 8 ví dụ Đi(31x44), Thêm(89x36), Thêm(89x36), Thêm(89x36), Thêm(89x36), +150(60x36), +250(63x36), +330(63x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:nhat-ky",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 8 ví dụ Đi(31x44), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36), Sao chép từ hôm qua(196x36), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:them-mon",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 2 ví dụ Ghi nhanh calo(153x36), Tạo món mới(116x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:can-nang",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:bao-cao",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 3 ví dụ Tuần(66x36), Tháng(76x36), Ghi cân nặng(89x18)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:cong-thuc",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/768x1024:ho-so",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 768x1024",
+    "actual": "scrollWidth=768, clientWidth=768; phần tử <44px: 7 ví dụ Chỉnh tay(92x36), Tính lại tự động(133x36), Bật nhắc uống nước(48x28), Bật nhắc ghi bữa sáng(48x28), Bật nhắc ghi bữa trưa(48x28), Bật nhắc ghi bữa tối(48x28), INPUT(24x24)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:hom-nay",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 8 ví dụ Đi(31x44), Thêm(89x36), Thêm(89x36), Thêm(89x36), Thêm(89x36), +150(60x36), +250(63x36), +330(63x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:nhat-ky",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 8 ví dụ Đi(31x44), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36), Sao chép từ hôm qua(196x36), Thêm món(122x36), Hôm qua chưa có bữa này(229x36), Thêm món(122x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:them-mon",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 2 ví dụ Ghi nhanh calo(153x36), Tạo món mới(116x36)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:can-nang",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:bao-cao",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 3 ví dụ Tuần(66x36), Tháng(76x36), Ghi cân nặng(89x18)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:cong-thuc",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-01/1440x900:ho-so",
+    "status": "Pass",
+    "expected": "Không tràn ngang tại 1440x900",
+    "actual": "scrollWidth=1440, clientWidth=1440; phần tử <44px: 7 ví dụ Chỉnh tay(92x36), Tính lại tự động(133x36), Bật nhắc uống nước(48x28), Bật nhắc ghi bữa sáng(48x28), Bật nhắc ghi bữa trưa(48x28), Bật nhắc ghi bữa tối(48x28), INPUT(24x24)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:hom-nay",
+    "status": "Fail",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=840, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:nhat-ky",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:them-mon",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:can-nang",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:bao-cao",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:cong-thuc",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/zoom200:ho-so",
+    "status": "Pass",
+    "expected": "Zoom 200% không tràn ngang",
+    "actual": "scrollWidth=720, clientWidth=720",
+    "evidence": []
+  },
+  {
+    "id": "NFR-03/keyboard",
+    "status": "Fail",
+    "expected": "Tab qua các phần tử tương tác, focus nhìn thấy rõ",
+    "actual": "skip-link=0; 12 lần Tab; không thấy focus=1; chuỗi: A:Hôm nayHôm nay → A:Nhật kýNhật ký → A:Công thứcCông thức → A:Cân nặngCân nặng → A:Báo cáoBáo cáo → A:Hồ sơ & cài đặtHồ sơ & cài đặt → A:Thêm mónThêm món → A:Ngày trước → INPUT:date → INPUT:date → INPUT:date → INPUT:date",
+    "evidence": []
+  },
+  {
+    "id": "NFR-02/dark",
+    "status": "Pass",
+    "expected": "Dark mode áp dụng và giữ sau reload",
+    "actual": "data-theme=dark; bg=rgba(0, 0, 0, 0); fg=rgb(234, 242, 236); sau reload=dark; tràn ngang=false",
+    "evidence": [
+      "docs/qa/evidence/a11y/hom-nay-dark-desktop.png"
+    ]
+  },
+  {
+    "id": "NFR-02/dark-mobile",
+    "status": "Pass",
+    "expected": "Dark mode mobile 360 không tràn",
+    "actual": "scrollWidth=360, clientWidth=360; bg=rgba(0, 0, 0, 0)",
+    "evidence": [
+      "docs/qa/evidence/a11y/nhat-ky-dark-360x800.png"
+    ]
+  },
+  {
+    "id": "NFR-04/reduced-motion",
+    "status": "Pass",
+    "expected": "prefers-reduced-motion: reduce được tôn trọng",
+    "actual": "matchMedia=true; phần tử có transition khác 0s=0/10 (Tailwind motion-reduce cho phép tắt; đo mẫu nhỏ)",
+    "evidence": []
+  }
+]

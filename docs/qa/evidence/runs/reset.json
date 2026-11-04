@@ -1,0 +1,11 @@
+[
+  {
+    "id": "US-02.5b",
+    "status": "Pass",
+    "expected": "Link reset dùng một lần, hết hạn 60 phút, thu hồi phiên",
+    "actual": "Đổi lần 1=true; dùng lại bị chặn=true; số phiên còn=0",
+    "evidence": [
+      "docs/qa/evidence/auth/21-reset-reuse-light.png"
+    ]
+  }
+]

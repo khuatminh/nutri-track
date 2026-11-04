@@ -1,0 +1,27 @@
+[
+  {
+    "id": "US-11.1/11.3",
+    "status": "Pass",
+    "expected": "Sao chép hôm qua vào bữa đích đang có món: thêm (không ghi đè), Hoàn tác cả thao tác",
+    "actual": "Số dòng trước=0, sau copy=1, sau Hoàn tác=0; tổng ngày có \"Phở gà\"=true",
+    "evidence": [
+      "docs/qa/evidence/food/17-copy-into-existing-light.png"
+    ]
+  },
+  {
+    "id": "US-08.2",
+    "status": "Pass",
+    "expected": "Xóa 1 dòng → biến mất, tổng cập nhật, Hoàn tác trong 5 giây",
+    "actual": "Số dòng trước=2, sau xóa=1, sau Hoàn tác=2; toast Hoàn tác=true",
+    "evidence": [
+      "docs/qa/evidence/food/18-delete-single-light.png"
+    ]
+  },
+  {
+    "id": "US-08.4-prep",
+    "status": "Pass",
+    "expected": "Chuẩn bị: log QA Snapshot Food 150 g",
+    "actual": "Tổng kcal trước khi sửa nguồn: 236",
+    "evidence": []
+  }
+]

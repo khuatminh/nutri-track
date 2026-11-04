@@ -1,0 +1,109 @@
+[
+  {
+    "id": "US-24.1",
+    "status": "Fail",
+    "expected": "Hai loại nhắc: nước (khung giờ + mỗi 1/2/3 giờ) và ghi bữa (07:30/12:00/19:00), bật/tắt độc lập",
+    "actual": "Nước=false; mặc định bữa 07:30/12:00/19:00=false; 3 switch bữa=3",
+    "evidence": [
+      "docs/qa/evidence/reminder/01-settings-defaults-light.png"
+    ]
+  },
+  {
+    "id": "US-24.3",
+    "status": "Pass",
+    "expected": "Kết thúc ≤ bắt đầu hoặc không chọn ngày → báo lỗi, không lưu",
+    "actual": "Text lỗi:  Ngày sinh  /  Mục tiêu hằng ngày  /  Giờ kết thúc phải sau giờ bắt đầu ",
+    "evidence": [
+      "docs/qa/evidence/reminder/02-invalid-config-light.png"
+    ]
+  },
+  {
+    "id": "US-24.2",
+    "status": "Fail",
+    "expected": "Cấu hình nhắc lưu theo tài khoản và áp dụng theo múi giờ người dùng",
+    "actual": "Sau reload còn 08:00/20:00=false; timezone DB=Asia/Ho_Chi_Minh",
+    "evidence": [
+      "docs/qa/evidence/reminder/03-saved-light.png"
+    ]
+  },
+  {
+    "id": "US-25.1",
+    "status": "Pass",
+    "expected": "Đến giờ: banner/toast in-app có hành động nhanh +250 ml, có thể đóng/hoãn 30 phút",
+    "actual": "Slot=23:31; toast=true; có +250ml=true; có nút hoãn=true",
+    "evidence": [
+      "docs/qa/evidence/reminder/04-inapp-reminder-light.png"
+    ]
+  },
+  {
+    "id": "US-25.1b",
+    "status": "Pass",
+    "expected": "Hoãn 30 phút ghi snoozeUntil và ẩn nhắc",
+    "actual": "snoozeUntil=2026-11-04T17:01:56.677Z; reload...",
+    "evidence": []
+  },
+  {
+    "id": "US-25.1c",
+    "status": "Pass",
+    "expected": "Sau hoãn, reload không hiện lại nhắc trong 30 phút",
+    "actual": "Toast sau reload=false",
+    "evidence": []
+  },
+  {
+    "id": "US-25.3",
+    "status": "Pass",
+    "expected": "Tắt nhắc → không còn banner loại đó",
+    "actual": "Toast khi tắt=false",
+    "evidence": []
+  },
+  {
+    "id": "US-25.2",
+    "status": "Pass",
+    "expected": "Đã ghi nước trong 30 phút trước giờ nhắc → không hiện nhắc",
+    "actual": "Toast=false (đã có WaterLog lúc 2026-11-04T16:32:06.492Z)",
+    "evidence": [
+      "docs/qa/evidence/reminder/05-suppressed-after-log-light.png"
+    ]
+  },
+  {
+    "id": "US-26.1",
+    "status": "Blocked",
+    "expected": "Có nút bật thông báo khi quyền default",
+    "actual": "Không thấy nút; quyền=denied",
+    "evidence": []
+  },
+  {
+    "id": "US-26.3a",
+    "status": "Pass",
+    "expected": "Quyền bị từ chối → hướng dẫn mở lại quyền, nhắc in-app vẫn dùng được",
+    "actual": "Text:  Hồ sơ & cài đặt  /  Hồ sơ & cài đặt  /  Trình duyệt đang chặn thông báo. Hãy mở cài đặt trang web (biểu tượng ổ khóa cạnh địa chỉ) và cho phép Thông báo. Nhắc nhở trong ứng dụng vẫn hoạt động. ",
+    "evidence": [
+      "docs/qa/evidence/reminder/07-notification-denied-light.png"
+    ]
+  },
+  {
+    "id": "US-26.3b",
+    "status": "Pass",
+    "expected": "Trình duyệt không hỗ trợ Notification API → ẩn tùy chọn",
+    "actual": "Có mục Thông báo trình duyệt=false",
+    "evidence": [
+      "docs/qa/evidence/reminder/08-notification-unsupported-light.png"
+    ]
+  },
+  {
+    "id": "US-26.2a",
+    "status": "Pass",
+    "expected": "Đến giờ khi tab ở nền và quyền granted → hiện web notification",
+    "actual": "Số notification tạo=1; nội dung={\"title\":\"NutriTrack\",\"body\":\"Đến giờ uống nước rồi 💧\"}",
+    "evidence": [
+      "docs/qa/evidence/reminder/09-notification-created-light.png"
+    ]
+  },
+  {
+    "id": "US-26.2b",
+    "status": "Fail",
+    "expected": "Bấm notification mở đúng màn hình hành động",
+    "actual": "Notification có handler onclick=false (mã nguồn chỉ new Notification, không gắn onclick)",
+    "evidence": []
+  }
+]

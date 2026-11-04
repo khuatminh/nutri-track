@@ -1,0 +1,38 @@
+[
+  {
+    "page": "hom-nay",
+    "violations": []
+  },
+  {
+    "page": "nhat-ky",
+    "violations": [
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "nodes": 4,
+        "help": "Elements must have their visible text as part of their accessible name",
+        "sample": "<button class=\"min-w-0 flex-1 text-left\" aria-label=\"Sửa QA nạp 802,9\"><span class=\"block truncate font-medium\">QA nạp 802,9</span><span cla"
+      }
+    ]
+  },
+  {
+    "page": "them-mon",
+    "violations": []
+  },
+  {
+    "page": "can-nang",
+    "violations": []
+  },
+  {
+    "page": "bao-cao",
+    "violations": []
+  },
+  {
+    "page": "cong-thuc",
+    "violations": []
+  },
+  {
+    "page": "ho-so",
+    "violations": []
+  }
+]

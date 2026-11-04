@@ -1,0 +1,76 @@
+[
+  {
+    "id": "NFR-07/isolation-export",
+    "status": "Fail",
+    "expected": "Tài khoản B không thấy dữ liệu riêng của A qua API export",
+    "actual": "Export B: 5 log, 1 món tự tạo; chứa dữ liệu A=true",
+    "evidence": []
+  },
+  {
+    "id": "US-09.4",
+    "status": "Pass",
+    "expected": "Món tự tạo của A không hiển thị với B",
+    "actual": "B tìm \"QA Snapshot\" → 0 kết quả",
+    "evidence": []
+  },
+  {
+    "id": "NFR-07/unauth",
+    "status": "Pass",
+    "expected": "Chưa đăng nhập không tải được export",
+    "actual": "HTTP=401",
+    "evidence": []
+  },
+  {
+    "id": "NFR-07/cookie",
+    "status": "Pass",
+    "expected": "Cookie phiên HttpOnly, SameSite=Lax; Secure bắt buộc khi HTTPS",
+    "actual": "HttpOnly=true; SameSite=Lax; Secure=false (localhost HTTP nên false); Path=/",
+    "evidence": []
+  },
+  {
+    "id": "NFR-08/headers",
+    "status": "Pass",
+    "expected": "Header bảo mật cơ bản (nosniff; HSTS chỉ có trên HTTPS)",
+    "actual": "x-content-type-options=nosniff; strict-transport-security=max-age=63072000; includeSubDomains; CSP=(none)",
+    "evidence": []
+  },
+  {
+    "id": "NFR-08/logs",
+    "status": "Pass",
+    "expected": "Log ứng dụng không chứa email/mật khẩu người dùng",
+    "actual": "Có email/mật khẩu trong .qa/app.log=false",
+    "evidence": []
+  },
+  {
+    "id": "NFR-08/xss",
+    "status": "Fail",
+    "expected": "Tên món chứa HTML được hiển thị dạng text, không thực thi script",
+    "actual": "window.__xss=0; text chứa nguyên chuỗi=false",
+    "evidence": [
+      "docs/qa/evidence/security/01-xss-quicklog-light.png"
+    ]
+  },
+  {
+    "id": "NFR-09/offline",
+    "status": "Fail",
+    "expected": "Mất mạng khi lưu: giữ input/dialog, báo lỗi tiếng Việt, không tạo bản ghi",
+    "actual": "Có thông báo lỗi=false; dialog còn=0; log trước/sau=1/1; text=Application error: a client-side exception has occurred while loading localhost (see the browser console for more information).",
+    "evidence": [
+      "docs/qa/evidence/security/02-offline-add-light.png"
+    ]
+  },
+  {
+    "id": "NFR-09/retry",
+    "status": "Fail",
+    "expected": "Kết nối lại và Retry: lưu đúng một bản ghi, không nhân đôi",
+    "actual": "Trước=1; sau retry=1; chênh=0",
+    "evidence": []
+  },
+  {
+    "id": "NFR-09/concurrency",
+    "status": "Blocked",
+    "expected": "Hai phiên cùng sửa: ghi sau thắng, hai log thêm độc lập không mất",
+    "actual": "Chưa có kịch bản điều khiển đồng thời ổn định trong lượt này; cần test riêng",
+    "evidence": []
+  }
+]

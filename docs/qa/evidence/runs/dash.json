@@ -1,0 +1,367 @@
+[
+  {
+    "id": "US-17.3",
+    "status": "Pass",
+    "expected": "<2 bản ghi → trạng thái rỗng hướng dẫn thay vì biểu đồ trống",
+    "actual": "Hiển thị: \"Cần ít nhất 2 lần ghi để vẽ biểu đồ \"",
+    "evidence": [
+      "docs/qa/evidence/weight/01-empty-light.png"
+    ]
+  },
+  {
+    "id": "US-16.1a",
+    "status": "Pass",
+    "expected": "Nhập 62,4 (dấu phẩy) → lưu WeightLog hôm nay",
+    "actual": "Sau lưu: toast=\"Đã ghi cân nặng\"; trang có 62,4 kg=true",
+    "evidence": [
+      "docs/qa/evidence/weight/02-saved-comma-light.png"
+    ]
+  },
+  {
+    "id": "US-16.1b",
+    "status": "Pass",
+    "expected": "Nhập lại cùng ngày → hỏi xác nhận, đồng ý thì cập nhật bản ghi ngày đó",
+    "actual": "Hộp thoại xác nhận: \"Ngày này đã có cân nặng. Cập nhật thành 62,4 kg?\"; toast sau xác nhận: \"Đã cập nhật cân nặng\"",
+    "evidence": [
+      "docs/qa/evidence/weight/03-duplicate-confirm-light.png"
+    ]
+  },
+  {
+    "id": "US-16.2",
+    "status": "Pass",
+    "expected": "Ngoài 20–300 kg báo lỗi",
+    "actual": "19,9: báo lỗi OK; 300,1: báo lỗi OK",
+    "evidence": [
+      "docs/qa/evidence/weight/04-bounds-light.png"
+    ]
+  },
+  {
+    "id": "US-16.3",
+    "status": "Pass",
+    "expected": "Không cho ghi ngày tương lai",
+    "actual": "Thông báo:  Chọn ngày không muộn hơn hôm nay ",
+    "evidence": [
+      "docs/qa/evidence/weight/05-future-date-light.png"
+    ]
+  },
+  {
+    "id": "US-16.4",
+    "status": "Fail",
+    "expected": "Sửa/xóa được bản ghi cân nặng",
+    "actual": "Không có UI sửa/xóa bản ghi cân nặng trên trang Cân nặng (chỉ có form thêm mới).",
+    "evidence": []
+  },
+  {
+    "id": "US-18.1",
+    "status": "Pass",
+    "expected": "Lệch ≥1 kg so với cân dùng tính mục tiêu → gợi ý kèm so sánh cũ→mới",
+    "actual": "Dashboard có gợi ý: \"Cân nặng mới 63,4 kg. Cập nhật mục tiêu kcal theo cân nặng mới? \"",
+    "evidence": [
+      "docs/qa/evidence/weight/06-retarget-prompt-light.png"
+    ]
+  },
+  {
+    "id": "US-18.1b",
+    "status": "Pass",
+    "expected": "So sánh mục tiêu cũ → mới (1510 → 1810; 0,5 kg/tuần bị hạ còn 0,25 do trần 25% TDEE)",
+    "actual": "Hộp thoại: Cập nhật mục tiêu? Các ngày trước vẫn giữ mục tiêu cũ. Kcal 1.510 → 1.810 Đạm (g) 112 → 114 Tinh bột (g) 164 → 216 Béo (g) 45 → 54 Giữ nguyên Cập nhật; oracle 63,4 kg: TDEE 2085,5, trần 521 < 550 → hạ 0,25 kg/tuần → 1810",
+    "evidence": [
+      "docs/qa/evidence/weight/07-retarget-compare-light.png"
+    ]
+  },
+  {
+    "id": "US-18.3",
+    "status": "Pass",
+    "expected": "Từ chối → giữ mục tiêu, không nhắc lại đến khi lệch thêm ≥1 kg",
+    "actual": "Sau khi bấm Giữ nguyên và reload, còn gợi ý=false",
+    "evidence": []
+  },
+  {
+    "id": "US-18.2",
+    "status": "Pass",
+    "expected": "Đồng ý → tính lại BMR/TDEE/macro theo cân mới (auto), ngày quá khứ giữ mục tiêu cũ",
+    "actual": "Mục tiêu sau cập nhật: 1.830; oracle 64,5 kg: BMR 1356,5 → TDEE 2102,58 → trần 525 < 550 → −275 → 1830. Trang ngày cũ giữ 1510: kiểm riêng.",
+    "evidence": [
+      "docs/qa/evidence/weight/08-retarget-accepted-light.png"
+    ]
+  },
+  {
+    "id": "US-18.2b",
+    "status": "Pass",
+    "expected": "Ngày quá khứ không bị tính lại mục tiêu (snapshot theo ngày hiệu lực)",
+    "actual": "Mục tiêu ngày 2026-11-03: 1.510 (kỳ vọng 1.510)",
+    "evidence": []
+  },
+  {
+    "id": "US-17.1",
+    "status": "Pass",
+    "expected": "≥2 bản ghi → biểu đồ + lọc 30/90/Tất cả + xu hướng 7 ngày + mục tiêu nếu có",
+    "actual": "role=img=1; bộ lọc=true; chú giải xu hướng=true; mục tiêu=false (chưa đặt cân nặng mục tiêu nên không có đường mục tiêu)",
+    "evidence": [
+      "docs/qa/evidence/weight/09-chart-light.png"
+    ]
+  },
+  {
+    "id": "US-17.2",
+    "status": "Pass",
+    "expected": "Tooltip ngày+kg khi hover; có bảng dữ liệu tương đương cho trình đọc màn hình",
+    "actual": "Tooltip: \"04/11/2026  Cân nặng : 64,5 kg Xu hướng 7 ngày : 64,5 kg\"; bảng có 2 dòng",
+    "evidence": [
+      "docs/qa/evidence/weight/10-chart-tooltip-table-light.png"
+    ]
+  },
+  {
+    "id": "US-17.4",
+    "status": "Pass",
+    "expected": "Hiển thị thay đổi so với lần đầu và 7/30 ngày trước",
+    "actual": "Có 3 mốc so sánh; giá trị: So với lần đầu | +3,5 kg ",
+    "evidence": []
+  },
+  {
+    "id": "US-05.4",
+    "status": "Pass",
+    "expected": "Nhập tay kcal/macro → dùng giá trị của tôi, nhãn Tùy chỉnh, nút khôi phục đề xuất",
+    "actual": "Nhãn=\"Tùy chỉnh\"=true, nút khôi phục hiện có tên \"Tính lại tự động\" (không phải \"Khôi phục đề xuất\"); mục tiêu 2.000 kcal=true",
+    "evidence": [
+      "docs/qa/evidence/dash/11-custom-target-light.png"
+    ]
+  },
+  {
+    "id": "US-05.5a",
+    "status": "Pass",
+    "expected": "Kcal tay <800 bị chặn không lưu",
+    "actual": "Lỗi hiển thị dưới ô Kcal: \"Tối thiểu 800 kcal\"",
+    "evidence": [
+      "docs/qa/evidence/dash/12-kcal-799-blocked-light.png"
+    ]
+  },
+  {
+    "id": "US-05.5b",
+    "status": "Pass",
+    "expected": "Kcal dưới sàn (nữ <1200) → cảnh báo + xác nhận lần hai; xác nhận thì lưu",
+    "actual": "Cảnh báo lần 1=true; sau xác nhận lưu được 1.199 kcal=true",
+    "evidence": [
+      "docs/qa/evidence/dash/13-below-floor-confirm-light.png"
+    ]
+  },
+  {
+    "id": "US-05.6",
+    "status": "Fail",
+    "expected": "Macro lệch >5% → cảnh báo \"Macro không khớp kcal\" + đề xuất tự cân bằng carb; vẫn lưu được",
+    "actual": "Lệch 7% (P200/C200/F60 vs 2000): cảnh báo=false (ngưỡng UI là 10%); lệch 25%: \"Macro cộng lại ≈ 2.500 kcal, lệch >10% so với mục tiêu.\nLưu mục tiêu\" — không có gợi ý cân bằng carb.",
+    "evidence": [
+      "docs/qa/evidence/dash/14-macro-mismatch-light.png"
+    ]
+  },
+  {
+    "id": "US-05.4b",
+    "status": "Pass",
+    "expected": "Khôi phục đề xuất → về giá trị tính tự động",
+    "actual": "Sau \"Tính lại tự động\": badge Tự động=true, kcal 1.830=true (64,5 kg, tốc độ bị hạ còn 0,25 kg/tuần)",
+    "evidence": [
+      "docs/qa/evidence/dash/15-auto-restored-light.png"
+    ]
+  },
+  {
+    "id": "US-03.5",
+    "status": "Fail",
+    "expected": "Sửa chiều cao/cân/vận động/mục tiêu/giới tính → tính lại và hỏi xác nhận nếu đang chỉnh tay",
+    "actual": "Sau khi đổi vận động khi đang Tùy chỉnh: toast \"Đã lưu hồ sơ (mục tiêu tùy chỉnh được giữ nguyên)\" — giữ nguyên không hỏi giữ/đổi.",
+    "evidence": [
+      "docs/qa/evidence/dash/16-profile-custom-save-light.png"
+    ]
+  },
+  {
+    "id": "US-13.1",
+    "status": "Pass",
+    "expected": "Mục tiêu 2000, đã ăn 1200 → Còn lại 800 kcal = mục tiêu − đã ăn",
+    "actual": "Đã ăn 1.200=true; còn lại 800=true; text=\"\"",
+    "evidence": [
+      "docs/qa/evidence/dash/17-dashboard-1200-light.png"
+    ]
+  },
+  {
+    "id": "US-13.3",
+    "status": "Pass",
+    "expected": "3 thanh P/C/F đã ăn / mục tiêu (g) và % hoàn thành",
+    "actual": "P/C/F mục tiêu hiển thị=true; có %=true",
+    "evidence": [
+      "docs/qa/evidence/dash/17-dashboard-1200-light.png"
+    ]
+  },
+  {
+    "id": "US-13.4",
+    "status": "Pass",
+    "expected": "Thẻ nước x/y ml + nút thêm nhanh",
+    "actual": "Có 0 / 2.150 ml và nút +150/+250/+330/+500.",
+    "evidence": [
+      "docs/qa/evidence/dash/17-dashboard-1200-light.png"
+    ]
+  },
+  {
+    "id": "US-13.5",
+    "status": "Pass",
+    "expected": "Thẻ tóm tắt 4 bữa với kcal + danh sách, bữa trống có + Thêm",
+    "actual": "Đủ 4 bữa; bữa trưa có món; bữa trống có nút Thêm.",
+    "evidence": [
+      "docs/qa/evidence/dash/17-dashboard-1200-light.png"
+    ]
+  },
+  {
+    "id": "US-13.6",
+    "status": "Pass",
+    "expected": "Điều hướng ngày, định dạng 'Thứ Tư, 04/11/2026', nút Hôm nay",
+    "actual": "Có định dạng ngày=true; có nút Hôm nay=true",
+    "evidence": [
+      "docs/qa/evidence/dash/17-dashboard-1200-light.png"
+    ]
+  },
+  {
+    "id": "US-13.2",
+    "status": "Pass",
+    "expected": "Vượt mục tiêu → \"Vượt 150 kcal\" bằng màu + biểu tượng + chữ, tông nhẹ",
+    "actual": "Badge: \" ⓘ Vượt 150 kcal — không sao, ngày mai điều chỉnh nhẹ nhàng nhé. \"",
+    "evidence": [
+      "docs/qa/evidence/dash/18-dashboard-over-light.png"
+    ]
+  },
+  {
+    "id": "US-13.9",
+    "status": "Fail",
+    "expected": "P1: streak + tổng chất xơ/đường/natri trong ngày",
+    "actual": "Streak=false; vi chất=false (không thấy trên dashboard)",
+    "evidence": [
+      "docs/qa/evidence/dash/18-dashboard-over-light.png"
+    ]
+  },
+  {
+    "id": "US-13.8",
+    "status": "Pass",
+    "expected": "Ngày tương lai cho xem (rỗng) + cảnh báo khi ghi >1 ngày",
+    "actual": "Có badge \"Ngày ở tương lai — bạn chỉ có thể xem\"=true",
+    "evidence": [
+      "docs/qa/evidence/dash/19-dashboard-future-light.png"
+    ]
+  },
+  {
+    "id": "US-13.7",
+    "status": "Pass",
+    "expected": "Ngày rỗng: CTA Thêm bữa đầu tiên + vòng kcal = mục tiêu đầy đủ (mục tiêu lịch sử của ngày 01/10 là 1510)",
+    "actual": "CTA=true; vòng kcal hiển thị mục tiêu đầy đủ=true; không lẫn thành ngày đã ghi (không có số kcal đã ăn)",
+    "evidence": [
+      "docs/qa/evidence/dash/20-dashboard-empty-day-light.png"
+    ]
+  },
+  {
+    "id": "US-15.1",
+    "status": "Pass",
+    "expected": "Nút +150/+250/+330/+500 thêm ngay, tiến độ cập nhật",
+    "actual": "Tổng sau 250+150+330+500 = 1.230 ml: true",
+    "evidence": [
+      "docs/qa/evidence/water/21-quick-add-light.png"
+    ]
+  },
+  {
+    "id": "US-15.2",
+    "status": "Pass",
+    "expected": "Nhập ml 1–2000; 0/2001 báo lỗi",
+    "actual": "0 → true; 2001 → true",
+    "evidence": [
+      "docs/qa/evidence/water/22-water-invalid-light.png"
+    ]
+  },
+  {
+    "id": "US-15.4",
+    "status": "Pass",
+    "expected": "Tổng ≥ mục tiêu vẫn thêm được, hiện trạng thái đạt",
+    "actual": "Có badge Đạt mục tiêu=true; tổng=3.231",
+    "evidence": [
+      "docs/qa/evidence/water/23-water-over-target-light.png"
+    ]
+  },
+  {
+    "id": "US-15.3",
+    "status": "Pass",
+    "expected": "Sửa/xóa từng lần uống, có Hoàn tác sau xóa",
+    "actual": "Có nút sửa/xóa=true; sửa qua window.prompt (dialogs: 1); toast Hoàn tác=true",
+    "evidence": [
+      "docs/qa/evidence/water/24-water-history-light.png",
+      "docs/qa/evidence/water/25-water-delete-undo-light.png"
+    ]
+  },
+  {
+    "id": "US-14.2",
+    "status": "Pass",
+    "expected": "Chỉnh tay mục tiêu nước 500–6000, áp dụng từ hôm nay",
+    "actual": "Dashboard có 6.000 ml=true",
+    "evidence": []
+  },
+  {
+    "id": "US-14.2b",
+    "status": "Pass",
+    "expected": "Nước ngoài 500–6000 bị chặn",
+    "actual": "400 ml → báo lỗi",
+    "evidence": []
+  },
+  {
+    "id": "US-15.5",
+    "status": "Fail",
+    "expected": "P1: cấu hình chai/cốc yêu thích → nút nhanh dùng dung tích đó",
+    "actual": "Không có UI cấu hình chai/cốc yêu thích; nút nhanh cố định 150/250/330/500.",
+    "evidence": [
+      "docs/qa/evidence/water/26-water-custom-limit-light.png"
+    ]
+  },
+  {
+    "id": "US-19.1",
+    "status": "Fail",
+    "expected": "Tuần hiện tại Thứ Hai–Chủ Nhật, biểu đồ cột + đường mục tiêu, chuyển tuần",
+    "actual": "Khoảng hiển thị: 02/11/2026 – 08/11/2026; có điều hướng tuần.",
+    "evidence": [
+      "docs/qa/evidence/report/27-week-light.png"
+    ]
+  },
+  {
+    "id": "US-19.3",
+    "status": "Fail",
+    "expected": "Ngày trống không tính vào trung bình; báo 'Trung bình trên n/7 ngày có dữ liệu'",
+    "actual": "Text: \"Trung bình trên 2/7 ngày có dữ liệu (ngày trống không tính). \"",
+    "evidence": [
+      "docs/qa/evidence/report/27-week-light.png"
+    ]
+  },
+  {
+    "id": "US-19.2",
+    "status": "Pass",
+    "expected": "Đủ chỉ số tuần: kcal TB, macro g/%, xơ, đường, natri, số ngày đạt ±10%, nước TB, thay đổi cân nặng",
+    "actual": "Có xơ/đường/natri=true; nước=true; cân nặng=true",
+    "evidence": [
+      "docs/qa/evidence/report/27-week-light.png"
+    ]
+  },
+  {
+    "id": "US-20.1",
+    "status": "Pass",
+    "expected": "Tháng: biểu đồ kcal theo ngày, TB theo tuần, chỉ số như tuần + biểu đồ cân nặng tháng",
+    "actual": "Tháng 11/2026: 🥗 NutriTrack | Hôm nay | Nhật ký | Công thức | Cân nặng | Báo cáo | Hồ sơ & cài đặt | Thêm món | Fixture B | Báo cáo | 01/11/2026 – 30/11/2026 | Tuần | Tháng |",
+    "evidence": [
+      "docs/qa/evidence/report/28-month-light.png"
+    ]
+  },
+  {
+    "id": "US-19.4",
+    "status": "Pass",
+    "expected": "Khoảng không có dữ liệu → trạng thái rỗng",
+    "actual": "Có trạng thái rỗng=true",
+    "evidence": [
+      "docs/qa/evidence/report/29-empty-month-light.png"
+    ]
+  },
+  {
+    "id": "US-20.3",
+    "status": "Fail",
+    "expected": "P1: xuất ảnh/PDF/CSV báo cáo",
+    "actual": "Không có UI xuất báo cáo (chỉ có tải JSON toàn bộ dữ liệu ở Hồ sơ).",
+    "evidence": []
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "id": "US-02.1",
+    "status": "Pass",
+    "expected": "Đăng nhập đúng → Dashboard hôm nay; reload giữ phiên",
+    "actual": "Sau login+reload: /hom-nay",
+    "evidence": []
+  },
+  {
+    "id": "US-01.2",
+    "status": "Fail",
+    "expected": "Email đã tồn tại → lỗi tại trường email, không tạo tài khoản thứ hai",
+    "actual": "Lỗi=\"\"; số user=1; text=🥗 NutriTrack | Quản lý dinh dưỡng cho người Việt | Tạo tài khoản | Email | Email này đã được đăng ký | Mật khẩu | Tối thiểu 8 ký tự, gồm chữ và số | Tôi đồng ý",
+    "evidence": [
+      "docs/qa/evidence/auth/16-register-duplicate-light.png"
+    ]
+  },
+  {
+    "id": "US-02.3",
+    "status": "Fail",
+    "expected": "5 lần sai liên tiếp/15 phút → chặn tạm thời, hiện thời gian chờ",
+    "actual": "Text: 🥗 NutriTrack | Quản lý dinh dưỡng cho người Việt | Đăng nhập | Email | Email không hợp lệ | Mật khẩu | Đăng nhập | Quên mật khẩu? | Tạo tài khoản",
+    "evidence": [
+      "docs/qa/evidence/auth/17-lockout-light.png"
+    ]
+  },
+  {
+    "id": "US-02.5",
+    "status": "Pass",
+    "expected": "Quên mật khẩu: luôn báo thành công; gửi link hạn 60 phút; token lưu hash một lần",
+    "actual": "Thông báo=\" Nhập email, chúng tôi sẽ gửi liên kết đặt lại mật khẩu. \"; token còn 60 phút; độ dài hash=64; dùng 1 lần (có usedAt field)",
+    "evidence": [
+      "docs/qa/evidence/auth/18-forgot-sent-light.png"
+    ]
+  },
+  {
+    "id": "US-02.5b",
+    "status": "Pass",
+    "expected": "Email đặt lại được gửi vào Mailpit",
+    "actual": "Mailpit tổng thư=2",
+    "evidence": []
+  },
+  {
+    "id": "US-04.2",
+    "status": "Pass",
+    "expected": "Xuất dữ liệu tải JSON chứa hồ sơ + toàn bộ log của tôi",
+    "actual": "HTTP=200; content-type=application/json; charset=utf-8; khóa=exportedAt,user,profile,targets,foodLogs,waterLogs,weightLogs,recipes,reminders,customFoods; số log=10",
+    "evidence": []
+  },
+  {
+    "id": "US-04.1",
+    "status": "Fail",
+    "expected": "Đổi mật khẩu: cần mật khẩu cũ đúng; thành công thì phiên khác bị đăng xuất",
+    "actual": "Sai mk cũ báo lỗi=true; đổi thành công=true; phiên cũ HTTP=200; URL=/ho-so",
+    "evidence": [
+      "docs/qa/evidence/profile/02-password-changed-light.png"
+    ]
+  },
+  {
+    "id": "US-04.3",
+    "status": "Fail",
+    "expected": "Xóa tài khoản: cần mật khẩu đúng, xóa toàn bộ dữ liệu, đăng xuất",
+    "actual": "Sai mk bị chặn=true; user còn trong DB=false; URL=/dang-ky",
+    "evidence": [
+      "docs/qa/evidence/profile/03-account-deleted-light.png"
+    ]
+  },
+  {
+    "id": "US-19.1",
+    "status": "Pass",
+    "expected": "Tuần hiện tại Thứ Hai–Chủ Nhật, biểu đồ cột kcal + đường mục tiêu, chuyển tuần trước/sau",
+    "actual": "Khoảng tuần=true; số svg=15; có nút chuyển tuần=false",
+    "evidence": [
+      "docs/qa/evidence/report/32-week-recheck-light.png"
+    ]
+  },
+  {
+    "id": "US-19.3",
+    "status": "Pass",
+    "expected": "Ngày trống không tính vào trung bình; báo trên n/7 ngày",
+    "actual": "Text=\"Trung bình trên 2/7 ngày có dữ liệu (ngày trống không tính). \"",
+    "evidence": [
+      "docs/qa/evidence/report/32-week-recheck-light.png"
+    ]
+  },
+  {
+    "id": "US-21",
+    "status": "Fail",
+    "expected": "P1: tối đa 3 nhận xét dạng quy tắc khi đủ dữ liệu ≥3 ngày",
+    "actual": "Có khối nhận xét/insight=false (không thấy trong UI báo cáo)",
+    "evidence": []
+  }
+]
