@@ -6,6 +6,7 @@ import { hasMissingMicro, nutrientsForGrams, scaleNutrients, snapshot, type Nutr
 import { addLogSchema, quickLogSchema, updateLogSchema, isoDateSchema, mealSchema } from "@/lib/validation/food";
 import { fieldErrors } from "@/lib/validation/auth";
 import { db } from "@/server/db";
+import { isUniqueViolation } from "@/server/idempotency";
 import { hydrate, recipeServing, type FoodHit } from "@/server/foods/search";
 
 export type Result<T = object> = ({ ok: true } & T) | { ok: false; error: string; fields?: Record<string, string> };
@@ -142,22 +143,37 @@ export async function addLog(userId: string, timezone: string, raw: unknown, opt
   if ("error" in r) return { ok: false, error: r.error, fields: r.field ? { [r.field]: r.error } : undefined };
   const ge = gramsError(r.grams);
   if (ge) return { ok: false, error: ge, fields: { quantity: ge } };
-  const log = await db.foodLog.create({
-    data: {
-      userId,
-      logDate: isoToDate(i.date),
-      meal: i.meal,
-      foodId: r.foodId,
-      recipeId: r.recipeId,
-      nameSnapshot: r.name,
-      quantity: i.quantity,
-      servingLabel: r.servingLabel,
-      grams: r.grams,
-      ...nutrientCols(snapshot(r.nutrients)),
-      missingMicro: r.missingMicro,
-      source: i.source,
-    },
-  });
+  if (i.clientRequestId) {
+    const existing = await db.foodLog.findFirst({ where: { userId, clientRequestId: i.clientRequestId } });
+    if (existing) return { ok: true, log: toDto(existing) };
+  }
+  let log: FoodLog;
+  try {
+    log = await db.foodLog.create({
+      data: {
+        userId,
+        logDate: isoToDate(i.date),
+        meal: i.meal,
+        foodId: r.foodId,
+        recipeId: r.recipeId,
+        nameSnapshot: r.name,
+        quantity: i.quantity,
+        servingLabel: r.servingLabel,
+        grams: r.grams,
+        ...nutrientCols(snapshot(r.nutrients)),
+        missingMicro: r.missingMicro,
+        source: i.source,
+        clientRequestId: i.clientRequestId ?? null,
+      },
+    });
+  } catch (e) {
+    // Two retries raced: the unique (userId, clientRequestId) index keeps exactly one row.
+    if (i.clientRequestId && isUniqueViolation(e)) {
+      const existing = await db.foodLog.findFirst({ where: { userId, clientRequestId: i.clientRequestId } });
+      if (existing) return { ok: true, log: toDto(existing) };
+    }
+    throw e;
+  }
   return { ok: true, log: toDto(log) };
 }
 
@@ -167,22 +183,36 @@ export async function addQuickLog(userId: string, timezone: string, raw: unknown
   if (!p.success) return { ok: false, error: "Dữ liệu chưa hợp lệ", fields: fieldErrors(p.error) };
   const i = p.data;
   if (isTooFarInFuture(i.date, timezone)) return { ok: false, error: "Ngày này ở tương lai xa", fields: { date: "future" } };
-  const log = await db.foodLog.create({
-    data: {
-      userId,
-      logDate: isoToDate(i.date),
-      meal: i.meal,
-      nameSnapshot: i.name?.trim() || "Ghi nhanh",
-      quantity: 1,
-      servingLabel: "lần",
-      grams: 0,
-      kcal: i.kcal,
-      proteinG: i.proteinG ?? 0,
-      carbG: i.carbG ?? 0,
-      fatG: i.fatG ?? 0,
-      source: "quick",
-    },
-  });
+  if (i.clientRequestId) {
+    const existing = await db.foodLog.findFirst({ where: { userId, clientRequestId: i.clientRequestId } });
+    if (existing) return { ok: true, log: toDto(existing) };
+  }
+  let log: FoodLog;
+  try {
+    log = await db.foodLog.create({
+      data: {
+        userId,
+        logDate: isoToDate(i.date),
+        meal: i.meal,
+        nameSnapshot: i.name?.trim() || "Ghi nhanh",
+        quantity: 1,
+        servingLabel: "lần",
+        grams: 0,
+        kcal: i.kcal,
+        proteinG: i.proteinG ?? 0,
+        carbG: i.carbG ?? 0,
+        fatG: i.fatG ?? 0,
+        source: "quick",
+        clientRequestId: i.clientRequestId ?? null,
+      },
+    });
+  } catch (e) {
+    if (i.clientRequestId && isUniqueViolation(e)) {
+      const existing = await db.foodLog.findFirst({ where: { userId, clientRequestId: i.clientRequestId } });
+      if (existing) return { ok: true, log: toDto(existing) };
+    }
+    throw e;
+  }
   return { ok: true, log: toDto(log) };
 }
 

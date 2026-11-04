@@ -96,6 +96,34 @@ run("data services (db)", () => {
     expect((await addLog(b, TZ, { date: today, meal: "lunch", kind: "food", itemId: "nope", quantity: 100 })).ok).toBe(false);
   });
 
+  it("NFR-09: client retry keys make log/water saves idempotent", async () => {
+    const day = addDays(today, -5);
+    const logKey = `it-retry-log-${Date.now()}`;
+    const first = await addLog(a, TZ, { date: day, meal: "lunch", kind: "food", itemId: pho, servingId: phoServing, quantity: 1, clientRequestId: logKey });
+    const retry = await addLog(a, TZ, { date: day, meal: "lunch", kind: "food", itemId: pho, servingId: phoServing, quantity: 1, clientRequestId: logKey });
+    expect(first.ok).toBe(true);
+    expect(retry.ok).toBe(true);
+    if (first.ok && retry.ok) expect(retry.log.id).toBe(first.log.id);
+    expect((await listDay(a, day)).length).toBe(1);
+
+    const quickKey = `it-retry-quick-${Date.now()}`;
+    const quick1 = await addQuickLog(a, TZ, { date: day, meal: "snack", kcal: 120, clientRequestId: quickKey });
+    const quick2 = await addQuickLog(a, TZ, { date: day, meal: "snack", kcal: 120, clientRequestId: quickKey });
+    expect(quick1.ok && quick2.ok).toBe(true);
+    if (quick1.ok && quick2.ok) expect(quick2.log.id).toBe(quick1.log.id);
+
+    const waterKey = `it-retry-water-${Date.now()}`;
+    const w1 = await addWater(a, TZ, { amountMl: 250, date: day, clientRequestId: waterKey });
+    const w2 = await addWater(a, TZ, { amountMl: 250, date: day, clientRequestId: waterKey });
+    expect(w1.ok && w1.totalMl).toBe(250);
+    expect(w2.ok && w2.totalMl).toBe(250);
+    expect(await waterTotal(a, day)).toBe(250);
+
+    // A fresh key is a new, intentional save (the guard only deduplicates retries).
+    await addWater(a, TZ, { amountMl: 250, date: day, clientRequestId: `${waterKey}-b` });
+    expect(await waterTotal(a, day)).toBe(500);
+  });
+
   it("copies a meal (append), recents and frequent", async () => {
     await addLog(a, TZ, { date: yesterday, meal: "breakfast", kind: "food", itemId: pho, servingId: phoServing, quantity: 1 });
     await addLog(a, TZ, { date: yesterday, meal: "breakfast", kind: "food", itemId: pho, servingId: phoServing, quantity: 1 });

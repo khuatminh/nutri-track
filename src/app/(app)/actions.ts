@@ -23,9 +23,9 @@ const refresh = () => {
   for (const p of ["/hom-nay", "/nhat-ky", "/bao-cao", "/can-nang", "/cong-thuc", "/ho-so"]) revalidatePath(p);
 };
 
-export async function addWaterAction(amountMl: number, date?: string) {
+export async function addWaterAction(amountMl: number, date?: string, clientRequestId?: string) {
   const u = await requireUser();
-  const r = await addWater(u.userId, u.timezone, { amountMl, date });
+  const r = await addWater(u.userId, u.timezone, { amountMl, date, clientRequestId });
   refresh();
   return r;
 }

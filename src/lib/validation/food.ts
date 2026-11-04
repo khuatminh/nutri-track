@@ -31,6 +31,9 @@ export type CustomFoodInput = z.infer<typeof customFoodSchema>;
 
 const quantity = num("Nhập số lượng").positive("Số lượng phải lớn hơn 0").max(5000, "Số lượng quá lớn");
 
+/** NFR-09: opaque client retry key, reused when a failed save is retried so the server does not duplicate it. */
+export const clientRequestIdSchema = z.string().trim().min(8, "Mã yêu cầu không hợp lệ").max(120).optional();
+
 export const addLogSchema = z.object({
   date: isoDateSchema,
   meal: mealSchema,
@@ -40,6 +43,7 @@ export const addLogSchema = z.object({
   servingId: z.string().min(1).optional(),
   quantity,
   source: z.enum(["search", "recent", "copy", "quick"]).default("search"),
+  clientRequestId: clientRequestIdSchema,
 });
 export type AddLogInput = z.infer<typeof addLogSchema>;
 
@@ -58,6 +62,7 @@ export const quickLogSchema = z.object({
   proteinG: nonNeg("Không hợp lệ").max(1000).optional(),
   carbG: nonNeg("Không hợp lệ").max(1000).optional(),
   fatG: nonNeg("Không hợp lệ").max(1000).optional(),
+  clientRequestId: clientRequestIdSchema,
 });
 
 export const recipeInputSchema = z.object({
@@ -83,6 +88,7 @@ export type RecipeInput = z.infer<typeof recipeInputSchema>;
 export const waterSchema = z.object({
   amountMl: num("Nhập lượng nước").int("Nhập số nguyên").min(1, "Tối thiểu 1 ml").max(2000, "Tối đa 2.000 ml mỗi lần"),
   date: isoDateSchema.optional(),
+  clientRequestId: clientRequestIdSchema,
 });
 
 export const weightSchema = z.object({
