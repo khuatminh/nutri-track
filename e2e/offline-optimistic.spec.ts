@@ -68,7 +68,8 @@ test("NFR-09 / QLD-28: offline save keeps the sheet + input, shows Thử lại, 
     // Hard navigation reads the server state, not the component's optimistic counter.
     await page.goto(`/nhat-ky?date=${DATE}`);
     const lunch = page.locator("#lunch");
-    await expect(lunch.getByRole("button", { name: `Sửa ${name}`, exact: true })).toHaveCount(1);
+    // QLD-42 appended serving/qty text to the edit button's accessible name; match the prefix.
+    await expect(lunch.getByRole("button", { name: new RegExp(`^Sửa ${escapeRe(name)}`) })).toHaveCount(1);
     await expect(lunch).toContainText("100 kcal");
     await expect(lunch).not.toContainText("200 kcal");
   });
