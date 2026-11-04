@@ -151,6 +151,8 @@ export interface ComputedTargets {
   macros: MacroTargets;
   waterMl: number;
   advice: GoalAdvice;
+  weightLossBlocked: boolean;
+  suggestedGoal: Goal;
 }
 
 /** One-call pipeline used by onboarding / profile edits (US-05). */
@@ -167,7 +169,12 @@ export function computeTargets(input: {
   const age = ageFromBirthDate(input.birthDate, input.today);
   const b = bmr({ sex: input.sex, weightKg: input.weightKg, heightCm: input.heightCm, age });
   const t = tdee(b, input.activityLevel);
-  const calories = calorieTarget({ tdee: t, goal: input.goal, rateKgPerWeek: input.rateKgPerWeek, sex: input.sex });
+  const weightLossBlocked = age < 18 && input.goal === "lose";
+  const suggestedGoal = weightLossBlocked ? "maintain" : input.goal;
+  // US-05.8: preserve exact TDEE; rounding down could introduce a deficit.
+  const calories: CalorieTargetResult = weightLossBlocked
+    ? { kcal: t, adjustment: 0, effectiveRateKgPerWeek: 0, rateReduced: false, flooredToMin: false }
+    : calorieTarget({ tdee: t, goal: input.goal, rateKgPerWeek: input.rateKgPerWeek, sex: input.sex });
   const bmiValue = bmi(input.weightKg, input.heightCm);
   return {
     bmr: b,
@@ -175,9 +182,11 @@ export function computeTargets(input: {
     bmi: bmiValue,
     age,
     calories,
-    macros: macroTargets({ kcal: calories.kcal, weightKg: input.weightKg, goal: input.goal }),
+    macros: macroTargets({ kcal: calories.kcal, weightKg: input.weightKg, goal: suggestedGoal }),
     waterMl: waterTarget(input.weightKg),
-    advice: goalAdvice(input.goal, bmiValue),
+    advice: goalAdvice(suggestedGoal, bmiValue),
+    weightLossBlocked,
+    suggestedGoal,
   };
 }
 
