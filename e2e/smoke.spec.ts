@@ -52,6 +52,13 @@ test("QA-24: registration → onboarding → serving → persisted dashboard →
   page,
   browser,
 }, testInfo) => {
+  // NFR-07: any Content-Security-Policy violation reported by the browser fails the test.
+  const cspViolations: string[] = [];
+  page.on("console", (msg) => {
+    if (/content security policy|violates the following/i.test(msg.text())) {
+      cspViolations.push(msg.text());
+    }
+  });
   const runId = randomUUID();
   const name = `QA fixture ${runId}`;
   const color = testInfo.project.use.colorScheme ?? "light";
@@ -215,4 +222,5 @@ test("QA-24: registration → onboarding → serving → persisted dashboard →
       });
     });
   }
+  expect(cspViolations, "CSP violations in browser console").toEqual([]);
 });
