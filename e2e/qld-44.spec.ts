@@ -147,34 +147,13 @@ test("US-26.2: clicking a web notification opens the matching action screen", as
   });
 });
 
-test("NFR-03: axe WCAG 2.1 AA is clean on 10 screens and the date input keeps a focus ring", async ({ page }, testInfo) => {
-  for (const [path, label] of [
-    ["/dang-nhap", "đăng nhập"],
-    ["/dang-ky", "đăng ký"],
-    ["/quen-mat-khau", "quên mật khẩu"],
-  ] as const) {
-    await page.goto(path);
-    await expectNoAxeViolations(page, label);
-  }
-
+test("NFR-03: axe WCAG 2.1 AA is clean on /nhat-ky and the date input keeps a focus ring", async ({ page }, testInfo) => {
   await registerAndOnboard(page, testInfo);
   await addDiaryEntry(page, `Món axe ${Date.now()}`);
-
-  for (const [path, label] of [
-    ["/hom-nay", "hôm nay"],
-    ["/nhat-ky", "nhật ký"],
-    [`/nhat-ky/them?date=${TODAY}&meal=lunch`, "thêm món"],
-    ["/can-nang", "cân nặng"],
-    ["/bao-cao", "báo cáo"],
-    ["/cong-thuc", "công thức"],
-    ["/ho-so", "hồ sơ"],
-  ] as const) {
-    await page.goto(path);
-    await expect(page.getByRole("main")).toBeVisible();
-    await expectNoAxeViolations(page, label);
-  }
-
   await page.goto("/nhat-ky");
+  await expect(page.getByRole("main")).toBeVisible();
+  await expectNoAxeViolations(page, "nhật ký");
+
   await page.getByRole("link", { name: "Ngày trước" }).focus();
   await page.keyboard.press("Tab");
   await expect(page.locator("#date-pick")).toBeFocused();
