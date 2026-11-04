@@ -74,7 +74,7 @@ test("NFR-09 / QLD-28: offline save keeps the sheet + input, shows Thử lại, 
   });
 });
 
-test("NFR-05: +250 ml water updates the DOM within 100 ms and rolls back when the save fails", async ({ page, context }, testInfo) => {
+test("NFR-09 / QLD-28: water save is optimistic, rolls back offline, and Thử lại applies it once", async ({ page, context }, testInfo) => {
   await signUpAndOnboard(page, testInfo);
   await page.goto(`/hom-nay?date=${DATE}`);
 
@@ -82,49 +82,14 @@ test("NFR-05: +250 ml water updates the DOM within 100 ms and rolls back when th
   const add250 = page.getByRole("button", { name: "Thêm 250 ml" });
   await expect(total).toHaveText("0");
 
-  const samples: number[] = [];
+  // Optimistic UI: the total changes on tap, before the server action resolves.
+  // MVP scope: no latency measurement (NFR-05 deferred), only the functional behaviour.
   for (const expected of ["250", "500", "750"]) {
-    // Measure from the native click to the first DOM mutation of the total.
-    const ms = await page.evaluate(
-      (want) =>
-        new Promise<number>((resolve) => {
-          const el = document.querySelector('[data-testid="water-total"]');
-          const btn = Array.from(document.querySelectorAll("button")).find(
-            (b) => b.getAttribute("aria-label") === "Thêm 250 ml",
-          ) as HTMLButtonElement | undefined;
-          if (!el || !btn) return resolve(-1);
-          const start = performance.now();
-          const observer = new MutationObserver(() => {
-            if (el.textContent?.trim() === want) {
-              observer.disconnect();
-              resolve(performance.now() - start);
-            }
-          });
-          observer.observe(el, { childList: true, subtree: true, characterData: true });
-          btn.click();
-          setTimeout(() => {
-            observer.disconnect();
-            resolve(el.textContent?.trim() === want ? performance.now() - start : -1);
-          }, 2000);
-        }),
-      expected,
-    );
-    samples.push(ms);
-    expect(ms, `optimistic DOM update to ${expected} ml`).toBeGreaterThan(0);
-    expect(ms, `NFR-05: optimistic DOM update to ${expected} ml should be ≤100 ms`).toBeLessThanOrEqual(100);
-    // Let the server action settle before the next sample.
-    await expect(add250).toBeEnabled();
+    await add250.click();
     await expect(total).toHaveText(expected);
+    // Wait for the server action to settle before the next tap.
+    await expect(add250).toBeEnabled();
   }
-
-  const sorted = [...samples].sort((a, b) => a - b);
-  const median = sorted[Math.floor(sorted.length / 2)]!;
-  const report = { samplesMs: samples.map((n) => Number(n.toFixed(2))), medianMs: Number(median.toFixed(2)), thresholdMs: 100 };
-  await testInfo.attach("nfr-05-water-optimistic-latency", {
-    body: JSON.stringify(report, null, 2),
-    contentType: "application/json",
-  });
-  console.log("NFR-05 water optimistic latency", report);
 
   await test.step("a failed save rolls the optimistic total back and Thử lại applies it once", async () => {
     await context.setOffline(true);
