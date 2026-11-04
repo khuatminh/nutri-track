@@ -131,7 +131,7 @@ NutriTrack là web app quản lý dinh dưỡng cá nhân **đẹp, dễ dùng, 
 **US-06 (P0) — Tìm và thêm món vào bữa.**
 - **US-06.1** Given tôi ở Nhật ký, When bấm "+ Thêm" ở bữa Sáng/Trưa/Tối/Phụ, Then mở màn tìm món với ô tìm đã focus, hiển thị tab Gần đây / Hay dùng / Món của tôi.
 - **US-06.2** Given CSDL có món "Phở bò", When tôi gõ "pho bo" (không dấu) hoặc "phở", Then phở bò nằm trong kết quả; tìm không phân biệt hoa/thường và dấu tiếng Việt; hiển thị kcal/khẩu phần mặc định ngay trong danh sách.
-- **US-06.3** Given tôi gõ ≥ 2 ký tự, Then kết quả hiển thị với p95 ≤ 300 ms phía máy chủ (xem NFR-07), kết quả khớp đầu từ xếp trước, món Việt/món đã dùng của tôi được ưu tiên.
+- **US-06.3** Given tôi gõ ≥ 2 ký tự, Then kết quả hiển thị với p95 ≤ 300 ms phía máy chủ (xem NFR-06), kết quả khớp đầu từ xếp trước, món Việt/món đã dùng của tôi được ưu tiên.
 - **US-06.4** Given không có kết quả, Then hiện trạng thái rỗng "Không tìm thấy 'xyz'" cùng nút "Tạo món mới" điền sẵn tên đã gõ.
 - **US-06.5** Given CSDL seed, Then có tối thiểu các món Việt: phở bò, phở gà, cơm tấm sườn, bún chả, bún bò Huế, bánh mì thịt, bún riêu, hủ tiếu, mì Quảng, cơm gà, gỏi cuốn, bánh xèo, cháo, canh chua, rau muống xào tỏi, thịt kho trứng, cá kho, trứng chiên, đậu hũ sốt cà, chè (kiểm thử bằng danh sách).
 
@@ -315,7 +315,7 @@ Tuổi tính từ ngày sinh theo ngày hiện tại (múi giờ người dùng)
 `ml = round50(35 × cân nặng kg)`, kẹp trong [1500, 4000]. Người dùng chỉnh tay [500, 6000].
 
 ### 5.8 Giá trị tham chiếu báo cáo
-Natri 2000 mg/ngày; đường tổng tham chiếu hiển thị ≤ 50 g/ngày (≈10% của 2000 kcal; MVP lấy 10% mục tiêu kcal ÷ 4); chất xơ theo 5.6. Các giá trị cấu hình trong một file hằng số, không hard-code rải rác.
+Natri 2000 mg/ngày; đường tham chiếu = 10% mục tiêu kcal ÷ 4 (g/ngày; ví dụ 2000 kcal → 50 g); chất xơ theo 5.6. Các giá trị cấu hình trong một file hằng số, không hard-code rải rác.
 
 ---
 
