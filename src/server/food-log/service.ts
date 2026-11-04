@@ -1,8 +1,9 @@
-import type { FoodLog, Meal } from "@prisma/client";
+import { z } from "zod";
+import type { FoodLog, Meal, Prisma } from "@prisma/client";
 import { addDays, isoToDate, dateToIso, todayIn } from "@/lib/dates";
 import { RANGES } from "@/lib/nutrition/constants";
 import { hasMissingMicro, nutrientsForGrams, scaleNutrients, snapshot, type Nutrients } from "@/lib/nutrition";
-import { addLogSchema, quickLogSchema, updateLogSchema } from "@/lib/validation/food";
+import { addLogSchema, quickLogSchema, updateLogSchema, isoDateSchema, mealSchema } from "@/lib/validation/food";
 import { fieldErrors } from "@/lib/validation/auth";
 import { db } from "@/server/db";
 import { hydrate, recipeServing, type FoodHit } from "@/server/foods/search";
@@ -197,32 +198,30 @@ export async function updateLog(userId: string, timezone: string, logId: string,
   const data: Record<string, unknown> = {};
   if (i.meal) data.meal = i.meal;
   if (i.date) data.logDate = isoToDate(i.date);
-  if (i.quantity !== undefined || i.servingId) {
+  if (i.quantity !== undefined || i.servingId !== undefined) {
     const qty = i.quantity ?? cur.quantity;
+    if (cur.grams === 0) return { ok: false, error: "Mục ghi nhanh không có khẩu phần để sửa" };
     const kind = cur.recipeId ? "recipe" : "food";
     const itemId = cur.recipeId ?? cur.foodId;
-    let servingId = i.servingId;
-    if (!servingId && kind === "food" && itemId && cur.servingLabel && cur.servingLabel !== "g") {
-      // Quantity edit keeps the serving unit the entry was logged with.
-      servingId = (await db.foodServing.findFirst({ where: { foodId: itemId, label: cur.servingLabel }, select: { id: true } }))?.id;
+    // Omitted serving keeps the original grams per unit, even after a custom-food edit.
+    let grams = i.servingId === null ? qty : qty * cur.grams / cur.quantity;
+    let label = i.servingId === null ? "g" : cur.servingLabel;
+    const r = itemId ? await resolveItem(userId, kind, itemId, i.servingId ?? undefined,
+      kind === "recipe" || typeof i.servingId === "string" ? qty : grams) : null;
+    if (r && !("error" in r) && (kind === "recipe" || typeof i.servingId === "string")) {
+      grams = r.grams;
+      label = r.servingLabel;
     }
-    const r = itemId ? await resolveItem(userId, kind, itemId, servingId, qty) : null;
-    if (r && !("error" in r)) {
-      const ge = gramsError(r.grams);
-      if (ge) return { ok: false, error: ge, fields: { quantity: ge } };
-      Object.assign(data, { quantity: qty, servingLabel: r.servingLabel, grams: r.grams, ...nutrientCols(snapshot(r.nutrients)), missingMicro: r.missingMicro });
-    } else if (cur.grams > 0 && cur.quantity > 0 && !i.servingId) {
-      // Source food was deleted: scale the stored snapshot proportionally (history stays intact).
-      const f = qty / cur.quantity;
-      const base: Nutrients = { kcal: cur.kcal, proteinG: cur.proteinG, carbG: cur.carbG, fatG: cur.fatG, fiberG: cur.fiberG ?? 0, sugarG: cur.sugarG ?? 0, sodiumMg: cur.sodiumMg ?? 0 };
-      Object.assign(data, { quantity: qty, grams: cur.grams * f, ...nutrientCols(snapshot(scaleNutrients(base, f))) });
-    } else if (cur.grams === 0) {
-      return { ok: false, error: "Mục ghi nhanh không có khẩu phần để sửa" };
-    } else {
-      return { ok: false, error: "Món gốc không còn tồn tại" };
-    }
+    const ge = gramsError(grams);
+    if (ge) return { ok: false, error: ge, fields: { quantity: ge } };
+    if (r && "error" in r && r.field) return { ok: false, error: r.error, fields: { [r.field]: r.error } };
+    if ((!r || "error" in r) && typeof i.servingId === "string") return { ok: false, error: "Món gốc không còn tồn tại" };
+    const base: Nutrients = { kcal: cur.kcal, proteinG: cur.proteinG, carbG: cur.carbG, fatG: cur.fatG, fiberG: cur.fiberG ?? 0, sugarG: cur.sugarG ?? 0, sodiumMg: cur.sodiumMg ?? 0 };
+    const nutrition = r && !("error" in r) ? r.nutrients : scaleNutrients(base, grams / cur.grams);
+    Object.assign(data, { quantity: qty, servingLabel: label, grams, ...nutrientCols(snapshot(nutrition)),
+      missingMicro: r && !("error" in r) ? r.missingMicro : cur.missingMicro });
   }
-  const log = await db.foodLog.update({ where: { id: cur.id }, data });
+  const log = await db.foodLog.update({ where: { id: cur.id, userId }, data });
   return { ok: true, log: toDto(log) };
 }
 
@@ -230,15 +229,24 @@ export async function updateLog(userId: string, timezone: string, logId: string,
 export async function deleteLog(userId: string, logId: string): Promise<Result<{ removed: LogDto }>> {
   const cur = await db.foodLog.findFirst({ where: { id: logId, userId } });
   if (!cur) return { ok: false, error: "Không tìm thấy mục nhật ký" };
-  await db.foodLog.delete({ where: { id: cur.id } });
+  await db.foodLog.delete({ where: { id: cur.id, userId } });
   return { ok: true, removed: toDto(cur) };
 }
 
 /** Undo for delete/copy: re-create entries from a DTO. The owner is always the session user. */
-export async function restoreLog(userId: string, dto: LogDto): Promise<Result<{ log: LogDto }>> {
-  const foodId = dto.foodId ? ((await db.food.findFirst({ where: { id: dto.foodId, OR: [{ ownerId: null }, { ownerId: userId }] }, select: { id: true } }))?.id ?? null) : null;
-  const recipeId = dto.recipeId ? ((await db.recipe.findFirst({ where: { id: dto.recipeId, userId }, select: { id: true } }))?.id ?? null) : null;
-  const log = await db.foodLog.create({
+const logDtoSchema = z.object({
+  id: z.string(), date: isoDateSchema, meal: mealSchema,
+  foodId: z.string().nullable(), recipeId: z.string().nullable(), name: z.string().min(1).max(120),
+  quantity: z.number().positive().max(5000), servingLabel: z.string().max(30).nullable(),
+  grams: z.number().min(0).max(5000), kcal: z.number().min(0), proteinG: z.number().min(0),
+  carbG: z.number().min(0), fatG: z.number().min(0), fiberG: z.number().min(0),
+  sugarG: z.number().min(0), sodiumMg: z.number().min(0), missingMicro: z.boolean(),
+});
+
+async function restoreEntry(tx: Prisma.TransactionClient, userId: string, dto: LogDto): Promise<LogDto> {
+  const foodId = dto.foodId ? ((await tx.food.findFirst({ where: { id: dto.foodId, OR: [{ ownerId: null }, { ownerId: userId }] }, select: { id: true } }))?.id ?? null) : null;
+  const recipeId = dto.recipeId ? ((await tx.recipe.findFirst({ where: { id: dto.recipeId, userId }, select: { id: true } }))?.id ?? null) : null;
+  const log = await tx.foodLog.create({
     data: {
       userId,
       logDate: isoToDate(dto.date),
@@ -260,7 +268,38 @@ export async function restoreLog(userId: string, dto: LogDto): Promise<Result<{ 
       source: "search",
     },
   });
-  return { ok: true, log: toDto(log) };
+  return toDto(log);
+}
+
+export async function restoreLog(userId: string, dto: LogDto): Promise<Result<{ log: LogDto }>> {
+  const p = logDtoSchema.safeParse(dto);
+  if (!p.success) return { ok: false, error: "Dữ liệu hoàn tác chưa hợp lệ", fields: fieldErrors(p.error) };
+  const log = await db.$transaction((tx) => restoreEntry(tx, userId, p.data));
+  return { ok: true, log };
+}
+
+/** Delete exactly this owner's meal and return the committed snapshots for undo. */
+export async function deleteMeal(userId: string, raw: { date: string; meal: Meal }): Promise<Result<{ removed: LogDto[] }>> {
+  if (!isoDateSchema.safeParse(raw?.date).success || !mealSchema.safeParse(raw?.meal).success)
+    return { ok: false, error: "Ngày hoặc bữa không hợp lệ", fields: { date: "Dữ liệu chưa hợp lệ" } };
+  const removed = await db.$transaction(async (tx) => {
+    const rows = await tx.foodLog.findMany({ where: { userId, logDate: isoToDate(raw.date), meal: raw.meal }, orderBy: { createdAt: "asc" } });
+    await tx.foodLog.deleteMany({ where: { userId, id: { in: rows.map((r) => r.id) } } });
+    return rows.map(toDto);
+  });
+  return { ok: true, removed };
+}
+
+/** The entire undo succeeds or rolls back, using only the session owner. */
+export async function restoreMeal(userId: string, dtos: LogDto[]): Promise<Result<{ logs: LogDto[] }>> {
+  const p = z.array(logDtoSchema).safeParse(dtos);
+  if (!p.success) return { ok: false, error: "Dữ liệu hoàn tác chưa hợp lệ", fields: fieldErrors(p.error) };
+  const logs = await db.$transaction(async (tx) => {
+    const out: LogDto[] = [];
+    for (const dto of p.data) out.push(await restoreEntry(tx, userId, dto));
+    return out;
+  });
+  return { ok: true, logs };
 }
 
 /** Undo for copy: remove entries by id, only the caller's. */
