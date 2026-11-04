@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import { THEME_COOKIE, THEME_INIT_SCRIPT, type ThemePref } from "@/lib/theme";
+import { APP_URL } from "@/lib/seo";
 import "./globals.css";
 
 const font = Be_Vietnam_Pro({
@@ -12,8 +13,19 @@ const font = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: { default: "NutriTrack", template: "%s · NutriTrack" },
-  description: "Quản lý dinh dưỡng cá nhân cho người Việt",
+  // QLD-50: origin tuyệt đối cho canonical/OG. Thiếu metadataBase thì OG image
+  // và canonical tương đối bị trình thu thập bỏ qua.
+  metadataBase: new URL(APP_URL),
+  applicationName: "NutriTrack",
+  title: { default: "NutriTrack — Đếm calo món Việt", template: "%s · NutriTrack" },
+  description:
+    "Tra calo và macro của 289 món Việt, ghi bữa ăn trong 30 giây. Số liệu tham khảo từ Viện Dinh dưỡng và USDA FDC.",
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    siteName: "NutriTrack",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

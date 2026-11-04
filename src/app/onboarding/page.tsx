@@ -4,8 +4,9 @@ import { OnboardingWizard } from "@/components/onboarding/wizard";
 import { ToastProvider } from "@/components/ui/toast";
 import { requireUser } from "@/server/auth";
 import { getProfile } from "@/server/profile/service";
+import { NOINDEX } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Bắt đầu" };
+export const metadata: Metadata = { title: "Bắt đầu", robots: NOINDEX };
 
 export default async function Page() {
   const u = await requireUser();

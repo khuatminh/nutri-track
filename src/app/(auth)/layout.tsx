@@ -1,5 +1,10 @@
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { getSession } from "@/server/auth";
+import { NOINDEX } from "@/lib/seo";
+
+// QLD-50: 4 trang auth gần trùng nội dung — không để Google index.
+export const metadata: Metadata = { robots: NOINDEX };
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   if (await getSession()) redirect("/hom-nay");

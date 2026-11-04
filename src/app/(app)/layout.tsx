@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { BottomNav, Sidebar } from "@/components/layout/nav";
 import { OnlineBanner } from "@/components/layout/online-banner";
 import { RemindersRunner } from "@/components/reminders/runner";
@@ -6,6 +7,10 @@ import { ToastProvider } from "@/components/ui/toast";
 import { requireUser } from "@/server/auth";
 import { getProfile } from "@/server/profile/service";
 import { listReminders } from "@/server/reminders/service";
+import { NOINDEX } from "@/lib/seo";
+
+// QLD-50: toàn bộ nội dung app nằm sau đăng nhập, không index.
+export const metadata: Metadata = { robots: NOINDEX };
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
