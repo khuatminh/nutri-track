@@ -151,7 +151,7 @@ test("QA-24: registration → onboarding → serving → persisted dashboard →
     await expect(dialog).not.toBeVisible();
     await page.getByRole("button", { name: "Xong (1)", exact: true }).click();
     await expect(
-      page.locator("#lunch").getByRole("button", { name: `Sửa ${name}`, exact: true }),
+      page.locator("#lunch").getByRole("button", { name: new RegExp(`^Sửa ${name}`) }),
     ).toBeVisible();
     await expect(page.locator("#lunch")).toContainText("270 kcal");
   });

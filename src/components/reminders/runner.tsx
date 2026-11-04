@@ -23,6 +23,14 @@ export function RemindersRunner({ reminders, timezone }: { reminders: ReminderLi
     const active = reminders.filter((r) => r.enabled);
     if (active.length === 0) return;
     let stop = false;
+
+    /** US-26.2: a notification click focuses the tab and opens the matching action. */
+    const openAction = (r: ReminderLike) => {
+      window.focus();
+      if (r.type === "water") void addWaterAction(250).then(() => router.refresh());
+      else router.push(`/nhat-ky/them?meal=${r.meal ?? "lunch"}`);
+    };
+
     const tick = async () => {
       const now = nowIn(timezone);
       const candidates = active.map((r) => ({ r, slot: dueSlot({ reminder: r, now, lastLoggedMinAgo: null, shown: shown.current }) })).filter((x) => x.slot);
@@ -42,15 +50,16 @@ export function RemindersRunner({ reminders, timezone }: { reminders: ReminderLi
         if (ago !== null && ago <= 30) continue; // US-25.2
         const text = r.type === "water" ? "Đến giờ uống nước rồi 💧" : `Đến giờ ghi ${MEAL_LABEL[r.meal ?? "lunch"]}`;
         if (typeof Notification !== "undefined" && Notification.permission === "granted" && document.visibilityState === "hidden") {
-          new Notification("NutriTrack", { body: text });
+          const notification = new Notification("NutriTrack", { body: text });
+          notification.onclick = () => {
+            notification.close();
+            openAction(r);
+          };
         }
         toast.show(text, {
           ms: 15000,
           actionLabel: r.type === "water" ? "+250 ml" : `Ghi ${MEAL_LABEL[r.meal ?? "lunch"]}`,
-          onAction: () => {
-            if (r.type === "water") void addWaterAction(250).then(() => router.refresh());
-            else router.push(`/nhat-ky/them?meal=${r.meal ?? "lunch"}`);
-          },
+          onAction: () => openAction(r),
         });
         // Snooze is offered as a second toast so the user can postpone up to 3 times (PRD §8.6).
         const used = snoozes.current.get(key) ?? 0;
