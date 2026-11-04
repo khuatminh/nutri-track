@@ -114,7 +114,7 @@ export function WaterCard({ date, totalMl, targetMl, logs }: { date: string; tot
         <h2 className="flex items-center gap-2 text-lg font-semibold"><Droplet className="size-5 text-water" aria-hidden /> Nước uống</h2>
         {reached && <Badge tone="ok">✓ Đạt mục tiêu</Badge>}
       </div>
-      <p className="text-sm" data-testid="water-total"><strong className="text-xl">{fmtInt(total)}</strong> / {fmtInt(targetMl)} ml</p>
+      <p className="text-sm"><strong className="text-xl" data-testid="water-total">{fmtInt(total)}</strong> / {fmtInt(targetMl)} ml</p>
       <WaterBar totalMl={total} targetMl={targetMl} />
       <div className="flex flex-wrap gap-2">
         {WATER_QUICK_ADD_ML.map((ml) => (
