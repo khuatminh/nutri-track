@@ -1,0 +1,130 @@
+/* NutriTrack design tokens — v1.0
+ * Usage: <html data-theme="light|dark">. Default follows prefers-color-scheme.
+ * Contrast ratios measured by docs/design/tools/contrast.mjs (see design-spec). */
+:root {
+  /* ---- Typography ---- */
+  --font-sans: "Be Vietnam Pro", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-num: "Be Vietnam Pro", "Inter", ui-sans-serif, system-ui, sans-serif; /* use font-variant-numeric: tabular-nums */
+  --fs-xs: 0.75rem;   /* 12 */
+  --fs-sm: 0.875rem;  /* 14 */
+  --fs-md: 1rem;      /* 16 body */
+  --fs-lg: 1.125rem;  /* 18 */
+  --fs-xl: 1.375rem;  /* 22 h2 */
+  --fs-2xl: 1.75rem;  /* 28 h1 */
+  --fs-3xl: 2.5rem;   /* 40 big number */
+  --lh-tight: 1.2; --lh-base: 1.5;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+
+  /* ---- Spacing (4px grid) ---- */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+
+  /* ---- Radius ---- */
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-full: 999px;
+
+  /* ---- Layout ---- */
+  --bp-sm: 640px; --bp-md: 768px; --bp-lg: 1024px; --bp-xl: 1280px;
+  --touch-min: 44px;
+  --sidebar-w: 248px;
+  --content-max: 1120px;
+
+  /* ---- Motion ---- */
+  --dur-fast: 120ms; --dur-base: 200ms; --ease: cubic-bezier(.2,.8,.2,1);
+
+  /* ---- Light theme (default) ---- */
+  --bg: #F6F8F5;
+  --surface: #FFFFFF;
+  --surface-2: #EEF2EC;
+  --border: #D5DDD2;
+  --border-strong: #7F8D7D;     /* 3:1 on bg for input borders (WCAG 1.4.11) */
+  --text: #17211B;
+  --text-muted: #4A5A50;
+  --text-faint: #5C6B61;
+  --primary: #0B6E4F;           /* button bg; white text on it */
+  --primary-hover: #095A41;
+  --primary-contrast: #FFFFFF;
+  --primary-soft: #DDF0E6;
+  --primary-soft-text: #08523B;
+  --link: #0B6E4F;
+  --focus: #1B5FD1;
+  --danger: #B3261E;
+  --danger-soft: #FBE4E1;
+  --warning: #8A5A00;
+  --warning-soft: #FFF0CC;
+  --success: #1B6B3A;
+  --success-soft: #DDF3E4;
+  --info: #1B5FD1;
+
+  /* Macro (colour-blind safe: Okabe–Ito family, each also has a distinct fill pattern + letter) */
+  --macro-protein: #0072B2;       /* blue    — P — diagonal stripes */
+  --macro-protein-text: #005A8E;
+  --macro-carb: #B36B00;          /* orange  — C — dots */
+  --macro-carb-text: #8A5200;
+  --macro-fat: #A8447F;           /* magenta — F — cross-hatch */
+  --macro-fat-text: #8E2F68;
+  --kcal: #0B6E4F;
+  --water: #1F6FB5;
+  --track: #DDE4DA;               /* progress track */
+  --chart-line: #0B6E4F;
+  --chart-grid: #DDE4DA;
+  --shadow-1: 0 1px 2px rgba(23,33,27,.06), 0 1px 3px rgba(23,33,27,.08);
+  --shadow-2: 0 4px 12px rgba(23,33,27,.10);
+  --shadow-3: 0 12px 32px rgba(23,33,27,.18);
+  --overlay: rgba(10,18,13,.5);
+}
+
+/* ---- Dark theme ---- */
+[data-theme="dark"] {
+  --bg: #0E1511;
+  --surface: #161F1A;
+  --surface-2: #1F2B24;
+  --border: #2E3C34;
+  --border-strong: #7A8C80;
+  --text: #EAF2EC;
+  --text-muted: #A9B8AE;
+  --text-faint: #98A89D;
+  --primary: #4FC78F;
+  --primary-hover: #6AD6A3;
+  --primary-contrast: #06251A;
+  --primary-soft: #1B3A2D;
+  --primary-soft-text: #9BE3C1;
+  --link: #6AD6A3;
+  --focus: #7CB2FF;
+  --danger: #FF8A80;
+  --danger-soft: #3D1D1B;
+  --warning: #F2C04D;
+  --warning-soft: #3A2D0E;
+  --success: #6FD695;
+  --success-soft: #153A24;
+  --info: #7CB2FF;
+
+  --macro-protein: #56B4E9;
+  --macro-protein-text: #7CC6F0;
+  --macro-carb: #F0B429;
+  --macro-carb-text: #F2C25A;
+  --macro-fat: #E58FC0;
+  --macro-fat-text: #EBA6CE;
+  --kcal: #4FC78F;
+  --water: #6DB3F2;
+  --track: #2A372F;
+  --chart-line: #4FC78F;
+  --chart-grid: #2A372F;
+  --shadow-1: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-2: 0 4px 12px rgba(0,0,0,.5);
+  --shadow-3: 0 12px 32px rgba(0,0,0,.6);
+  --overlay: rgba(0,0,0,.65);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1511; --surface: #161F1A; --surface-2: #1F2B24; --border: #2E3C34; --border-strong: #7A8C80;
+    --text: #EAF2EC; --text-muted: #A9B8AE; --text-faint: #98A89D;
+    --primary: #4FC78F; --primary-hover: #6AD6A3; --primary-contrast: #06251A;
+    --primary-soft: #1B3A2D; --primary-soft-text: #9BE3C1; --link: #6AD6A3; --focus: #7CB2FF;
+    --danger: #FF8A80; --danger-soft: #3D1D1B; --warning: #F2C04D; --warning-soft: #3A2D0E;
+    --success: #6FD695; --success-soft: #153A24; --info: #7CB2FF;
+    --macro-protein: #56B4E9; --macro-protein-text: #7CC6F0; --macro-carb: #F0B429; --macro-carb-text: #F2C25A;
+    --macro-fat: #E58FC0; --macro-fat-text: #EBA6CE; --kcal: #4FC78F; --water: #6DB3F2;
+    --track: #2A372F; --chart-line: #4FC78F; --chart-grid: #2A372F; --overlay: rgba(0,0,0,.65);
+  }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
