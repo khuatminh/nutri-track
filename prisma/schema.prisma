@@ -1,5 +1,6 @@
-// NutriTrack schema. Food/FoodServing introduced by QLD-20 (seed); remaining models
-// (User, FoodLog, Recipe, ...) are added by the backend tasks per ADR-0001 §2.4.
+// NutriTrack data model — ADR-0001 §2.4, PRD §7.
+// Nutrition values on Food are per 100 g. FoodLog stores a nutrition snapshot (PRD §8.4).
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,41 +10,349 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Food {
-  id             String        @id @default(cuid())
-  slug           String        @unique
-  name           String
-  nameUnaccented String        @map("name_unaccented")
-  category       String
-  isVietnamese   Boolean       @default(true) @map("is_vietnamese")
-  /// Nutrition values are per 100 g.
-  energyKcal     Float         @map("energy_kcal")
-  proteinG       Float         @map("protein_g")
-  carbG          Float         @map("carb_g")
-  fatG           Float         @map("fat_g")
-  fiberG         Float         @map("fiber_g")
-  sugarG         Float         @map("sugar_g")
-  sodiumMg       Float         @map("sodium_mg")
-  source         String
-  confidence     String
-  /// Soft delete for system foods (ADR-0001 §2.3).
-  deletedAt      DateTime?     @map("deleted_at")
-  createdAt      DateTime      @default(now()) @map("created_at")
-  updatedAt      DateTime      @updatedAt @map("updated_at")
-  servings       FoodServing[]
+enum Sex {
+  male
+  female
+  other
+}
 
-  @@index([category])
+enum ActivityLevel {
+  sedentary
+  light
+  moderate
+  active
+  very_active
+}
+
+enum Goal {
+  lose
+  maintain
+  gain
+}
+
+enum TargetsMode {
+  auto
+  custom
+}
+
+enum ThemePref {
+  system
+  light
+  dark
+}
+
+enum Meal {
+  breakfast
+  lunch
+  dinner
+  snack
+}
+
+enum LogSource {
+  search
+  recent
+  copy
+  quick
+}
+
+enum ReminderType {
+  water
+  meal
+}
+
+enum ReminderChannel {
+  in_app
+  web_push
+}
+
+enum Confidence {
+  high
+  medium
+  low
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  lastLoginAt  DateTime? @map("last_login_at")
+  consentAt    DateTime? @map("consent_at")
+  timezone     String    @default("Asia/Ho_Chi_Minh")
+  themePref    ThemePref @default(system) @map("theme_pref")
+
+  profile             Profile?
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+  targetHistory       TargetHistory[]
+  foods               Food[]
+  foodLogs            FoodLog[]
+  recipes             Recipe[]
+  waterLogs           WaterLog[]
+  weightLogs          WeightLog[]
+  reminders           Reminder[]
+  favorites           Favorite[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id // SHA-256 hex of the random cookie token (ADR §2.2)
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  email     String // normalized (lowercase)
+  ip        String?
+  success   Boolean
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([email, createdAt])
+  @@map("login_attempts")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model Profile {
+  userId               String        @id @map("user_id")
+  displayName          String        @map("display_name")
+  sex                  Sex
+  birthDate            DateTime      @map("birth_date") @db.Date
+  heightCm             Float         @map("height_cm")
+  weightKg             Float         @map("weight_kg")
+  activityLevel        ActivityLevel @map("activity_level")
+  goal                 Goal
+  goalRateKgPerWeek    Float?        @map("goal_rate_kg_per_week")
+  targetWeightKg       Float?        @map("target_weight_kg")
+  calorieTarget        Int           @map("calorie_target")
+  proteinG             Int           @map("protein_g")
+  carbG                Int           @map("carb_g")
+  fatG                 Int           @map("fat_g")
+  targetsMode          TargetsMode   @default(auto) @map("targets_mode")
+  waterTargetMl        Int           @map("water_target_ml")
+  waterTargetCustom    Boolean       @default(false) @map("water_target_custom")
+  targetsEffectiveFrom DateTime      @map("targets_effective_from") @db.Date
+  /// Weight (kg) used the last time targets were computed — drives US-18 suggestion.
+  targetsWeightKg      Float         @map("targets_weight_kg")
+  hideWeight           Boolean       @default(false) @map("hide_weight")
+  createdAt            DateTime      @default(now()) @map("created_at")
+  updatedAt            DateTime      @updatedAt @map("updated_at")
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+/// Targets by effective date so past reports use the targets of that day (PRD §8.4).
+model TargetHistory {
+  id            String   @id @default(cuid())
+  userId        String   @map("user_id")
+  effectiveFrom DateTime @map("effective_from") @db.Date
+  kcal          Int
+  proteinG      Int      @map("protein_g")
+  carbG         Int      @map("carb_g")
+  fatG          Int      @map("fat_g")
+  waterMl       Int      @map("water_ml")
+  createdAt     DateTime @default(now()) @map("created_at")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, effectiveFrom])
+  @@map("target_history")
+}
+
+model Food {
+  id               String      @id @default(cuid())
+  /// Stable key for system foods (seed upsert); null for user foods.
+  slug             String?     @unique
+  ownerId          String?     @map("owner_id") // null = system food
+  name             String
+  nameUnaccented   String      @map("name_unaccented")
+  brand            String?
+  category         String?
+  isVietnamese     Boolean     @default(false) @map("is_vietnamese")
+  // per 100 g
+  energyKcal       Float       @map("energy_kcal")
+  proteinG         Float       @map("protein_g")
+  carbG            Float       @map("carb_g")
+  fatG             Float       @map("fat_g")
+  fiberG           Float?      @map("fiber_g")
+  sugarG           Float?      @map("sugar_g")
+  sodiumMg         Float?      @map("sodium_mg")
+  source           String?
+  confidence       Confidence?
+  defaultServingId String?     @map("default_serving_id")
+  deletedAt        DateTime?   @map("deleted_at")
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  owner       User?              @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  servings    FoodServing[]
+  logs        FoodLog[]
+  ingredients RecipeIngredient[]
+  favorites   Favorite[]
+
+  @@index([ownerId])
   @@map("foods")
 }
 
 model FoodServing {
   id        String  @id @default(cuid())
   foodId    String  @map("food_id")
-  food      Food    @relation(fields: [foodId], references: [id], onDelete: Cascade)
   label     String
   grams     Float
   isDefault Boolean @default(false) @map("is_default")
+  food      Food    @relation(fields: [foodId], references: [id], onDelete: Cascade)
 
-  @@unique([foodId, label])
+  @@index([foodId])
   @@map("food_servings")
+}
+
+model Favorite {
+  userId    String   @map("user_id")
+  foodId    String   @map("food_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  food      Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  @@id([userId, foodId])
+  @@map("favorites")
+}
+
+model FoodLog {
+  id           String    @id @default(cuid())
+  userId       String    @map("user_id")
+  logDate      DateTime  @map("log_date") @db.Date
+  meal         Meal
+  foodId       String?   @map("food_id")
+  recipeId     String?   @map("recipe_id")
+  nameSnapshot String    @map("name_snapshot")
+  quantity     Float
+  servingLabel String?   @map("serving_label")
+  grams        Float
+  // nutrition snapshot (2 decimals)
+  kcal         Float
+  proteinG     Float     @map("protein_g")
+  carbG        Float     @map("carb_g")
+  fatG         Float     @map("fat_g")
+  fiberG       Float?    @map("fiber_g")
+  sugarG       Float?    @map("sugar_g")
+  sodiumMg     Float?    @map("sodium_mg")
+  /// True when the source food lacked fiber/sugar/sodium data (PRD §8.5).
+  missingMicro Boolean   @default(false) @map("missing_micro")
+  source       LogSource @default(search)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  food   Food?   @relation(fields: [foodId], references: [id], onDelete: SetNull)
+  recipe Recipe? @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+
+  @@index([userId, logDate])
+  @@index([userId, foodId])
+  @@map("food_logs")
+}
+
+model Recipe {
+  id                String    @id @default(cuid())
+  userId            String    @map("user_id")
+  name              String
+  nameUnaccented    String    @map("name_unaccented")
+  servings          Float
+  cookedWeightG     Float?    @map("cooked_weight_g")
+  note              String?
+  // cached per-serving nutrition (recomputed on save)
+  kcalPerServing    Float     @default(0) @map("kcal_per_serving")
+  proteinPerServing Float     @default(0) @map("protein_per_serving")
+  carbPerServing    Float     @default(0) @map("carb_per_serving")
+  fatPerServing     Float     @default(0) @map("fat_per_serving")
+  fiberPerServing   Float     @default(0) @map("fiber_per_serving")
+  sugarPerServing   Float     @default(0) @map("sugar_per_serving")
+  sodiumPerServing  Float     @default(0) @map("sodium_per_serving")
+  /// Total grams of all ingredients (used when cookedWeightG is null).
+  totalWeightG      Float     @default(0) @map("total_weight_g")
+  deletedAt         DateTime? @map("deleted_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ingredients RecipeIngredient[]
+  logs        FoodLog[]
+
+  @@index([userId])
+  @@map("recipes")
+}
+
+model RecipeIngredient {
+  id           String  @id @default(cuid())
+  recipeId     String  @map("recipe_id")
+  foodId       String  @map("food_id")
+  quantity     Float
+  servingLabel String? @map("serving_label")
+  grams        Float
+  recipe       Recipe  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  food         Food    @relation(fields: [foodId], references: [id])
+
+  @@index([recipeId])
+  @@map("recipe_ingredients")
+}
+
+model WaterLog {
+  id       String   @id @default(cuid())
+  userId   String   @map("user_id")
+  loggedAt DateTime @map("logged_at")
+  logDate  DateTime @map("log_date") @db.Date
+  amountMl Int      @map("amount_ml")
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, logDate])
+  @@map("water_logs")
+}
+
+model WeightLog {
+  id       String   @id @default(cuid())
+  userId   String   @map("user_id")
+  logDate  DateTime @map("log_date") @db.Date
+  weightKg Float    @map("weight_kg")
+  note     String?
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, logDate])
+  @@map("weight_logs")
+}
+
+model Reminder {
+  id            String          @id @default(cuid())
+  userId        String          @map("user_id")
+  type          ReminderType
+  meal          Meal?
+  enabled       Boolean         @default(true)
+  /// Meal reminders: ["07:30"]. Water reminders: unused (see startTime/endTime/intervalHours).
+  times         String[]
+  startTime     String?         @map("start_time") // HH:mm, water
+  endTime       String?         @map("end_time") // HH:mm, water
+  intervalHours Int?            @map("interval_hours") // 1 | 2 | 3
+  daysOfWeek    Int[]           @map("days_of_week") // 1=Mon .. 7=Sun
+  channel       ReminderChannel @default(in_app)
+  snoozeUntil   DateTime?       @map("snooze_until")
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("reminders")
 }
