@@ -21,12 +21,4 @@ export function loadFoods(dir = SEED_DATA_DIR): FoodSeed[] {
   });
 }
 
-/** Search key: NFD, strip diacritics, đ→d, lowercase (ADR-0001 §2.5). */
-export function unaccent(s: string): string {
-  return s
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D")
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "")
-    .toLowerCase();
-}
+export { unaccent } from "../../src/lib/text";
