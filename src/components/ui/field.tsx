@@ -71,7 +71,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   error?: string;
   hint?: string;
-  options: Array<{ value: string; label: string }>;
+  options: Array<{ value: string; label: string; disabled?: boolean }>;
 }
 
 export function Select({ label, error, hint, options, id, className, ...rest }: SelectProps) {
@@ -81,7 +81,7 @@ export function Select({ label, error, hint, options, id, className, ...rest }: 
     <FieldShell label={label} error={error} hint={hint} id={fid}>
       <select id={fid} aria-invalid={!!error || undefined} aria-describedby={describedBy(fid, error, hint)} className={cn(inputCls(error), className)} {...rest}>
         {options.map((o) => (
-          <option key={o.value} value={o.value}>
+          <option key={o.value} value={o.value} disabled={o.disabled}>
             {o.label}
           </option>
         ))}
