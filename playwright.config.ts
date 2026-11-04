@@ -23,11 +23,25 @@ export default defineConfig({
   projects: (["light", "dark"] as const).flatMap((colorScheme) => [
     {
       name: `mobile-${colorScheme}`,
+      testIgnore: "**/responsive.spec.ts",
       use: { ...devices["Pixel 5"], viewport: { width: 393, height: 851 }, colorScheme },
     },
     {
       name: `desktop-${colorScheme}`,
+      testIgnore: "**/responsive.spec.ts",
       use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 }, colorScheme },
     },
+    ...[
+      { width: 360, height: 800 },
+      { width: 393, height: 851 },
+      { width: 768, height: 1024 },
+      { width: 1440, height: 900 },
+      // 1440×900 at 200% browser zoom has a 720×450 CSS viewport.
+      { width: 720, height: 450 },
+    ].map((viewport) => ({
+      name: `responsive-${viewport.width}-${colorScheme}`,
+      testMatch: "**/responsive.spec.ts",
+      use: { ...devices["Desktop Chrome"], viewport, colorScheme },
+    })),
   ]),
 });

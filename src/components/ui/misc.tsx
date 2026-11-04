@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 export function Card({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("rounded-lg border border-border bg-surface p-4 shadow-[var(--shadow-1)]", className)} {...rest} />;
+  return <div className={cn("min-w-0 rounded-lg border border-border bg-surface p-4 shadow-[var(--shadow-1)]", className)} {...rest} />;
 }
 
 type Tone = "default" | "warn" | "ok" | "danger";

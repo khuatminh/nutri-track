@@ -149,8 +149,8 @@ export function RemindersCard({ reminders }: { reminders: ReminderDto[] }) {
     </div>
   );
   const Switch = ({ on, onChange, label }: { on: boolean; onChange: (b: boolean) => void; label: string }) => (
-    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={() => onChange(!on)} className={cn("relative h-7 w-12 shrink-0 rounded-full", on ? "bg-primary" : "bg-border-strong")}>
-      <span className={cn("absolute top-[3px] size-[22px] rounded-full bg-primary-contrast transition-all motion-reduce:transition-none", on ? "right-[3px]" : "left-[3px] bg-surface")} />
+    <button type="button" role="switch" aria-checked={on} aria-label={label} onClick={() => onChange(!on)} className="relative flex h-11 w-12 shrink-0 items-center rounded-full">
+      <span aria-hidden className={cn("relative block h-7 w-full rounded-full", on ? "bg-primary" : "bg-border-strong")}><span className={cn("absolute top-[3px] size-[22px] rounded-full bg-primary-contrast transition-all motion-reduce:transition-none", on ? "right-[3px]" : "left-[3px] bg-surface")} /></span>
     </button>
   );
 
@@ -218,7 +218,7 @@ export function AppearanceCard({ theme, hideWeight }: { theme: ThemePref; hideWe
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- label wraps the checkbox and its visible text */}
       <label className="flex min-h-11 items-center justify-between gap-3">
         <span><span className="block font-semibold">Ẩn số cân nặng</span><span className="text-sm text-muted">Ẩn khỏi Hôm nay, Cân nặng và Báo cáo.</span></span>
-        <input type="checkbox" className="size-6" checked={h} onChange={(e) => { setH(e.target.checked); start(() => setHideWeightAction(e.target.checked)); }} />
+        <input type="checkbox" className="size-11 shrink-0" checked={h} onChange={(e) => { setH(e.target.checked); start(() => setHideWeightAction(e.target.checked)); }} />
       </label>
     </Card>
   );
