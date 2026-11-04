@@ -66,6 +66,29 @@ run("profile service (db)", () => {
     expect(p).toMatchObject({ calorieTarget: 1100, targetsMode: "custom" });
   });
 
+  it("keeps custom targets when saving a changed profile, then recalculates from the new profile", async () => {
+    const original = await db.profile.findUniqueOrThrow({ where: { userId: a } });
+    const previousDate = addDays(todayIn(TZ), -1);
+    await db.targetHistory.create({ data: { userId: a, effectiveFrom: new Date(`${previousDate}T00:00:00Z`), kcal: 1900, proteinG: 90, carbG: 250, fatG: 60, waterMl: 2000 } });
+    const changed = { ...input, heightCm: 180, birthDate: "1990-01-01", sex: "male", activityLevel: "active", goal: "gain" };
+    expect((await saveProfile(a, TZ, changed)).ok).toBe(true);
+    const kept = await db.profile.findUniqueOrThrow({ where: { userId: a } });
+    expect(kept).toMatchObject({ heightCm: 180, targetsMode: "custom", calorieTarget: original.calorieTarget, proteinG: original.proteinG, carbG: original.carbG, fatG: original.fatG, waterTargetMl: original.waterTargetMl });
+    const result = await recalculateTargets(a, TZ);
+    expect(result.ok).toBe(true);
+    if (!result.ok) throw new Error(result.error);
+    const recalculated = await db.profile.findUniqueOrThrow({ where: { userId: a } });
+    expect(recalculated).toMatchObject({ targetsMode: "auto", heightCm: 180, calorieTarget: result.targets.calories.kcal, ...result.targets.macros });
+    expect(recalculated.calorieTarget).not.toBe(original.calorieTarget);
+    expect(await targetsForDate(a, previousDate)).toMatchObject({ kcal: 1900, proteinG: 90, carbG: 250, fatG: 60 });
+  });
+
+  it("persists mismatched custom macros without blocking the save", async () => {
+    const custom = { kcal: 2000, proteinG: 100, carbG: 50, fatG: 100, waterMl: 2100 };
+    expect(await setCustomTargets(a, TZ, custom)).toEqual({ ok: true });
+    expect(await targetsForDate(a, todayIn(TZ))).toMatchObject(custom);
+  });
+
   it("recalculate returns to auto; retarget suggestion after ≥1 kg drift; dismiss; accept", async () => {
     await recalculateTargets(a, TZ);
     expect(await getRetargetSuggestion(a, TZ)).toBeNull();

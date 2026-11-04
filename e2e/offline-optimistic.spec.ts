@@ -33,7 +33,7 @@ test("NFR-09 / QLD-28: offline save keeps the sheet + input, shows Thử lại, 
   await page.goto(`/nhat-ky/them?meal=lunch&date=${DATE}`);
 
   // Create a private food while online so the offline attempt does not depend on search.
-  await page.getByRole("button", { name: "Tạo món mới", exact: true }).click();
+  await page.getByRole("button", { name: "Tạo món mới", exact: true }).last().click();
   const create = page.getByRole("dialog");
   await create.getByLabel("Tên món", { exact: true }).fill(name);
   await create.getByLabel("Khối lượng một khẩu phần", { exact: true }).fill("100");
@@ -44,7 +44,7 @@ test("NFR-09 / QLD-28: offline save keeps the sheet + input, shows Thử lại, 
   await create.getByRole("button", { name: "Lưu món" }).click();
   await expect(create).not.toBeVisible();
 
-  await page.getByRole("tab", { name: "Tự thêm" }).click();
+  await page.getByRole("tab", { name: "Món của tôi" }).click();
   const item = page.getByRole("button", { name: new RegExp(`^${escapeRe(name)}`) });
   await expect(item).toBeVisible();
 
