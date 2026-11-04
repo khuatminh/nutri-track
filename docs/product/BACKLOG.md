@@ -54,7 +54,7 @@
 
 **Won't (MVP)** — theo PRD 1.5: quét mã vạch/nhận diện ảnh; meal plan tự động; wearable; mạng xã hội; app native; vi chất ngoài natri & theo dõi tập luyện; đa ngôn ngữ/imperial/thanh toán; chia sẻ món/công thức; giao diện admin CSDL món; Push server khi app đóng hẳn (Q5); xuất báo cáo PDF/ảnh (US-20.3); đăng nhập Google/Apple (Q3).
 
-**Kiểm tra phủ:** 26/26 user story (US-01…US-26) đều có mức MoSCoW và đúng 1 milestone. Tổng: Must 20 (US) + 6 (TS); Should 4 (US-04, US-12, US-26, + TS-06); Could 1 (US-21). Story chứa sub-AC có mức khác (US-11.4, US-13.9, US-15.5, US-20.3, US-23.3) được ghi chú ngay ở cột Story và có thể cắt mà không ảnh hưởng DoD của story.
+**Kiểm tra phủ:** 26/26 user story (US-01…US-26) đều có mức MoSCoW và đúng 1 milestone. Tổng US: Must 22, Should 3 (US-04, US-12, US-26), Could 1 (US-21) = 26; story kỹ thuật: Must 7 (TS-01…05, 07, 08), Should 1 (TS-06). Story chứa sub-AC có mức khác (US-11.4, US-13.9, US-15.5, US-20.3, US-23.3) được ghi chú ngay ở cột Story và có thể cắt mà không ảnh hưởng DoD của story.
 
 ## 3. Milestone & lộ trình
 
@@ -93,7 +93,7 @@ Giả định thứ tự thời gian: M1 → M2 → M3 → M4, mỗi milestone n
 - Xuất & xóa dữ liệu hoạt động (US-04), có đồng ý quyền riêng tư khi đăng ký (NFR-08).
 - Dark mode đủ mọi màn hình; axe không lỗi nghiêm trọng; điều khiển bằng bàn phím; hoạt động ở 360 px không cuộn ngang; tôn trọng reduced-motion.
 - Should/Could chưa xong được ghi nhận rõ (không chặn M3).
-**Điều kiện chuyển QA:** tính năng M3 hoàn tất (feature freeze), staging cập nhật, e2e xanh; không còn story Must dang dở.
+**Điều kiện chuyển QA:** tính năng M3 hoàn tất (feature freeze), staging cập nhật, e2e xanh; không còn story Must dở dang.
 
 ### M4 — QA & hardening
 **Story:** TS-08 + sửa lỗi từ QA (không thêm tính năng mới).
