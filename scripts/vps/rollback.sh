@@ -15,9 +15,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
-VPS_SSH_HOST="${VPS_SSH_HOST:-vps}"
+VPS_SSH_HOST="${VPS_SSH_HOST:-oracle-vps}"
 REMOTE_DIR="${REMOTE_DIR:-/opt/nutritrack}"
 APP_PORT="${APP_PORT:-3200}"
+WEB_PORT="${WEB_PORT:-8080}"
 
 MODE="previous"
 TARGET=""
@@ -46,13 +47,14 @@ ssh "$VPS_SSH_HOST" "docker image inspect 'nutritrack:$TARGET_SHA' --format '{{.
 
 CURRENT="$(ssh "$VPS_SSH_HOST" "head -1 '$REMOTE_DIR/releases/current' 2>/dev/null || true")"
 
-ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && IMAGE_TAG='$TARGET_SHA' docker compose up -d --wait --wait-timeout 180 app"
+ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && IMAGE_TAG='$TARGET_SHA' docker compose up -d --wait --wait-timeout 180 app web"
 
-if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck.sh"; then
+if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck.sh" \
+  || ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && HEALTH_URL='http://127.0.0.1:${WEB_PORT}/dang-nhap' ./healthcheck.sh"; then
   echo "error: rollback target $TARGET_SHA also fails its health check" >&2
   if [[ "$MODE" == "auto" && -n "${FAILED:-}" ]]; then
     echo "restoring the failed release $FAILED so the stack is not left on a broken target" >&2
-    ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && IMAGE_TAG='$FAILED' docker compose up -d --wait --wait-timeout 180 app" || true
+    ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && IMAGE_TAG='$FAILED' docker compose up -d --wait --wait-timeout 180 app web" || true
   fi
   exit 1
 fi

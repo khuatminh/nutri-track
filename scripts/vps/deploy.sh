@@ -26,10 +26,14 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
-VPS_SSH_HOST="${VPS_SSH_HOST:-vps}"
+VPS_SSH_HOST="${VPS_SSH_HOST:-oracle-vps}"
 REMOTE_DIR="${REMOTE_DIR:-/opt/nutritrack}"
 APP_PORT="${APP_PORT:-3200}"
+WEB_PORT="${WEB_PORT:-8080}"
 DB_TUNNEL_PORT="${DB_TUNNEL_PORT:-55432}"
+# Public origin written into APP_URL (password-reset links, absolute URLs).
+# Override for every public deployment, e.g. APP_URL=https://nutritrack.example.com
+PUBLIC_APP_URL="${APP_URL:-http://127.0.0.1:${APP_PORT}}"
 IMAGE_REPO="${IMAGE_REPO:-nutritrack}"
 PLATFORM="${PLATFORM:-linux/amd64}"
 LOCAL_DB_PORT="${LOCAL_DB_PORT:-$DB_TUNNEL_PORT}"
@@ -66,12 +70,14 @@ docker image inspect --format 'image size: {{.Size}} bytes' "$IMAGE_REPO:$SHA"
 log "Sync compose files to $REMOTE_DIR"
 ssh "$VPS_SSH_HOST" "mkdir -p '$REMOTE_DIR/postgres-init' '$REMOTE_DIR/releases' '$REMOTE_DIR/backups'"
 scp -q scripts/vps/compose.yml "$VPS_SSH_HOST:$REMOTE_DIR/compose.yml"
+scp -q scripts/vps/Caddyfile "$VPS_SSH_HOST:$REMOTE_DIR/Caddyfile"
 scp -q scripts/vps/backup.sh scripts/vps/healthcheck.sh "$VPS_SSH_HOST:$REMOTE_DIR/"
 scp -q docker/postgres/init/*.sql "$VPS_SSH_HOST:$REMOTE_DIR/postgres-init/"
 ssh "$VPS_SSH_HOST" "chmod 755 '$REMOTE_DIR/backup.sh' '$REMOTE_DIR/healthcheck.sh'"
 
 log "Ensure remote .env exists"
-ssh "$VPS_SSH_HOST" env REMOTE_DIR="$REMOTE_DIR" APP_PORT="$APP_PORT" DB_TUNNEL_PORT="$DB_TUNNEL_PORT" bash -s <<'REMOTE_ENV'
+ssh "$VPS_SSH_HOST" env REMOTE_DIR="$REMOTE_DIR" APP_PORT="$APP_PORT" WEB_PORT="$WEB_PORT" \
+  DB_TUNNEL_PORT="$DB_TUNNEL_PORT" PUBLIC_APP_URL="$PUBLIC_APP_URL" bash -s <<'REMOTE_ENV'
 set -euo pipefail
 cd "$REMOTE_DIR"
 if [[ -f .env ]]; then
@@ -81,12 +87,13 @@ fi
 umask 077
 {
   echo "POSTGRES_PASSWORD=$(openssl rand -hex 24)"
-  echo "APP_URL=http://127.0.0.1:${APP_PORT}"
+  echo "APP_URL=${PUBLIC_APP_URL}"
   echo "SMTP_HOST=mailpit"
   echo "SMTP_PORT=1025"
   echo "MAIL_FROM=NutriTrack Staging <no-reply@nutritrack.local>"
   echo "TZ=Asia/Ho_Chi_Minh"
   echo "APP_PORT=${APP_PORT}"
+  echo "WEB_PORT=${WEB_PORT}"
   echo "DB_TUNNEL_PORT=${DB_TUNNEL_PORT}"
   echo "MAILPIT_PORT=8026"
 } > .env
@@ -139,13 +146,14 @@ if [[ "${SKIP_MIGRATE:-0}" != "1" ]]; then
 fi
 
 # ---------------------------------------------------------------- switch app
-log "Record previous release and start app"
+log "Record previous release and start app + reverse proxy"
 ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && \
   if [[ -s releases/current ]]; then cp releases/current releases/previous; fi && \
-  IMAGE_TAG='$SHA' docker compose up -d --wait --wait-timeout 180 app"
+  IMAGE_TAG='$SHA' docker compose up -d --wait --wait-timeout 180 app web"
 
-log "Health check"
-if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck.sh"; then
+log "Health check (app and reverse proxy)"
+if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck.sh" \
+  || ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && HEALTH_URL='http://127.0.0.1:${WEB_PORT}/dang-nhap' ./healthcheck.sh"; then
   echo "health check failed — rolling back" >&2
   bash scripts/vps/rollback.sh --auto "$SHA" || true
   die "deploy failed; previous release restored (see output above)"
@@ -170,8 +178,9 @@ cat <<EOF
 
 Release : $SHA
 Host    : $VPS_SSH_HOST ($REMOTE_DIR)
-Browse  : ssh -N -L ${APP_PORT}:127.0.0.1:${APP_PORT} ${VPS_SSH_HOST}
-          open http://127.0.0.1:${APP_PORT}/dang-nhap
-Logs    : ssh ${VPS_SSH_HOST} "cd ${REMOTE_DIR} && IMAGE_TAG=${SHA} docker compose logs -f app"
+App URL : $PUBLIC_APP_URL
+Local   : ssh -N -L ${WEB_PORT}:127.0.0.1:${WEB_PORT} ${VPS_SSH_HOST}
+          open http://127.0.0.1:${WEB_PORT}/dang-nhap
+Logs    : ssh ${VPS_SSH_HOST} "cd ${REMOTE_DIR} && IMAGE_TAG=${SHA} docker compose logs -f app web"
 Rollback: bash scripts/vps/rollback.sh
 EOF

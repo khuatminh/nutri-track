@@ -4,8 +4,11 @@
 # Produces a Next.js standalone runtime (~250 MB) so the shared VPS keeps enough disk
 # headroom. Build for the target architecture explicitly:
 #
-#   docker buildx build --platform linux/amd64 -f docker/app/Dockerfile \
+#   docker buildx build --platform linux/arm64 -f docker/app/Dockerfile \
 #     --build-arg GIT_SHA=$(git rev-parse --short=12 HEAD) -t nutritrack:<sha> --load .
+#
+# The runtime stage copies whichever @node-rs/argon2 platform package the build
+# installed, so the same Dockerfile builds for amd64 and arm64.
 #
 # Migrations are NOT run from this image. `prisma migrate deploy` runs from the deploy
 # host/CI runner against the database published on the VPS loopback interface.
@@ -32,7 +35,7 @@ RUN pnpm exec prisma generate \
 # Next's tracer follows @node-rs/argon2 but not its platform-specific optional package.
 # Materialise both under a stable path so the runtime stage does not pin a pnpm version.
 RUN mkdir -p /app/relocate/@node-rs \
-  && cp -a node_modules/.pnpm/@node-rs+argon2-linux-x64-gnu@*/node_modules/@node-rs/argon2-linux-x64-gnu /app/relocate/@node-rs/
+  && cp -a node_modules/.pnpm/@node-rs+argon2-linux-*/node_modules/@node-rs/. /app/relocate/@node-rs/
 
 FROM node:22-bookworm-slim AS runtime
 RUN apt-get update \

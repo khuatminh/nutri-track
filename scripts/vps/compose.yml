@@ -1,12 +1,13 @@
-# VPS deployment stack (QLD-51) — NutriTrack.
+# VPS deployment stack (QLD-51 / QLD-53) — NutriTrack.
 #
-# Every published port is bound to the VPS loopback interface. The app is reachable
-# through an SSH tunnel until the board approves a public hostname + TLS:
+# Topology: Cloudflare edge (public TLS) → cloudflared on the VPS (outbound tunnel)
+# → Caddy `web` (127.0.0.1:8080) → Next.js `app` (127.0.0.1:3200) → Postgres.
+# No inbound port is published: the tunnel is an outbound connection, so Oracle
+# VCN ingress only needs SSH (22). The stack keeps its own project name, network
+# and volumes and does not touch host-level ports 80/443.
 #
-#   ssh -N -L 3200:127.0.0.1:3200 vps   →   http://127.0.0.1:3200
-#
-# This stack is independent from the other Compose projects on the host (it has its own
-# project name, network and volume) and never touches the host-level ports 80/443.
+# Fallback without the tunnel (debug only):
+#   ssh -N -L 3200:127.0.0.1:3200 oracle-vps   →   http://127.0.0.1:3200
 name: nutritrack_vps
 
 x-app-env: &app-env
@@ -78,5 +79,30 @@ services:
       start_period: 30s
     logging: *logging
 
+  # Reverse proxy in front of the app. Caddy terminates the loopback hop and is the
+  # only origin cloudflared talks to. Public TLS is terminated at Cloudflare, so no
+  # certificate and no inbound 80/443 are required on the VPS.
+  web:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8080}:8080"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - vps_caddy:/data
+      - vps_caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/dang-nhap"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    logging: *logging
+
 volumes:
   vps_db:
+  vps_caddy:
+  vps_caddy_config:

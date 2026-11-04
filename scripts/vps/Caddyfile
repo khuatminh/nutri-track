@@ -1,0 +1,25 @@
+# Reverse proxy for the VPS NutriTrack stack (QLD-53).
+#
+# Listens on loopback only; the public entrypoint is the Cloudflare Tunnel
+# (cloudflared → 127.0.0.1:8080). Keep this file free of hostnames: the same
+# stack can sit behind any Cloudflare hostname without a rebuild.
+{
+	admin off
+	auto_https off
+}
+
+:8080 {
+	encode zstd gzip
+
+	# The app already sets its own security headers (next.config.ts); only pass
+	# through the client address so Next.js logs/traces show the real visitor.
+	reverse_proxy app:3000 {
+		header_up X-Forwarded-Proto https
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}
