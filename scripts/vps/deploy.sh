@@ -159,7 +159,8 @@ if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck
   die "deploy failed; previous release restored (see output above)"
 fi
 
-ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && echo '$SHA' > releases/current && date -u +%FT%TZ >> releases/current"
+ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && echo '$SHA' > releases/current && date -u +%FT%TZ >> releases/current \
+  && (grep -q '^IMAGE_TAG=' .env && sed -i 's/^IMAGE_TAG=.*/IMAGE_TAG=$SHA/' .env || echo 'IMAGE_TAG=$SHA' >> .env)"
 
 # Keep the running and the previous image only; the VPS has little disk headroom.
 log "Prune old images"

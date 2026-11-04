@@ -59,5 +59,6 @@ if ! ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && APP_PORT='$APP_PORT' ./healthcheck
   exit 1
 fi
 
-ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && echo '$TARGET_SHA' > releases/current && echo '$CURRENT' > releases/previous"
+ssh "$VPS_SSH_HOST" "cd '$REMOTE_DIR' && echo '$TARGET_SHA' > releases/current && echo '$CURRENT' > releases/previous \
+  && (grep -q '^IMAGE_TAG=' .env && sed -i 's/^IMAGE_TAG=.*/IMAGE_TAG=$TARGET_SHA/' .env || echo 'IMAGE_TAG=$TARGET_SHA' >> .env)"
 echo "rollback: now serving $TARGET_SHA (previous pointer: $CURRENT)"
