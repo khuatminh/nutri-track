@@ -1,21 +1,26 @@
 #!/usr/bin/env bash
-# Deploy NutriTrack to the VPS (QLD-51).
+# Deploy NutriTrack to the Oracle VPS (QLD-53).
 #
-# Flow: build an amd64 release image locally → ship it over SSH → db/mailpit up →
-# backup → `prisma migrate deploy` through an SSH tunnel → app up → health check →
-# record the release. On a failed health check the previous image is restored
-# automatically.
+# Flow: build a release image for the VPS architecture locally → ship it over SSH →
+# db/mailpit up → backup → `prisma migrate deploy` through an SSH tunnel → app up →
+# health check → record the release. On a failed health check the previous image is
+# restored automatically.
+#
+# The VPS Oracle is aarch64 (ARM64), so the image MUST be built for linux/arm64.
+# The platform is derived from `uname -m` on the target host; a mismatching
+# PLATFORM override is rejected because it only produces `exec format error`.
 #
 # The stack publishes only loopback ports on the VPS; use an SSH tunnel to browse it:
-#   ssh -N -L 3200:127.0.0.1:3200 vps   →   http://127.0.0.1:3200
+#   ssh -N -L 3200:127.0.0.1:3200 oracle-vps   →   http://127.0.0.1:3200
 #
 # Configuration (env vars, all optional):
-#   VPS_SSH_HOST     SSH alias/host from ~/.ssh/config          (default: vps)
+#   VPS_SSH_HOST     SSH alias/host from ~/.ssh/config          (default: oracle-vps)
 #   REMOTE_DIR       deploy directory on the VPS                (default: /opt/nutritrack)
 #   APP_PORT         loopback port for the app on the VPS       (default: 3200)
 #   DB_TUNNEL_PORT   loopback port of Postgres on the VPS       (default: 55432)
 #   IMAGE_REPO       local image repository name                (default: nutritrack)
-#   PLATFORM         docker build platform                      (default: linux/amd64)
+#   PLATFORM         docker build platform                      (default: detected from remote arch)
+#   ALLOW_PLATFORM_MISMATCH=1  allow a platform that differs from the remote arch
 #   ALLOW_DIRTY=1    build from a dirty tree (SHA will not describe the build)
 #   SKIP_MIGRATE=1   skip `prisma migrate deploy` (docs-only changes)
 #   SKIP_BACKUP=1    skip the pre-migration database dump
@@ -35,7 +40,7 @@ DB_TUNNEL_PORT="${DB_TUNNEL_PORT:-55432}"
 # Override for every public deployment, e.g. APP_URL=https://nutritrack.example.com
 PUBLIC_APP_URL="${APP_URL:-http://127.0.0.1:${APP_PORT}}"
 IMAGE_REPO="${IMAGE_REPO:-nutritrack}"
-PLATFORM="${PLATFORM:-linux/amd64}"
+PLATFORM="${PLATFORM:-}"
 LOCAL_DB_PORT="${LOCAL_DB_PORT:-$DB_TUNNEL_PORT}"
 
 log() { printf '\n==> %s\n' "$*"; }
@@ -49,10 +54,27 @@ if [[ -n "$(git status --porcelain)" && "${ALLOW_DIRTY:-0}" != "1" ]]; then
   die "working tree is dirty; the image tag would not describe the build (ALLOW_DIRTY=1 to override)"
 fi
 command -v docker >/dev/null || die "docker is required to build the release image"
-ssh -o BatchMode=yes -o ConnectTimeout=10 "$VPS_SSH_HOST" 'true' \
+REMOTE_ARCH="$(ssh -o BatchMode=yes -o ConnectTimeout=10 "$VPS_SSH_HOST" 'uname -m')" \
   || die "cannot SSH to '$VPS_SSH_HOST' non-interactively (check ~/.ssh/config and keys)"
+
+# The image must match the VPS architecture; an amd64 image on an ARM64 host dies
+# with `exec format error` (or crawls under qemu). Derive it instead of hard-coding.
+case "$REMOTE_ARCH" in
+  aarch64|arm64) TARGET_PLATFORM="linux/arm64" ;;
+  x86_64|amd64)  TARGET_PLATFORM="linux/amd64" ;;
+  *) die "unsupported remote architecture '$REMOTE_ARCH' on $VPS_SSH_HOST" ;;
+esac
+if [[ -n "$PLATFORM" && "$PLATFORM" != "$TARGET_PLATFORM" ]]; then
+  if [[ "${ALLOW_PLATFORM_MISMATCH:-0}" != "1" ]]; then
+    die "PLATFORM=$PLATFORM does not match $VPS_SSH_HOST ($REMOTE_ARCH → $TARGET_PLATFORM); unset PLATFORM or set ALLOW_PLATFORM_MISMATCH=1"
+  fi
+  printf 'warning: building %s for a %s host (%s) — expect exec format error\n' \
+    "$PLATFORM" "$REMOTE_ARCH" "$TARGET_PLATFORM" >&2
+fi
+PLATFORM="${PLATFORM:-$TARGET_PLATFORM}"
+
 echo "release  : $SHA"
-echo "host     : $VPS_SSH_HOST:$REMOTE_DIR"
+echo "host     : $VPS_SSH_HOST:$REMOTE_DIR ($REMOTE_ARCH)"
 echo "image    : $IMAGE_REPO:$SHA ($PLATFORM)"
 
 # ---------------------------------------------------------------- build image
