@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Be_Vietnam_Pro } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { THEME_COOKIE, THEME_INIT_SCRIPT, type ThemePref } from "@/lib/theme";
 import "./globals.css";
 
@@ -27,11 +27,12 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const pref = (await cookies()).get(THEME_COOKIE)?.value as ThemePref | undefined;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
   const theme = pref === "light" || pref === "dark" ? pref : undefined;
   return (
     <html lang="vi" data-theme={theme} className={font.variable} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body>{children}</body>
     </html>
