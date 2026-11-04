@@ -45,7 +45,7 @@ export async function saveWeight(userId: string, timezone: string, raw: unknown,
 export async function deleteWeight(userId: string, id: string): Promise<R<{ removed: WeightDto }>> {
   const cur = await db.weightLog.findFirst({ where: { id, userId } });
   if (!cur) return { ok: false, error: "Không tìm thấy bản ghi" };
-  await db.weightLog.delete({ where: { id } });
+  await db.weightLog.delete({ where: { id, userId } });
   return { ok: true, removed: dto(cur) };
 }
 
@@ -82,4 +82,27 @@ export async function getWeightChart(userId: string, timezone: string, range: We
 export async function latestWeight(userId: string): Promise<WeightDto | null> {
   const w = await db.weightLog.findFirst({ where: { userId }, orderBy: { logDate: "desc" } });
   return w && dto(w);
+}
+
+/** US-16.4: complete history, newest first. */
+export async function listWeights(userId: string): Promise<WeightDto[]> {
+  return (await db.weightLog.findMany({ where: { userId }, orderBy: { logDate: "desc" } })).map(dto);
+}
+
+export async function updateWeight(userId: string, timezone: string, id: string, raw: unknown): Promise<R<{ log: WeightDto }>> {
+  const p = weightSchema.safeParse(raw);
+  if (!p.success) return { ok: false, error: "Cân nặng chưa hợp lệ", fields: fieldErrors(p.error) };
+  const { date, weightKg, note } = p.data;
+  if (date > todayIn(timezone)) return { ok: false, error: "Không thể ghi cân nặng cho ngày tương lai", fields: { date: "Chọn ngày không muộn hơn hôm nay" } };
+  const cur = await db.weightLog.findFirst({ where: { id, userId } });
+  if (!cur) return { ok: false, error: "Không tìm thấy bản ghi" };
+  try {
+    const log = await db.weightLog.update({ where: { id, userId }, data: { logDate: isoToDate(date), weightKg, note: note ?? null } });
+    return { ok: true, log: dto(log) };
+  } catch (e) {
+    // The unique constraint also protects against concurrent writes to the target date.
+    if (typeof e === "object" && e !== null && "code" in e && e.code === "P2002")
+      return { ok: false, error: "Ngày này đã có cân nặng. Bạn muốn cập nhật?", needsConfirm: true };
+    throw e;
+  }
 }

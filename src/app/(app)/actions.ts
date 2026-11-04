@@ -1,13 +1,14 @@
 "use server";
+import { crudAction } from "@/server/crud-action";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { THEME_COOKIE, type ThemePref } from "@/lib/theme";
 import { requireUser } from "@/server/auth";
 import { addWater, deleteWater, restoreWater, updateWater, type WaterDto } from "@/server/water/service";
-import { addLog, addQuickLog, copyMeal, deleteLog, deleteLogs, restoreLog, setFavorite, updateLog, type LogDto } from "@/server/food-log/service";
-import { createCustomFood } from "@/server/foods/custom";
+import { addLog, addQuickLog, copyMeal, deleteMeal, restoreMeal, deleteLog, deleteLogs, restoreLog, setFavorite, updateLog, type LogDto } from "@/server/food-log/service";
+import { createCustomFood, updateCustomFood, deleteCustomFood, listMyFoods } from "@/server/foods/custom";
 import { createRecipe, deleteRecipe, duplicateRecipe, updateRecipe } from "@/server/recipes/service";
-import { saveWeight, deleteWeight } from "@/server/weight/service";
+import { saveWeight, deleteWeight, updateWeight, listWeights } from "@/server/weight/service";
 import { acceptRetarget, dismissRetarget, recalculateTargets, saveProfile, setCustomTargets, setHideWeight, setThemePref } from "@/server/profile/service";
 import { deleteReminder, saveReminder, setReminderEnabled, snoozeReminder } from "@/server/reminders/service";
 import { changePassword, deleteAccount } from "@/server/auth/service";
@@ -60,22 +61,25 @@ export async function addQuickLogAction(input: unknown) {
   return r;
 }
 export async function updateLogAction(id: string, input: unknown) {
-  const u = await requireUser();
-  const r = await updateLog(u.userId, u.timezone, id, input);
-  refresh();
-  return r;
+  return crudAction(async (u) => {
+    const r = await updateLog(u.userId, u.timezone, id, input);
+    refresh();
+    return r;
+  });
 }
 export async function deleteLogAction(id: string) {
-  const u = await requireUser();
-  const r = await deleteLog(u.userId, id);
-  refresh();
-  return r;
+  return crudAction(async (u) => {
+    const r = await deleteLog(u.userId, id);
+    refresh();
+    return r;
+  });
 }
 export async function restoreLogAction(dto: LogDto) {
-  const u = await requireUser();
-  const r = await restoreLog(u.userId, dto);
-  refresh();
-  return r;
+  return crudAction(async (u) => {
+    const r = await restoreLog(u.userId, dto);
+    refresh();
+    return r;
+  });
 }
 export async function undoLogsAction(ids: string[]) {
   const u = await requireUser();
@@ -94,8 +98,11 @@ export async function favoriteAction(foodId: string, on: boolean) {
   return setFavorite(u.userId, foodId, on);
 }
 export async function createFoodAction(input: unknown) {
-  const u = await requireUser();
-  return createCustomFood(u.userId, input);
+  return crudAction(async (u) => {
+    const r = await createCustomFood(u.userId, input);
+    refresh();
+    return r;
+  });
 }
 
 export async function createRecipeAction(input: unknown) {
@@ -124,16 +131,18 @@ export async function duplicateRecipeAction(id: string) {
 }
 
 export async function saveWeightAction(input: unknown, overwrite?: boolean) {
-  const u = await requireUser();
-  const r = await saveWeight(u.userId, u.timezone, input, { overwrite });
-  refresh();
-  return r;
+  return crudAction(async (u) => {
+    const r = await saveWeight(u.userId, u.timezone, input, { overwrite });
+    refresh();
+    return r;
+  });
 }
 export async function deleteWeightAction(id: string) {
-  const u = await requireUser();
-  const r = await deleteWeight(u.userId, id);
-  refresh();
-  return r;
+  return crudAction(async (u) => {
+    const r = await deleteWeight(u.userId, id);
+    refresh();
+    return r;
+  });
 }
 
 export async function saveProfileAction(input: unknown) {
@@ -213,4 +222,46 @@ export async function deleteAccountAction(password: string) {
   if (!r.ok) return r;
   await clearSessionCookie();
   redirect("/dang-ky");
+}
+
+export async function deleteMealAction(input: { date: string; meal: Meal }) {
+  return crudAction(async (u) => {
+    const r = await deleteMeal(u.userId, input);
+    refresh();
+    return r;
+  });
+}
+export async function restoreMealAction(dtos: LogDto[]) {
+  return crudAction(async (u) => {
+    const r = await restoreMeal(u.userId, dtos);
+    refresh();
+    return r;
+  });
+}
+export async function updateFoodAction(id: string, input: unknown) {
+  return crudAction(async (u) => {
+    const r = await updateCustomFood(u.userId, id, input);
+    refresh();
+    return r;
+  });
+}
+export async function deleteFoodAction(id: string) {
+  return crudAction(async (u) => {
+    const r = await deleteCustomFood(u.userId, id);
+    refresh();
+    return r;
+  });
+}
+export async function listMyFoodsAction() {
+  return crudAction((u) => listMyFoods(u.userId));
+}
+export async function listWeightsAction() {
+  return crudAction((u) => listWeights(u.userId));
+}
+export async function updateWeightAction(id: string, input: unknown) {
+  return crudAction(async (u) => {
+    const r = await updateWeight(u.userId, u.timezone, id, input);
+    refresh();
+    return r;
+  });
 }
