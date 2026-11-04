@@ -36,12 +36,12 @@ export function MacroBar({ kind, eatenG, targetG }: { kind: keyof typeof MACRO; 
   const pct = targetG > 0 ? (eatenG / targetG) * 100 : 0;
   const over = pct > 100;
   return (
-    <div>
-      <div className="mb-1 flex justify-between text-sm font-semibold">
-        <span className={m.text}>
+    <div className="min-w-0">
+      <div className="mb-1 flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 text-sm font-semibold">
+        <span className={cn("min-w-0", m.text)}>
           <span aria-hidden>{m.mark}</span> {m.name}
         </span>
-        <span>
+        <span className="min-w-0">
           {fmtDec1(eatenG)} / {fmtInt(targetG)} g · {fmtInt(pct)}% {over && <span className="ml-1 rounded-full bg-warning-soft px-2 text-xs font-bold text-warning">Vượt</span>}
         </span>
       </div>

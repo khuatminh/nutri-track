@@ -28,7 +28,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ d
   const over = d.remainingKcal < 0;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex min-w-0 flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-[1.75rem] font-bold leading-tight">Hôm nay</h1>
@@ -39,11 +39,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ d
       {date > addDays(today, 1) && <Badge tone="warn" className="self-start">Ngày ở tương lai — bạn chỉ có thể xem.</Badge>}
       {suggestion && <RetargetPrompt s={suggestion} />}
 
-      <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-        <div className="flex flex-col gap-4">
-          <Card className="grid items-center gap-4 sm:grid-cols-[auto_1fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="flex min-w-0 flex-col gap-4">
+          <Card className="grid items-center gap-4 sm:grid-cols-[auto_minmax(0,1fr)]">
             <div className="justify-self-center"><KcalRing eaten={d.eaten.kcal} target={d.targets.kcal} /></div>
-            <div className="flex flex-col gap-3">
+            <div className="flex min-w-0 flex-col gap-3">
               <p className="text-sm text-muted">Đã ăn <strong className="text-text">{fmtInt(d.eaten.kcal)}</strong> / {fmtInt(d.targets.kcal)} kcal</p>
               {over && <Badge tone="warn" className="self-start">ⓘ Vượt {fmtInt(-d.remainingKcal)} kcal — không sao, ngày mai điều chỉnh nhẹ nhàng nhé.</Badge>}
               <MacroBar kind="protein" eatenG={d.macros.protein.eatenG} targetG={d.macros.protein.targetG} />
@@ -75,7 +75,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ d
           </Card>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex min-w-0 flex-col gap-4">
           <WaterCard date={date} totalMl={d.water.totalMl} targetMl={d.water.targetMl} logs={water} />
           <WeightCard weight={d.weight} hidden={d.hideWeight} />
         </div>
