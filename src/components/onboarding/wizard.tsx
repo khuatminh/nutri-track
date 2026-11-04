@@ -7,8 +7,9 @@ import { Input, Select } from "@/components/ui/field";
 import { Badge, Card, Disclaimer } from "@/components/ui/misc";
 import { cn } from "@/lib/cn";
 import { fmtInt, parseDecimal } from "@/lib/format";
-import { DEFAULT_RATE, GOAL_RATES, computeTargets, type ActivityLevel, type Goal, type Sex } from "@/lib/nutrition";
+import { DEFAULT_RATE, GOAL_RATES, ageFromBirthDate, computeTargets, type ActivityLevel, type Goal, type Sex } from "@/lib/nutrition";
 import { todayIn } from "@/lib/dates";
+import { UNDERAGE_WEIGHT_LOSS_MESSAGE } from "@/lib/validation/profile";
 
 const GOALS: Array<{ value: Goal; title: string; hint: string }> = [
   { value: "lose", title: "Giảm cân", hint: "Thâm hụt calo nhẹ, bền vững" },
@@ -38,6 +39,13 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
   const h = parseDecimal(f.height);
   const w = parseDecimal(f.weight);
 
+  // US-05.8: the goal step comes before the birth date, so the restriction is
+  // only known after the body step (and when navigating back to the goal step).
+  const underage = useMemo(
+    () => /^\d{4}-\d{2}-\d{2}$/.test(f.birth) && ageFromBirthDate(f.birth, todayIn(timezone)) < 18,
+    [f.birth, timezone],
+  );
+
   const validateBody = () => {
     const e: Record<string, string> = {};
     if (!f.name.trim()) e.name = "Vui lòng nhập tên hiển thị";
@@ -57,7 +65,12 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
     }
   }, [step, errors, h, w, f, goal, rate, timezone]);
 
-  const finish = () =>
+  const finish = () => {
+    // Safety net: the result step must resolve the blocked goal before saving.
+    if (result?.weightLossBlocked) {
+      setStep(2);
+      return;
+    }
     start(async () => {
       setServerError("");
       const r = await saveProfileAction({ displayName: f.name, sex: f.sex, birthDate: f.birth, heightCm: h, weightKg: w, activityLevel: f.activity, goal, goalRateKgPerWeek: goal === "maintain" ? undefined : rate });
@@ -76,6 +89,7 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
       }
       router.replace("/hom-nay");
     });
+  };
 
   return (
     <div className="mx-auto flex w-full max-w-[720px] flex-col gap-6 p-4 md:p-8">
@@ -96,14 +110,18 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
         <div className="flex flex-col gap-4">
           <fieldset className="flex flex-col gap-3">
             <legend className="sr-only">Mục tiêu</legend>
-            {GOALS.map((g) => (
-              // eslint-disable-next-line jsx-a11y/label-has-associated-control -- label wraps the radio and its visible text
-              <label key={g.value} className={cn("flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border-2 p-4", goal === g.value ? "border-primary bg-primary-soft" : "border-border bg-surface")}>
-                <input type="radio" name="goal" className="size-5" checked={goal === g.value} onChange={() => { setGoal(g.value); setRate(DEFAULT_RATE[g.value]); }} />
-                <span><span className="block font-semibold">{g.title}</span><span className="text-sm text-muted">{g.hint}</span></span>
-              </label>
-            ))}
+            {GOALS.map((g) => {
+              const blocked = underage && g.value === "lose";
+              return (
+                // eslint-disable-next-line jsx-a11y/label-has-associated-control -- label wraps the radio and its visible text
+                <label key={g.value} className={cn("flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border-2 p-4", goal === g.value ? "border-primary bg-primary-soft" : "border-border bg-surface", blocked && "cursor-not-allowed opacity-60")}>
+                  <input type="radio" name="goal" className="size-5" checked={goal === g.value} disabled={blocked} onChange={() => { setGoal(g.value); setRate(DEFAULT_RATE[g.value]); }} />
+                  <span><span className="block font-semibold">{g.title}</span><span className="text-sm text-muted">{blocked ? "Không áp dụng cho người dưới 18 tuổi" : g.hint}</span></span>
+                </label>
+              );
+            })}
           </fieldset>
+          {underage && <p role="alert" className="rounded-md bg-warning-soft p-3 text-sm font-semibold text-warning">⚠ {UNDERAGE_WEIGHT_LOSS_MESSAGE}</p>}
           {goal !== "maintain" && (
             <Select label="Tốc độ mong muốn" value={String(rate)} onChange={(e) => setRate(Number(e.target.value))} options={GOAL_RATES[goal].map((r) => ({ value: String(r), label: `${String(r).replace(".", ",")} kg/tuần` }))} hint="Tốc độ vừa phải giúp bạn duy trì lâu dài." />
           )}
@@ -121,12 +139,23 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
           <div className="md:col-span-2">
             <Select label="Mức độ vận động" value={f.activity} onChange={(e) => setF({ ...f, activity: e.target.value as ActivityLevel })} options={ACTIVITY} />
           </div>
+          {underage && (
+            <div role="alert" className="rounded-md bg-warning-soft p-3 text-sm font-semibold text-warning md:col-span-2">
+              <p>⚠ {UNDERAGE_WEIGHT_LOSS_MESSAGE}</p>
+              {goal === "lose" && <Button type="button" size="sm" variant="secondary" className="mt-2" onClick={() => { setGoal("maintain"); setRate(DEFAULT_RATE.maintain); }}>Chọn mục tiêu giữ cân</Button>}
+            </div>
+          )}
         </div>
       )}
 
       {step === 2 && result && (
         <div className="flex flex-col gap-4">
-          {result.age < 18 && <Badge tone="warn">Bạn dưới 18 tuổi — nên hỏi người lớn/bác sĩ trước khi giảm cân.</Badge>}
+          {result.age < 18 && !result.weightLossBlocked && <Badge tone="warn">Bạn dưới 18 tuổi — nên tham khảo chuyên gia dinh dưỡng trước khi thay đổi cân nặng.</Badge>}
+          {result.weightLossBlocked && (
+            <div role="alert" className="rounded-md bg-warning-soft p-3 text-sm font-semibold text-warning">
+              <p>⚠ {UNDERAGE_WEIGHT_LOSS_MESSAGE}</p>
+            </div>
+          )}
           {result.advice === "suggest_maintain_high_bmi" && <Badge tone="warn">BMI của bạn khá cao — nên cân nhắc mục tiêu &quot;Giữ cân&quot;.</Badge>}
           {result.advice === "suggest_maintain_low_bmi" && <Badge tone="warn">BMI của bạn khá thấp — nên cân nhắc mục tiêu &quot;Giữ cân&quot;.</Badge>}
           <Card className="text-center">
@@ -160,7 +189,11 @@ export function OnboardingWizard({ timezone, initialName }: { timezone: string; 
       <div className="flex gap-3">
         {step > 0 && <Button variant="secondary" onClick={() => setStep(step - 1)} disabled={pending}>Quay lại</Button>}
         {step < 3 ? (
-          <Button className="flex-1" onClick={() => { if (step === 1 && !validateBody()) return; setStep(step + 1); }}>Tiếp tục</Button>
+          step === 2 && result?.weightLossBlocked ? (
+            <Button className="flex-1" onClick={() => { setGoal("maintain"); setRate(DEFAULT_RATE.maintain); }}>Chọn giữ cân</Button>
+          ) : (
+            <Button className="flex-1" onClick={() => { if (step === 1 && !validateBody()) return; setStep(step + 1); }}>Tiếp tục</Button>
+          )
         ) : (
           <Button className="flex-1" loading={pending} onClick={finish}>{pending ? "Đang lưu…" : "Hoàn tất"}</Button>
         )}
