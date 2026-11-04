@@ -5,13 +5,13 @@ import { changePassword, deleteAccount, login, logout, register, requestPassword
 import { hashToken } from "./tokens";
 
 const run = process.env.DATABASE_URL ? describe : describe.skip;
-const email = `it-${Date.now()}@example.test`;
+const email = `it-auth-${Date.now()}@example.test`;
 const pw = "matkhau123";
 
 run("auth service (db)", () => {
   afterAll(async () => {
-    await db.user.deleteMany({ where: { email: { startsWith: "it-" } } });
-    await db.loginAttempt.deleteMany({ where: { email: { startsWith: "it-" } } });
+    await db.user.deleteMany({ where: { email: { startsWith: "it-auth-" } } });
+    await db.loginAttempt.deleteMany({ where: { email: { startsWith: "it-auth-" } } });
     await db.$disconnect();
   });
 
