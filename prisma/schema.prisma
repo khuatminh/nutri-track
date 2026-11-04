@@ -152,6 +152,8 @@ model Profile {
   targetsEffectiveFrom DateTime      @map("targets_effective_from") @db.Date
   /// Weight (kg) used the last time targets were computed — drives US-18 suggestion.
   targetsWeightKg      Float         @map("targets_weight_kg")
+  /// Weight at which the user declined the retarget suggestion (US-18.3).
+  retargetDismissedKg  Float?        @map("retarget_dismissed_kg")
   hideWeight           Boolean       @default(false) @map("hide_weight")
   createdAt            DateTime      @default(now()) @map("created_at")
   updatedAt            DateTime      @updatedAt @map("updated_at")
