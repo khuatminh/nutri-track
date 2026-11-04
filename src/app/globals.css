@@ -57,3 +57,9 @@ body {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
+/* Native date/time controls must keep a visible keyboard focus ring (NFR-03). */
+input[type="date"]:focus-visible,
+input[type="time"]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

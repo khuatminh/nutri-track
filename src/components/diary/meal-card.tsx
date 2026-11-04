@@ -65,7 +65,8 @@ export function MealCard({ meal, date, items, yesterdayCount }: { meal: Meal; da
         <ul className="divide-y divide-border">
           {items.map((l) => (
             <li key={l.id} className="flex min-h-14 items-center gap-2 py-2">
-              <button className="min-h-11 min-w-0 flex-1 text-left" onClick={() => { setEdit(l); setQty(String(l.quantity).replace(".", ",")); setErr(""); }} aria-label={`Sửa ${l.name}`}>
+              <button className="min-h-11 min-w-0 flex-1 text-left" onClick={() => { setEdit(l); setQty(String(l.quantity).replace(".", ",")); setErr(""); }}>
+                <span className="sr-only">Sửa </span>
                 <span className="block truncate font-medium">{l.name}</span>
                 <span className="text-sm text-muted">{fmtDec1(l.quantity)} {l.servingLabel ?? ""}{l.grams > 0 && l.servingLabel !== "g" ? ` · ${fmtInt(l.grams)} g` : ""}{l.missingMicro ? " · thiếu dữ liệu natri/xơ/đường" : ""}</span>
               </button>

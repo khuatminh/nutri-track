@@ -11,6 +11,7 @@ import { useToast } from "@/components/ui/toast";
 import { cn } from "@/lib/cn";
 import { fmtDec1, fmtInt, parseDecimal } from "@/lib/format";
 import { MEAL_LABEL, MEAL_ORDER } from "@/lib/meals";
+import { previewPortion } from "@/lib/nutrition";
 import type { Meal } from "@prisma/client";
 import type { FoodHit } from "@/server/foods/search";
 
@@ -23,7 +24,7 @@ const TABS: Array<{ id: Tab; label: string }> = [
   { id: "frequent", label: "Hay dùng" },
   { id: "favorites", label: "Yêu thích" },
   { id: "recipes", label: "Công thức của tôi" },
-  { id: "mine", label: "Tự thêm" },
+  { id: "mine", label: "Món của tôi" },
 ];
 
 export interface AddFoodProps {
@@ -33,10 +34,11 @@ export interface AddFoodProps {
 }
 
 function preview(h: FoodHit, servingId: string, qty: number) {
-  const s = h.servings.find((x) => x.id === servingId);
-  const grams = s ? qty * s.grams : qty;
-  const k = h.kind === "recipe" ? qty : grams / 100;
-  return { grams, kcal: h.kcal * k, p: h.proteinG * k, c: h.carbG * k, f: h.fatG * k };
+  return previewPortion(
+    { kind: h.kind, energyKcal: h.kcal, proteinG: h.proteinG, carbG: h.carbG, fatG: h.fatG, fiberG: h.fiberG, sugarG: h.sugarG, sodiumMg: h.sodiumMg, servings: h.servings },
+    servingId,
+    qty,
+  );
 }
 
 export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
@@ -47,6 +49,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
   const [q, setQ] = useState("");
   const [hits, setHits] = useState<FoodHit[] | null>(null);
   const [searching, setSearching] = useState(false);
+  const [searchNonce, setSearchNonce] = useState(0);
   const [sel, setSel] = useState<WithLast | null>(null);
   const [meal, setMeal] = useState<Meal>(initialMeal);
   const [servingId, setServingId] = useState("");
@@ -54,8 +57,15 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
   const [qtyErr, setQtyErr] = useState("");
   const [added, setAdded] = useState(0);
   const [panel, setPanel] = useState<"quick" | "custom" | null>(null);
+  const [customName, setCustomName] = useState("");
   const [offline, setOffline] = useState(false);
   const reqId = useRef(0);
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // US-06.1: the dish search field is ready to type as soon as the screen opens.
+  useEffect(() => {
+    searchRef.current?.focus();
+  }, []);
 
   // Debounced search (150 ms, ADR §2.5) with stale-response guard.
   useEffect(() => {
@@ -77,7 +87,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
       }
     }, 150);
     return () => clearTimeout(t);
-  }, [q, tab]);
+  }, [q, tab, searchNonce]);
 
   const list: WithLast[] = tab === "search" ? (hits ?? []) : lists[tab];
 
@@ -92,6 +102,12 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
 
   const qn = parseDecimal(qty);
   const pv = useMemo(() => (sel && qn > 0 ? preview(sel, servingId, qn) : null), [sel, servingId, qn]);
+
+  /** US-06.4: the empty-state CTA seeds the custom-food name with the current query. */
+  const openCustom = (name = "") => {
+    setCustomName(name.trim());
+    setPanel("custom");
+  };
 
   const add = (allowFuture = false) => {
     if (!sel) return;
@@ -139,7 +155,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
       <div className="relative">
         <Search className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-muted" aria-hidden />
         <label htmlFor="food-q" className="sr-only">Tìm món ăn</label>
-        <input id="food-q" type="search" value={q} onChange={(e) => { setQ(e.target.value); setTab("search"); }} placeholder="Tìm món: phở bò, cơm tấm…" className="min-h-12 w-full rounded-md border border-border-strong bg-surface pl-10 pr-3 text-base" autoComplete="off" />
+        <input ref={searchRef} id="food-q" type="search" value={q} onChange={(e) => { setQ(e.target.value); setTab("search"); }} placeholder="Tìm món: phở bò, cơm tấm…" className="min-h-12 w-full rounded-md border border-border-strong bg-surface pl-10 pr-3 text-base" autoComplete="off" />
       </div>
 
       <div role="tablist" aria-label="Nguồn món" className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
@@ -159,7 +175,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
             icon="🤷"
             title={tab === "search" ? `Không tìm thấy “${q.trim()}”` : tab === "frequent" ? "Chưa có món hay dùng" : "Chưa có món nào ở đây"}
             hint={tab === "frequent" ? "Món ghi từ 3 lần trở lên sẽ hiện ở đây." : "Bạn có thể tự tạo món mới hoặc ghi nhanh calo."}
-            action={<Button variant="secondary" onClick={() => setPanel("custom")}>Tạo món mới</Button>}
+            action={<Button variant="secondary" onClick={() => openCustom(q)}>Tạo món mới</Button>}
           />
         ) : (
           <ul className="divide-y divide-border rounded-lg border border-border bg-surface">
@@ -185,7 +201,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
 
       <div className="flex flex-wrap gap-2">
         <Button variant="secondary" size="sm" onClick={() => setPanel("quick")}><Zap className="size-4" aria-hidden /> Ghi nhanh calo</Button>
-        <Button variant="ghost" size="sm" onClick={() => setPanel("custom")}>Tạo món mới</Button>
+        <Button variant="ghost" size="sm" onClick={() => openCustom()}>Tạo món mới</Button>
       </div>
 
       <Sheet open={!!sel} onOpenChange={(o) => !o && setSel(null)} title={sel?.name ?? ""} description="Chọn khẩu phần và số lượng">
@@ -200,9 +216,14 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
               )}
             </div>
             {pv && (
-              <p aria-live="polite" className="rounded-md bg-surface-2 p-3 text-sm">
-                <strong className="text-lg">{fmtInt(pv.kcal)} kcal</strong> · <span className="text-protein-text">■ P {fmtDec1(pv.p)} g</span> · <span className="text-carb-text">● C {fmtDec1(pv.c)} g</span> · <span className="text-fat-text">◆ F {fmtDec1(pv.f)} g</span>
-              </p>
+              <div aria-live="polite" className="rounded-md bg-surface-2 p-3 text-sm">
+                <p>
+                  <strong className="text-lg">{fmtInt(pv.kcal)} kcal</strong> · <span className="text-protein-text">■ P {fmtDec1(pv.proteinG)} g</span> · <span className="text-carb-text">● C {fmtDec1(pv.carbG)} g</span> · <span className="text-fat-text">◆ F {fmtDec1(pv.fatG)} g</span>
+                </p>
+                <p className="mt-1 text-muted">
+                  Chất xơ {pv.fiberG === null ? "—" : `${fmtDec1(pv.fiberG)} g`} · Đường {pv.sugarG === null ? "—" : `${fmtDec1(pv.sugarG)} g`} · Natri {pv.sodiumMg === null ? "—" : `${fmtInt(pv.sodiumMg)} mg`}
+                </p>
+              </div>
             )}
             <Button type="submit" loading={pending}>Thêm vào nhật ký</Button>
           </form>
@@ -210,7 +231,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
       </Sheet>
 
       <QuickSheet open={panel === "quick"} onClose={() => setPanel(null)} date={date} meal={meal} onDone={() => { setAdded((n) => n + 1); router.refresh(); }} />
-      <CustomFoodSheet open={panel === "custom"} onClose={() => setPanel(null)} onCreated={(h) => { setPanel(null); setTab("search"); setQ(h.name); toast.show(`Đã tạo món “${h.name}”`); router.refresh(); }} />
+      <CustomFoodSheet open={panel === "custom"} initialName={customName} onClose={() => setPanel(null)} onCreated={(h) => { setPanel(null); setTab("search"); setQ(h.name); setSearchNonce((n) => n + 1); toast.show(`Đã tạo món “${h.name}”`); router.refresh(); }} />
     </div>
   );
 }
@@ -231,11 +252,17 @@ function QuickSheet({ open, onClose, date, meal, onDone }: { open: boolean; onCl
   );
 }
 
-function CustomFoodSheet({ open, onClose, onCreated }: { open: boolean; onClose: () => void; onCreated: (h: FoodHit) => void }) {
+function CustomFoodSheet({ open, initialName, onClose, onCreated }: { open: boolean; initialName: string; onClose: () => void; onCreated: (h: FoodHit) => void }) {
   const [pending, start] = useTransition();
-  const [v, setV] = useState({ name: "", kcal: "", p: "", c: "", f: "", fiber: "", sugar: "", sodium: "", unit: "100 g", grams: "100" });
+  const [v, setV] = useState({ name: initialName, kcal: "", p: "", c: "", f: "", fiber: "", sugar: "", sodium: "", unit: "100 g", grams: "100" });
   const [errs, setErrs] = useState<Record<string, string>>({});
   const [warn, setWarn] = useState(false);
+
+  // US-06.4: opening from the "Không tìm thấy" state seeds the typed dish name.
+  useEffect(() => {
+    if (open) setV((cur) => ({ ...cur, name: initialName }));
+  }, [open, initialName]);
+
   const num = (s: string) => (s.trim() === "" ? undefined : parseDecimal(s));
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement>) => setV({ ...v, [k]: e.target.value });
 

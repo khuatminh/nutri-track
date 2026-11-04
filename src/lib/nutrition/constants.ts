@@ -17,6 +17,7 @@ export const PAL: Record<ActivityLevel, number> = {
   very_active: 1.9,
 };
 
+export const CUSTOM_MACRO_MISMATCH_FRACTION = 0.05;
 export const KCAL_PER_KG = 7700;
 export const KCAL_PER_G = { protein: 4, carb: 4, fat: 9 } as const;
 
