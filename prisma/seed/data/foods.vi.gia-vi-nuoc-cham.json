@@ -1,0 +1,220 @@
+[
+  {
+    "slug": "nuoc-mam",
+    "name": "Nước mắm",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 34.0,
+    "proteinG": 5.0,
+    "carbG": 3.5,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 3.5,
+    "sodiumMg": 7900.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 18.0,
+        "isDefault": true
+      },
+      {
+        "label": "muỗng cà phê",
+        "grams": 6.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "nuoc-mam-pha",
+    "name": "Nước mắm pha",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 52.0,
+    "proteinG": 1.0,
+    "carbG": 12.0,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 11.0,
+    "sodiumMg": 2500.0,
+    "servings": [
+      {
+        "label": "chén nhỏ",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "nuoc-tuong",
+    "name": "Nước tương",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 54.0,
+    "proteinG": 8.0,
+    "carbG": 5.5,
+    "fatG": 0.0,
+    "fiberG": 0.8,
+    "sugarG": 1.0,
+    "sodiumMg": 5500.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 16.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "tuong-ot",
+    "name": "Tương ớt",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 90.5,
+    "proteinG": 1.5,
+    "carbG": 20.0,
+    "fatG": 0.5,
+    "fiberG": 1.5,
+    "sugarG": 15.0,
+    "sodiumMg": 1500.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 15.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mam-tom",
+    "name": "Mắm tôm",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 73.5,
+    "proteinG": 12.0,
+    "carbG": 3.0,
+    "fatG": 1.5,
+    "fiberG": 0.0,
+    "sugarG": 1.0,
+    "sodiumMg": 7000.0,
+    "servings": [
+      {
+        "label": "muỗng cà phê",
+        "grams": 5.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "dau-an",
+    "name": "Dầu ăn",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 900.0,
+    "proteinG": 0.0,
+    "carbG": 0.0,
+    "fatG": 100.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 0.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 14.0,
+        "isDefault": true
+      },
+      {
+        "label": "muỗng cà phê",
+        "grams": 5.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "duong-trang",
+    "name": "Đường trắng",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 400.0,
+    "proteinG": 0.0,
+    "carbG": 100.0,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 100.0,
+    "sodiumMg": 0.0,
+    "servings": [
+      {
+        "label": "muỗng cà phê",
+        "grams": 4.0,
+        "isDefault": true
+      },
+      {
+        "label": "muỗng canh",
+        "grams": 12.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "mat-ong",
+    "name": "Mật ong",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 329.2,
+    "proteinG": 0.3,
+    "carbG": 82.0,
+    "fatG": 0.0,
+    "fiberG": 0.2,
+    "sugarG": 82.0,
+    "sodiumMg": 4.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 21.0,
+        "isDefault": true
+      },
+      {
+        "label": "muỗng cà phê",
+        "grams": 7.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sua-dac-co-duong",
+    "name": "Sữa đặc có đường",
+    "category": "Gia vị & nước chấm",
+    "isVietnamese": true,
+    "energyKcal": 326.5,
+    "proteinG": 7.5,
+    "carbG": 55.0,
+    "fatG": 8.5,
+    "fiberG": 0.0,
+    "sugarG": 55.0,
+    "sodiumMg": 100.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  }
+]

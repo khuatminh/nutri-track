@@ -1,0 +1,464 @@
+[
+  {
+    "slug": "rau-muong-xao-toi",
+    "name": "Rau muống xào tỏi",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 68.5,
+    "proteinG": 3.0,
+    "carbG": 4.0,
+    "fatG": 4.5,
+    "fiberG": 2.0,
+    "sugarG": 1.0,
+    "sodiumMg": 240.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "rau-muong-luoc",
+    "name": "Rau muống luộc",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 24.2,
+    "proteinG": 2.6,
+    "carbG": 3.0,
+    "fatG": 0.2,
+    "fiberG": 2.0,
+    "sugarG": 0.5,
+    "sodiumMg": 40.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "rau-cai-luoc",
+    "name": "Rau cải luộc",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 17.8,
+    "proteinG": 1.5,
+    "carbG": 2.5,
+    "fatG": 0.2,
+    "fiberG": 1.5,
+    "sugarG": 1.0,
+    "sodiumMg": 35.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "cai-thia-xao",
+    "name": "Cải thìa xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 55.2,
+    "proteinG": 1.8,
+    "carbG": 3.0,
+    "fatG": 4.0,
+    "fiberG": 1.5,
+    "sugarG": 1.0,
+    "sodiumMg": 230.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bong-cai-xanh-luoc",
+    "name": "Bông cải xanh luộc",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 33.2,
+    "proteinG": 2.4,
+    "carbG": 5.0,
+    "fatG": 0.4,
+    "fiberG": 2.4,
+    "sugarG": 1.5,
+    "sodiumMg": 30.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "bong-cai-xanh-xao-toi",
+    "name": "Bông cải xanh xào tỏi",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 69.2,
+    "proteinG": 2.8,
+    "carbG": 5.5,
+    "fatG": 4.0,
+    "fiberG": 2.2,
+    "sugarG": 1.5,
+    "sodiumMg": 220.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "su-su-xao",
+    "name": "Su su xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 56.0,
+    "proteinG": 1.0,
+    "carbG": 4.0,
+    "fatG": 4.0,
+    "fiberG": 1.5,
+    "sugarG": 2.0,
+    "sodiumMg": 220.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "dau-co-ve-xao",
+    "name": "Đậu cô ve xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 68.0,
+    "proteinG": 2.0,
+    "carbG": 6.0,
+    "fatG": 4.0,
+    "fiberG": 2.5,
+    "sugarG": 2.0,
+    "sodiumMg": 230.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-tim-nuong-mo-hanh",
+    "name": "Cà tím nướng mỡ hành",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 79.5,
+    "proteinG": 1.5,
+    "carbG": 6.0,
+    "fatG": 5.5,
+    "fiberG": 2.5,
+    "sugarG": 3.0,
+    "sodiumMg": 220.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "ca-chua",
+    "name": "Cà chua",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 21.0,
+    "proteinG": 0.9,
+    "carbG": 3.9,
+    "fatG": 0.2,
+    "fiberG": 1.2,
+    "sugarG": 2.6,
+    "sodiumMg": 5.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 120.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dua-leo",
+    "name": "Dưa leo",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 18.1,
+    "proteinG": 0.7,
+    "carbG": 3.6,
+    "fatG": 0.1,
+    "fiberG": 0.5,
+    "sugarG": 1.7,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "ca-rot",
+    "name": "Cà rốt",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 43.8,
+    "proteinG": 0.9,
+    "carbG": 9.6,
+    "fatG": 0.2,
+    "fiberG": 2.8,
+    "sugarG": 4.7,
+    "sodiumMg": 69.0,
+    "servings": [
+      {
+        "label": "củ",
+        "grams": 80.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "bap-cai-luoc",
+    "name": "Bắp cải luộc",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 26.1,
+    "proteinG": 1.3,
+    "carbG": 5.0,
+    "fatG": 0.1,
+    "fiberG": 2.0,
+    "sugarG": 2.5,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "bi-do-hap",
+    "name": "Bí đỏ hấp",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 30.9,
+    "proteinG": 1.0,
+    "carbG": 6.5,
+    "fatG": 0.1,
+    "fiberG": 0.5,
+    "sugarG": 2.8,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "muop-xao",
+    "name": "Mướp xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 56.0,
+    "proteinG": 1.0,
+    "carbG": 4.0,
+    "fatG": 4.0,
+    "fiberG": 1.0,
+    "sugarG": 2.0,
+    "sodiumMg": 230.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "nam-xao",
+    "name": "Nấm xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 68.5,
+    "proteinG": 3.0,
+    "carbG": 4.0,
+    "fatG": 4.5,
+    "fiberG": 1.5,
+    "sugarG": 1.5,
+    "sodiumMg": 240.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "gia-do-xao",
+    "name": "Giá đỗ xào",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 61.5,
+    "proteinG": 2.5,
+    "carbG": 5.0,
+    "fatG": 3.5,
+    "fiberG": 1.5,
+    "sugarG": 2.0,
+    "sodiumMg": 230.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "rau-song-xa-lach-rau-thom",
+    "name": "Rau sống (xà lách, rau thơm)",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 20.7,
+    "proteinG": 1.5,
+    "carbG": 3.0,
+    "fatG": 0.3,
+    "fiberG": 1.5,
+    "sugarG": 1.0,
+    "sodiumMg": 20.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 50.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "dua-chua-dua-cai-muoi",
+    "name": "Dưa chua (dưa cải muối)",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 17.8,
+    "proteinG": 1.0,
+    "carbG": 3.0,
+    "fatG": 0.2,
+    "fiberG": 1.5,
+    "sugarG": 1.0,
+    "sodiumMg": 900.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 50.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-phao-muoi",
+    "name": "Cà pháo muối",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 26.6,
+    "proteinG": 1.2,
+    "carbG": 5.0,
+    "fatG": 0.2,
+    "fiberG": 2.0,
+    "sugarG": 1.5,
+    "sodiumMg": 1000.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 15.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "kim-chi",
+    "name": "Kim chi",
+    "category": "Rau củ",
+    "isVietnamese": true,
+    "energyKcal": 18.5,
+    "proteinG": 1.1,
+    "carbG": 2.4,
+    "fatG": 0.5,
+    "fiberG": 1.6,
+    "sugarG": 1.0,
+    "sodiumMg": 700.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 60.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  }
+]

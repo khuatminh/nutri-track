@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Map design tokens (docs/design/design-spec.md §6) to Tailwind v4 utilities. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-contrast: var(--primary-contrast);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-text: var(--primary-soft-text);
+  --color-focus: var(--focus);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-protein: var(--macro-protein);
+  --color-protein-text: var(--macro-protein-text);
+  --color-carb: var(--macro-carb);
+  --color-carb-text: var(--macro-carb-text);
+  --color-fat: var(--macro-fat);
+  --color-fat-text: var(--macro-fat-text);
+  --color-kcal: var(--kcal);
+  --color-water: var(--water);
+  --color-track: var(--track);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --font-sans: var(--font-be-vietnam-pro), "Inter", system-ui, sans-serif;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+}
+body {
+  min-height: 100dvh;
+  line-height: var(--lh-base);
+}
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+/* Native date/time controls must keep a visible keyboard focus ring (NFR-03). */
+input[type="date"]:focus-visible,
+input[type="time"]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

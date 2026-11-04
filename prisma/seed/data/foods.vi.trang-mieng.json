@@ -1,0 +1,227 @@
+[
+  {
+    "slug": "che-dau-xanh",
+    "name": "Chè đậu xanh",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 81.6,
+    "proteinG": 1.5,
+    "carbG": 18.0,
+    "fatG": 0.4,
+    "fiberG": 1.5,
+    "sugarG": 12.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "che-dau-den",
+    "name": "Chè đậu đen",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 88.5,
+    "proteinG": 2.0,
+    "carbG": 19.0,
+    "fatG": 0.5,
+    "fiberG": 1.8,
+    "sugarG": 11.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "che-thai",
+    "name": "Chè thái",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 107.5,
+    "proteinG": 1.0,
+    "carbG": 18.0,
+    "fatG": 3.5,
+    "fiberG": 0.8,
+    "sugarG": 14.0,
+    "sodiumMg": 15.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "che-chuoi",
+    "name": "Chè chuối",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 110.2,
+    "proteinG": 0.8,
+    "carbG": 20.0,
+    "fatG": 3.0,
+    "fiberG": 0.8,
+    "sugarG": 12.0,
+    "sodiumMg": 15.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "che-khuc-bach",
+    "name": "Chè khúc bạch",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 85.5,
+    "proteinG": 2.0,
+    "carbG": 16.0,
+    "fatG": 1.5,
+    "fiberG": 0.2,
+    "sugarG": 14.0,
+    "sodiumMg": 20.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "che-bap",
+    "name": "Chè bắp",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 102.2,
+    "proteinG": 1.5,
+    "carbG": 20.0,
+    "fatG": 1.8,
+    "fiberG": 1.2,
+    "sugarG": 12.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "che-troi-nuoc",
+    "name": "Chè trôi nước",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 140.0,
+    "proteinG": 2.5,
+    "carbG": 28.0,
+    "fatG": 2.0,
+    "fiberG": 1.0,
+    "sugarG": 13.0,
+    "sodiumMg": 15.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "suong-sa-hat-luu",
+    "name": "Sương sa hạt lựu",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 71.5,
+    "proteinG": 0.5,
+    "carbG": 14.0,
+    "fatG": 1.5,
+    "fiberG": 0.3,
+    "sugarG": 11.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "kem",
+    "name": "Kem",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 209.0,
+    "proteinG": 3.5,
+    "carbG": 24.0,
+    "fatG": 11.0,
+    "fiberG": 0.5,
+    "sugarG": 21.0,
+    "sodiumMg": 80.0,
+    "servings": [
+      {
+        "label": "viên",
+        "grams": 60.0,
+        "isDefault": true
+      },
+      {
+        "label": "ly",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "rau-cau",
+    "name": "Rau câu",
+    "category": "Tráng miệng",
+    "isVietnamese": true,
+    "energyKcal": 56.1,
+    "proteinG": 0.8,
+    "carbG": 13.0,
+    "fatG": 0.1,
+    "fiberG": 0.3,
+    "sugarG": 12.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  }
+]

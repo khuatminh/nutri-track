@@ -1,0 +1,14 @@
+{
+	http_port 8480
+	https_port 8443
+	skip_install_trust
+}
+
+https://nutritrack-staging.localhost:8443 {
+	tls internal
+	reverse_proxy app:3000
+}
+
+http://nutritrack-staging.localhost:8480 {
+	redir https://nutritrack-staging.localhost:8443{uri} permanent
+}

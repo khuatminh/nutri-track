@@ -1,0 +1,543 @@
+[
+  {
+    "slug": "chuoi",
+    "name": "Chuối",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 99.1,
+    "proteinG": 1.1,
+    "carbG": 23.0,
+    "fatG": 0.3,
+    "fiberG": 2.6,
+    "sugarG": 12.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "xoai-chin",
+    "name": "Xoài chín",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 66.0,
+    "proteinG": 0.6,
+    "carbG": 15.0,
+    "fatG": 0.4,
+    "fiberG": 1.6,
+    "sugarG": 14.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 200.0,
+        "isDefault": true
+      },
+      {
+        "label": "miếng",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "xoai-xanh",
+    "name": "Xoài xanh",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 73.9,
+    "proteinG": 0.8,
+    "carbG": 17.0,
+    "fatG": 0.3,
+    "fiberG": 1.8,
+    "sugarG": 13.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "cam",
+    "name": "Cam",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 51.7,
+    "proteinG": 0.9,
+    "carbG": 11.8,
+    "fatG": 0.1,
+    "fiberG": 2.4,
+    "sugarG": 9.4,
+    "sodiumMg": 0.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "quyt",
+    "name": "Quýt",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 59.1,
+    "proteinG": 0.8,
+    "carbG": 13.3,
+    "fatG": 0.3,
+    "fiberG": 1.8,
+    "sugarG": 10.6,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "buoi",
+    "name": "Bưởi",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 42.5,
+    "proteinG": 0.8,
+    "carbG": 9.6,
+    "fatG": 0.1,
+    "fiberG": 1.0,
+    "sugarG": 7.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "múi",
+        "grams": 30.0,
+        "isDefault": true
+      },
+      {
+        "label": "nửa quả",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dua-hau",
+    "name": "Dưa hấu",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 34.6,
+    "proteinG": 0.6,
+    "carbG": 7.6,
+    "fatG": 0.2,
+    "fiberG": 0.4,
+    "sugarG": 6.2,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "du-du-chin",
+    "name": "Đu đủ chín",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 48.7,
+    "proteinG": 0.5,
+    "carbG": 11.0,
+    "fatG": 0.3,
+    "fiberG": 1.7,
+    "sugarG": 7.8,
+    "sodiumMg": 8.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "thanh-long",
+    "name": "Thanh long",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 60.0,
+    "proteinG": 1.1,
+    "carbG": 13.0,
+    "fatG": 0.4,
+    "fiberG": 3.0,
+    "sugarG": 8.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "oi",
+    "name": "Ổi",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 75.4,
+    "proteinG": 2.6,
+    "carbG": 14.0,
+    "fatG": 1.0,
+    "fiberG": 5.4,
+    "sugarG": 8.9,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dua-thom",
+    "name": "Dứa (thơm)",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 54.9,
+    "proteinG": 0.5,
+    "carbG": 13.0,
+    "fatG": 0.1,
+    "fiberG": 1.4,
+    "sugarG": 10.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "nhan",
+    "name": "Nhãn",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 66.1,
+    "proteinG": 1.3,
+    "carbG": 15.0,
+    "fatG": 0.1,
+    "fiberG": 1.1,
+    "sugarG": 13.0,
+    "sodiumMg": 0.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 10.0,
+        "isDefault": true
+      },
+      {
+        "label": "chùm",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "vai",
+    "name": "Vải",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 72.8,
+    "proteinG": 0.8,
+    "carbG": 16.5,
+    "fatG": 0.4,
+    "fiberG": 1.3,
+    "sugarG": 15.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "chom-chom",
+    "name": "Chôm chôm",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 69.4,
+    "proteinG": 0.9,
+    "carbG": 16.0,
+    "fatG": 0.2,
+    "fiberG": 1.0,
+    "sugarG": 13.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 25.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mit",
+    "name": "Mít",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 104.2,
+    "proteinG": 1.7,
+    "carbG": 23.0,
+    "fatG": 0.6,
+    "fiberG": 1.5,
+    "sugarG": 19.0,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "múi",
+        "grams": 25.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sau-rieng",
+    "name": "Sầu riêng",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 161.7,
+    "proteinG": 1.5,
+    "carbG": 27.0,
+    "fatG": 5.3,
+    "fiberG": 3.8,
+    "sugarG": 20.0,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "múi",
+        "grams": 40.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "mang-cut",
+    "name": "Măng cụt",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 79.0,
+    "proteinG": 0.4,
+    "carbG": 18.0,
+    "fatG": 0.6,
+    "fiberG": 1.8,
+    "sugarG": 16.0,
+    "sodiumMg": 7.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "tao",
+    "name": "Táo",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 59.0,
+    "proteinG": 0.3,
+    "carbG": 14.0,
+    "fatG": 0.2,
+    "fiberG": 2.4,
+    "sugarG": 10.0,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 180.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "le",
+    "name": "Lê",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 62.5,
+    "proteinG": 0.4,
+    "carbG": 15.0,
+    "fatG": 0.1,
+    "fiberG": 3.1,
+    "sugarG": 9.8,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 180.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "nho",
+    "name": "Nho",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 76.6,
+    "proteinG": 0.7,
+    "carbG": 18.0,
+    "fatG": 0.2,
+    "fiberG": 0.9,
+    "sugarG": 15.0,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "chùm nhỏ",
+        "grams": 100.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dau-tay",
+    "name": "Dâu tây",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 36.3,
+    "proteinG": 0.7,
+    "carbG": 7.7,
+    "fatG": 0.3,
+    "fiberG": 2.0,
+    "sugarG": 4.9,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 15.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "bo",
+    "name": "Bơ",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 177.0,
+    "proteinG": 2.0,
+    "carbG": 8.5,
+    "fatG": 15.0,
+    "fiberG": 6.7,
+    "sugarG": 0.7,
+    "sodiumMg": 7.0,
+    "servings": [
+      {
+        "label": "quả",
+        "grams": 150.0,
+        "isDefault": true
+      },
+      {
+        "label": "nửa quả",
+        "grams": 75.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dua-com",
+    "name": "Dừa (cơm)",
+    "category": "Trái cây",
+    "isVietnamese": true,
+    "energyKcal": 370.2,
+    "proteinG": 3.3,
+    "carbG": 15.0,
+    "fatG": 33.0,
+    "fiberG": 9.0,
+    "sugarG": 6.2,
+    "sodiumMg": 20.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  }
+]

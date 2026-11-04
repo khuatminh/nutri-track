@@ -1,0 +1,39 @@
+# QLD-31 backup/restore proof — 2026-11-04T17:05:41Z
+# SHA: 67d74db2c5b6b9eb69dcd96f8e6220721535a9ae  | fake data only (E2E fixtures + seed)
+
+$ row counts in live DB
+users|2
+food_logs|4
+foods|291
+live fingerprint: 16 tables, sha256 4c01ff5e6fe0db2b02bb072c59bfe9a0c43cbc8b219106c8ef2a5fb0869b8cc1
+
+$ scripts/staging/backup.sh
+Backup: .staging/backups/nutritrack-20261104T170548Z.dump.gpg (32640 bytes)
+
+$ encrypted? (pg_dump magic and fixture text must be absent)
+PGP symmetric key encrypted data - AES with 256-bit key salted & iterated - SHA256 .
+no PGDMP header: OK
+no plaintext fixture text: OK
+
+$ scripts/staging/restore.sh <backup>
+nutritrack-20261104T170548Z.dump.gpg: OK
+PASS: nutritrack_restore_20261104170551 matches nutritrack-20261104T170548Z.fingerprint (16 tables)
+restore exit=0
+
+$ row counts in restored DB nutritrack_restore_20261104170551
+users|2
+food_logs|4
+foods|291
+
+$ live DB untouched by restore
+fingerprint unchanged: OK (4c01ff5e6fe0db2b02bb072c59bfe9a0c43cbc8b219106c8ef2a5fb0869b8cc1)
+
+$ negative: wrong passphrase must fail
+gpg exit=2 (gpg: decryption failed: Bad session key)
+
+$ negative: tampered backup must be refused before touching any DB
+restore exit=1; databases before=5 after=5
+
+$ cleanup of proof DB
+DROP DATABASE
+dropped nutritrack_restore_20261104170551

@@ -1,0 +1,220 @@
+[
+  {
+    "slug": "chao-trang",
+    "name": "Cháo trắng",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 50.9,
+    "proteinG": 1.5,
+    "carbG": 11.0,
+    "fatG": 0.1,
+    "fiberG": 0.2,
+    "sugarG": 0.0,
+    "sodiumMg": 120.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "chao-thit-bam",
+    "name": "Cháo thịt bằm",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 74.2,
+    "proteinG": 3.5,
+    "carbG": 11.0,
+    "fatG": 1.8,
+    "fiberG": 0.3,
+    "sugarG": 0.2,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "chao-ga",
+    "name": "Cháo gà",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 74.2,
+    "proteinG": 4.5,
+    "carbG": 10.0,
+    "fatG": 1.8,
+    "fiberG": 0.3,
+    "sugarG": 0.2,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "chao-long",
+    "name": "Cháo lòng",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 78.5,
+    "proteinG": 4.0,
+    "carbG": 10.0,
+    "fatG": 2.5,
+    "fiberG": 0.3,
+    "sugarG": 0.2,
+    "sodiumMg": 310.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "chao-ca",
+    "name": "Cháo cá",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 71.5,
+    "proteinG": 4.5,
+    "carbG": 10.0,
+    "fatG": 1.5,
+    "fiberG": 0.3,
+    "sugarG": 0.2,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "chao-suon",
+    "name": "Cháo sườn",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 82.5,
+    "proteinG": 4.0,
+    "carbG": 11.0,
+    "fatG": 2.5,
+    "fiberG": 0.3,
+    "sugarG": 0.2,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "chao-dau-xanh",
+    "name": "Cháo đậu xanh",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 69.6,
+    "proteinG": 2.5,
+    "carbG": 14.0,
+    "fatG": 0.4,
+    "fiberG": 1.2,
+    "sugarG": 0.5,
+    "sodiumMg": 60.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "sup-cua",
+    "name": "Súp cua",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 58.2,
+    "proteinG": 3.5,
+    "carbG": 7.0,
+    "fatG": 1.8,
+    "fiberG": 0.3,
+    "sugarG": 0.8,
+    "sodiumMg": 320.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô",
+        "grams": 350.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "sup-ga-ngo",
+    "name": "Súp gà ngô",
+    "category": "Cháo & súp",
+    "isVietnamese": true,
+    "energyKcal": 57.5,
+    "proteinG": 3.0,
+    "carbG": 8.0,
+    "fatG": 1.5,
+    "fiberG": 0.5,
+    "sugarG": 1.5,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  }
+]

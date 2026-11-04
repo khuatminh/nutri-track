@@ -1,0 +1,433 @@
+[
+  {
+    "slug": "sua-dau-nanh-khong-duong",
+    "name": "Sữa đậu nành (không đường)",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 31.6,
+    "proteinG": 2.8,
+    "carbG": 1.5,
+    "fatG": 1.6,
+    "fiberG": 0.4,
+    "sugarG": 0.5,
+    "sodiumMg": 15.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 240.0,
+        "isDefault": true
+      },
+      {
+        "label": "hộp",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sua-dau-nanh-co-duong",
+    "name": "Sữa đậu nành có đường",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 49.6,
+    "proteinG": 2.8,
+    "carbG": 6.0,
+    "fatG": 1.6,
+    "fiberG": 0.4,
+    "sugarG": 5.0,
+    "sodiumMg": 30.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 240.0,
+        "isDefault": true
+      },
+      {
+        "label": "hộp",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "nuoc-dua",
+    "name": "Nước dừa",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 19.4,
+    "proteinG": 0.7,
+    "carbG": 3.7,
+    "fatG": 0.2,
+    "fiberG": 1.1,
+    "sugarG": 2.6,
+    "sodiumMg": 105.0,
+    "servings": [
+      {
+        "label": "trái",
+        "grams": 300.0,
+        "isDefault": true
+      },
+      {
+        "label": "ly",
+        "grams": 240.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sinh-to-bo",
+    "name": "Sinh tố bơ",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 143.0,
+    "proteinG": 2.0,
+    "carbG": 18.0,
+    "fatG": 7.0,
+    "fiberG": 2.5,
+    "sugarG": 14.0,
+    "sodiumMg": 35.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "sinh-to-xoai",
+    "name": "Sinh tố xoài",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 97.5,
+    "proteinG": 1.0,
+    "carbG": 20.0,
+    "fatG": 1.5,
+    "fiberG": 1.0,
+    "sugarG": 18.0,
+    "sodiumMg": 25.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "sinh-to-dau",
+    "name": "Sinh tố dâu",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 85.5,
+    "proteinG": 1.0,
+    "carbG": 17.0,
+    "fatG": 1.5,
+    "fiberG": 1.0,
+    "sugarG": 15.0,
+    "sodiumMg": 25.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "nuoc-cam-vat",
+    "name": "Nước cam vắt",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 44.6,
+    "proteinG": 0.7,
+    "carbG": 10.0,
+    "fatG": 0.2,
+    "fiberG": 0.2,
+    "sugarG": 8.4,
+    "sodiumMg": 1.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "nuoc-mia",
+    "name": "Nước mía",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 68.8,
+    "proteinG": 0.2,
+    "carbG": 17.0,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 16.0,
+    "sodiumMg": 5.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "tra-da-khong-duong",
+    "name": "Trà đá (không đường)",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 0.4,
+    "proteinG": 0.0,
+    "carbG": 0.1,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 3.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "tra-sua-tran-chau",
+    "name": "Trà sữa trân châu",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 73.5,
+    "proteinG": 1.0,
+    "carbG": 14.0,
+    "fatG": 1.5,
+    "fiberG": 0.2,
+    "sugarG": 11.0,
+    "sodiumMg": 30.0,
+    "servings": [
+      {
+        "label": "ly (M)",
+        "grams": 500.0,
+        "isDefault": true
+      },
+      {
+        "label": "ly (L)",
+        "grams": 700.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-phe-den-khong-duong",
+    "name": "Cà phê đen (không đường)",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 2.0,
+    "proteinG": 0.2,
+    "carbG": 0.3,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 3.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 60.0,
+        "isDefault": true
+      },
+      {
+        "label": "ly lớn",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "ca-phe-sua-da",
+    "name": "Cà phê sữa đá",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 71.5,
+    "proteinG": 1.5,
+    "carbG": 13.0,
+    "fatG": 1.5,
+    "fiberG": 0.0,
+    "sugarG": 12.0,
+    "sodiumMg": 35.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bac-xiu",
+    "name": "Bạc xỉu",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 67.4,
+    "proteinG": 1.8,
+    "carbG": 11.0,
+    "fatG": 1.8,
+    "fiberG": 0.0,
+    "sugarG": 10.0,
+    "sodiumMg": 35.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "tra-chanh",
+    "name": "Trà chanh",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 28.0,
+    "proteinG": 0.0,
+    "carbG": 7.0,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 6.5,
+    "sodiumMg": 3.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "sua-tuoi-khong-duong",
+    "name": "Sữa tươi không đường",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 62.1,
+    "proteinG": 3.3,
+    "carbG": 4.8,
+    "fatG": 3.3,
+    "fiberG": 0.0,
+    "sugarG": 4.8,
+    "sodiumMg": 45.0,
+    "servings": [
+      {
+        "label": "ly",
+        "grams": 200.0,
+        "isDefault": true
+      },
+      {
+        "label": "hộp",
+        "grams": 180.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sua-chua-co-duong",
+    "name": "Sữa chua có đường",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 79.5,
+    "proteinG": 3.5,
+    "carbG": 13.0,
+    "fatG": 1.5,
+    "fiberG": 0.0,
+    "sugarG": 12.0,
+    "sodiumMg": 50.0,
+    "servings": [
+      {
+        "label": "hộp",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "nuoc-ngot-co-ga",
+    "name": "Nước ngọt có ga",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 42.0,
+    "proteinG": 0.0,
+    "carbG": 10.5,
+    "fatG": 0.0,
+    "fiberG": 0.0,
+    "sugarG": 10.5,
+    "sodiumMg": 8.0,
+    "servings": [
+      {
+        "label": "lon",
+        "grams": 330.0,
+        "isDefault": true
+      },
+      {
+        "label": "chai",
+        "grams": 500.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "sua-chua-khong-duong",
+    "name": "Sữa chua không đường",
+    "category": "Đồ uống",
+    "isVietnamese": true,
+    "energyKcal": 63.0,
+    "proteinG": 4.0,
+    "carbG": 5.0,
+    "fatG": 3.0,
+    "fiberG": 0.0,
+    "sugarG": 5.0,
+    "sodiumMg": 50.0,
+    "servings": [
+      {
+        "label": "hộp",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  }
+]

@@ -1,0 +1,868 @@
+[
+  {
+    "slug": "pho-bo-tai",
+    "name": "Phở bò tái",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 72.2,
+    "proteinG": 5.5,
+    "carbG": 8.5,
+    "fatG": 1.8,
+    "fiberG": 0.3,
+    "sugarG": 0.5,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô nhỏ",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "pho-bo-chin",
+    "name": "Phở bò chín",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 75.2,
+    "proteinG": 5.8,
+    "carbG": 8.5,
+    "fatG": 2.0,
+    "fiberG": 0.3,
+    "sugarG": 0.5,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô nhỏ",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "pho-bo-nam-gau",
+    "name": "Phở bò nạm gầu",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 83.0,
+    "proteinG": 5.5,
+    "carbG": 8.5,
+    "fatG": 3.0,
+    "fiberG": 0.3,
+    "sugarG": 0.5,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "pho-ga",
+    "name": "Phở gà",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 67.5,
+    "proteinG": 5.0,
+    "carbG": 8.5,
+    "fatG": 1.5,
+    "fiberG": 0.3,
+    "sugarG": 0.4,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô nhỏ",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "pho-cuon",
+    "name": "Phở cuốn",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 127.5,
+    "proteinG": 6.0,
+    "carbG": 18.0,
+    "fatG": 3.5,
+    "fiberG": 1.0,
+    "sugarG": 1.0,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "cuốn",
+        "grams": 60.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa",
+        "grams": 240.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "pho-xao-bo",
+    "name": "Phở xào bò",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 186.0,
+    "proteinG": 6.5,
+    "carbG": 22.0,
+    "fatG": 8.0,
+    "fiberG": 1.0,
+    "sugarG": 1.5,
+    "sodiumMg": 380.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-bo-hue",
+    "name": "Bún bò Huế",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 83.0,
+    "proteinG": 5.5,
+    "carbG": 8.5,
+    "fatG": 3.0,
+    "fiberG": 0.4,
+    "sugarG": 0.5,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 600.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô nhỏ",
+        "grams": 450.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-rieu-cua",
+    "name": "Bún riêu cua",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 70.0,
+    "proteinG": 4.5,
+    "carbG": 8.5,
+    "fatG": 2.0,
+    "fiberG": 0.5,
+    "sugarG": 0.8,
+    "sodiumMg": 290.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 600.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-cha",
+    "name": "Bún chả",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 140.0,
+    "proteinG": 7.5,
+    "carbG": 14.0,
+    "fatG": 6.0,
+    "fiberG": 0.8,
+    "sugarG": 3.0,
+    "sodiumMg": 340.0,
+    "servings": [
+      {
+        "label": "suất",
+        "grams": 450.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-thit-nuong",
+    "name": "Bún thịt nướng",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 162.0,
+    "proteinG": 7.0,
+    "carbG": 20.0,
+    "fatG": 6.0,
+    "fiberG": 1.0,
+    "sugarG": 3.0,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-dau-mam-tom",
+    "name": "Bún đậu mắm tôm",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 186.0,
+    "proteinG": 8.0,
+    "carbG": 16.0,
+    "fatG": 10.0,
+    "fiberG": 1.0,
+    "sugarG": 0.8,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "suất",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-moc",
+    "name": "Bún mọc",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 72.5,
+    "proteinG": 4.5,
+    "carbG": 8.0,
+    "fatG": 2.5,
+    "fiberG": 0.4,
+    "sugarG": 0.5,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-ca",
+    "name": "Bún cá",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 70.2,
+    "proteinG": 5.0,
+    "carbG": 8.5,
+    "fatG": 1.8,
+    "fiberG": 0.5,
+    "sugarG": 0.5,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-mang-vit",
+    "name": "Bún măng vịt",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 85.5,
+    "proteinG": 5.5,
+    "carbG": 8.0,
+    "fatG": 3.5,
+    "fiberG": 0.8,
+    "sugarG": 0.5,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 600.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-oc",
+    "name": "Bún ốc",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 70.0,
+    "proteinG": 4.5,
+    "carbG": 8.5,
+    "fatG": 2.0,
+    "fiberG": 0.5,
+    "sugarG": 0.8,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-mam",
+    "name": "Bún mắm",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 78.5,
+    "proteinG": 5.5,
+    "carbG": 8.5,
+    "fatG": 2.5,
+    "fiberG": 0.6,
+    "sugarG": 0.8,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 600.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-nem-nuong",
+    "name": "Bún nem nướng",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 168.5,
+    "proteinG": 7.5,
+    "carbG": 20.0,
+    "fatG": 6.5,
+    "fiberG": 1.0,
+    "sugarG": 3.0,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-cha-ca",
+    "name": "Bún chả cá",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 76.0,
+    "proteinG": 5.5,
+    "carbG": 9.0,
+    "fatG": 2.0,
+    "fiberG": 0.4,
+    "sugarG": 0.5,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bun-thang",
+    "name": "Bún thang",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 66.0,
+    "proteinG": 4.5,
+    "carbG": 7.5,
+    "fatG": 2.0,
+    "fiberG": 0.4,
+    "sugarG": 0.5,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-nuoc-leo",
+    "name": "Bún nước lèo",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 70.0,
+    "proteinG": 4.5,
+    "carbG": 8.5,
+    "fatG": 2.0,
+    "fiberG": 0.5,
+    "sugarG": 0.6,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-tron",
+    "name": "Bún trộn",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 162.5,
+    "proteinG": 6.0,
+    "carbG": 20.0,
+    "fatG": 6.5,
+    "fiberG": 1.2,
+    "sugarG": 3.0,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bun-tuoi-luoc",
+    "name": "Bún tươi (luộc)",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 95.7,
+    "proteinG": 1.7,
+    "carbG": 22.0,
+    "fatG": 0.1,
+    "fiberG": 0.5,
+    "sugarG": 0.0,
+    "sodiumMg": 5.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 150.0,
+        "isDefault": true
+      },
+      {
+        "label": "vắt",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "hu-tieu-nam-vang",
+    "name": "Hủ tiếu nam vang",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 78.5,
+    "proteinG": 5.0,
+    "carbG": 9.0,
+    "fatG": 2.5,
+    "fiberG": 0.4,
+    "sugarG": 0.6,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 550.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "hu-tieu-kho",
+    "name": "Hủ tiếu khô",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 136.5,
+    "proteinG": 6.0,
+    "carbG": 18.0,
+    "fatG": 4.5,
+    "fiberG": 0.7,
+    "sugarG": 1.5,
+    "sodiumMg": 320.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "hu-tieu-go",
+    "name": "Hủ tiếu gõ",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 68.2,
+    "proteinG": 4.0,
+    "carbG": 9.0,
+    "fatG": 1.8,
+    "fiberG": 0.3,
+    "sugarG": 0.5,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 450.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "mi-quang",
+    "name": "Mì Quảng",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 122.5,
+    "proteinG": 6.5,
+    "carbG": 14.0,
+    "fatG": 4.5,
+    "fiberG": 0.8,
+    "sugarG": 1.0,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 450.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mi-goi-da-nau",
+    "name": "Mì gói (đã nấu)",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 107.5,
+    "proteinG": 3.0,
+    "carbG": 16.0,
+    "fatG": 3.5,
+    "fiberG": 0.6,
+    "sugarG": 0.4,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mi-xao-bo",
+    "name": "Mì xào bò",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 185.5,
+    "proteinG": 6.5,
+    "carbG": 23.0,
+    "fatG": 7.5,
+    "fiberG": 1.2,
+    "sugarG": 1.5,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mi-xao-hai-san",
+    "name": "Mì xào hải sản",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 181.0,
+    "proteinG": 6.5,
+    "carbG": 23.0,
+    "fatG": 7.0,
+    "fiberG": 1.2,
+    "sugarG": 1.5,
+    "sodiumMg": 440.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 350.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mi-van-than",
+    "name": "Mì vằn thắn",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 92.5,
+    "proteinG": 5.5,
+    "carbG": 12.0,
+    "fatG": 2.5,
+    "fiberG": 0.5,
+    "sugarG": 0.8,
+    "sodiumMg": 320.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mi-trung-luoc",
+    "name": "Mì trứng (luộc)",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 128.8,
+    "proteinG": 4.5,
+    "carbG": 25.0,
+    "fatG": 1.2,
+    "fiberG": 1.0,
+    "sugarG": 0.5,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mien-ga",
+    "name": "Miến gà",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 69.5,
+    "proteinG": 5.0,
+    "carbG": 9.0,
+    "fatG": 1.5,
+    "fiberG": 0.3,
+    "sugarG": 0.3,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mien-xao-cua",
+    "name": "Miến xào cua",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 171.5,
+    "proteinG": 4.5,
+    "carbG": 26.0,
+    "fatG": 5.5,
+    "fiberG": 0.8,
+    "sugarG": 1.0,
+    "sodiumMg": 380.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "mien-luon",
+    "name": "Miến lươn",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 82.5,
+    "proteinG": 6.0,
+    "carbG": 9.0,
+    "fatG": 2.5,
+    "fiberG": 0.3,
+    "sugarG": 0.4,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "banh-canh-cua",
+    "name": "Bánh canh cua",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 90.0,
+    "proteinG": 5.0,
+    "carbG": 13.0,
+    "fatG": 2.0,
+    "fiberG": 0.5,
+    "sugarG": 0.6,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "banh-canh-gio-heo",
+    "name": "Bánh canh giò heo",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 107.5,
+    "proteinG": 6.0,
+    "carbG": 13.0,
+    "fatG": 3.5,
+    "fiberG": 0.5,
+    "sugarG": 0.6,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "banh-da-cua",
+    "name": "Bánh đa cua",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 86.0,
+    "proteinG": 5.0,
+    "carbG": 12.0,
+    "fatG": 2.0,
+    "fiberG": 0.5,
+    "sugarG": 0.6,
+    "sodiumMg": 290.0,
+    "servings": [
+      {
+        "label": "tô",
+        "grams": 500.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "nui-xao-bo",
+    "name": "Nui xào bò",
+    "category": "Món nước",
+    "isVietnamese": true,
+    "energyKcal": 179.0,
+    "proteinG": 7.0,
+    "carbG": 22.0,
+    "fatG": 7.0,
+    "fiberG": 1.2,
+    "sugarG": 2.0,
+    "sodiumMg": 400.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]
