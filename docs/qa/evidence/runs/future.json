@@ -1,0 +1,20 @@
+[
+  {
+    "id": "US-13.8a",
+    "status": "Pass",
+    "expected": "Ngày +1 được ghi không cần xác nhận (AC chỉ cảnh báo >1 ngày)",
+    "actual": "Số dialog=0; date=2026-11-05",
+    "evidence": [
+      "docs/qa/evidence/food/future-1d-light.png"
+    ]
+  },
+  {
+    "id": "US-13.8b",
+    "status": "Pass",
+    "expected": "Ngày +2 hiện cảnh báo xác nhận trước khi ghi",
+    "actual": "dialog=[\"Ngày này ở tương lai xa. Bạn vẫn muốn ghi vào ngày này?\"]; date=2026-11-06",
+    "evidence": [
+      "docs/qa/evidence/food/future-2d-light.png"
+    ]
+  }
+]
