@@ -1,8 +1,8 @@
 "use client";
-import { Heart, Search, Zap } from "lucide-react";
+import { Heart, Pencil, Search, Trash2, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
-import { addLogAction, addQuickLogAction, createFoodAction, favoriteAction, undoLogsAction } from "@/app/(app)/actions";
+import { addLogAction, addQuickLogAction, createFoodAction, deleteFoodAction, favoriteAction, undoLogsAction, updateFoodAction } from "@/app/(app)/actions";
 import { Button } from "@/components/ui/button";
 import { Sheet } from "@/components/ui/dialog";
 import { Input, Select } from "@/components/ui/field";
@@ -60,6 +60,7 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
   const [added, setAdded] = useState(0);
   const [panel, setPanel] = useState<"quick" | "custom" | null>(null);
   const [customName, setCustomName] = useState("");
+  const [editing, setEditing] = useState<WithLast | null>(null);
   const [offline, setOffline] = useState(false);
   const [saveError, setSaveError] = useState("");
   const reqId = useRef(0);
@@ -159,6 +160,17 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
       }
     });
 
+  /** US-09.3: deleting a custom food is soft, so past logs keep their snapshot. */
+  const removeFood = (h: WithLast) => {
+    if (!window.confirm(`Xóa món “${h.name}”? Các bữa đã ghi vẫn giữ nguyên.`)) return;
+    start(async () => {
+      const r = await deleteFoodAction(h.id);
+      if (!r.ok) return toast.show(r.error, { tone: "error" });
+      toast.show(`Đã xóa món “${h.name}”`);
+      router.refresh();
+    });
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -216,6 +228,18 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
                     <Heart className={cn("size-5", h.isFavorite && "fill-current text-fat")} aria-hidden />
                   </button>
                 )}
+                {tab === "mine" && h.kind === "food" && (
+                  <>
+                    <button className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-surface-2" onClick={() => setEditing(h)} disabled={pending}>
+                      <span className="sr-only">Sửa {h.name}</span>
+                      <Pencil className="size-4" aria-hidden />
+                    </button>
+                    <button className="grid size-11 shrink-0 place-items-center rounded-full hover:bg-surface-2" onClick={() => removeFood(h)} disabled={pending}>
+                      <span className="sr-only">Xóa {h.name}</span>
+                      <Trash2 className="size-4" aria-hidden />
+                    </button>
+                  </>
+                )}
               </li>
             ))}
           </ul>
@@ -255,7 +279,8 @@ export function AddFood({ date, meal: initialMeal, lists }: AddFoodProps) {
       </Sheet>
 
       <QuickSheet open={panel === "quick"} onClose={() => setPanel(null)} date={date} meal={meal} onDone={() => { setAdded((n) => n + 1); router.refresh(); }} />
-      <CustomFoodSheet open={panel === "custom"} initialName={customName} onClose={() => setPanel(null)} onCreated={(h) => { setPanel(null); setTab("search"); setQ(h.name); setSearchNonce((n) => n + 1); toast.show(`Đã tạo món “${h.name}”`); router.refresh(); }} />
+      <CustomFoodSheet open={panel === "custom"} initialName={customName} onClose={() => setPanel(null)} onSaved={(h) => { setPanel(null); setTab("search"); setQ(h.name); setSearchNonce((n) => n + 1); toast.show(`Đã tạo món “${h.name}”`); router.refresh(); }} />
+      <CustomFoodSheet open={!!editing} food={editing} onClose={() => setEditing(null)} onSaved={(h) => { setEditing(null); toast.show(`Đã lưu món “${h.name}”`); router.refresh(); }} />
     </div>
   );
 }
@@ -305,16 +330,44 @@ function QuickSheet({ open, onClose, date, meal, onDone }: { open: boolean; onCl
   );
 }
 
-function CustomFoodSheet({ open, initialName, onClose, onCreated }: { open: boolean; initialName: string; onClose: () => void; onCreated: (h: FoodHit) => void }) {
+type CustomFoodForm = { name: string; kcal: string; p: string; c: string; f: string; fiber: string; sugar: string; sodium: string; unit: string; grams: string };
+
+const numInput = (n: number) => String(Number(n.toFixed(2))).replace(".", ",");
+
+const blankCustomFood = (name = ""): CustomFoodForm => ({ name, kcal: "", p: "", c: "", f: "", fiber: "", sugar: "", sodium: "", unit: "100 g", grams: "100" });
+
+/** Values are entered per serving while the API stores per 100 g (PRD §7). */
+function customFoodForm(food: FoodHit): CustomFoodForm {
+  const s = food.servings.find((x) => x.isDefault) ?? food.servings[0];
+  const g = s?.grams ?? 100;
+  const per = (n: number | null | undefined) => (n == null ? "" : numInput((n * g) / 100));
+  return {
+    name: food.name,
+    kcal: numInput((food.kcal * g) / 100),
+    p: numInput((food.proteinG * g) / 100),
+    c: numInput((food.carbG * g) / 100),
+    f: numInput((food.fatG * g) / 100),
+    fiber: per(food.fiberG),
+    sugar: per(food.sugarG),
+    sodium: per(food.sodiumMg),
+    unit: s?.label ?? "100 g",
+    grams: numInput(g),
+  };
+}
+
+function CustomFoodSheet({ open, initialName = "", food, onClose, onSaved }: { open: boolean; initialName?: string; food?: WithLast | null; onClose: () => void; onSaved: (h: FoodHit) => void }) {
   const [pending, start] = useTransition();
-  const [v, setV] = useState({ name: initialName, kcal: "", p: "", c: "", f: "", fiber: "", sugar: "", sodium: "", unit: "100 g", grams: "100" });
+  const [v, setV] = useState<CustomFoodForm>(() => (food ? customFoodForm(food) : blankCustomFood(initialName)));
   const [errs, setErrs] = useState<Record<string, string>>({});
   const [warn, setWarn] = useState(false);
 
-  // US-06.4: opening from the "Không tìm thấy" state seeds the typed dish name.
+  // US-06.4 seeds the name from the query; editing loads the current food values.
   useEffect(() => {
-    if (open) setV((cur) => ({ ...cur, name: initialName }));
-  }, [open, initialName]);
+    if (!open) return;
+    setV(food ? customFoodForm(food) : blankCustomFood(initialName));
+    setErrs({});
+    setWarn(false);
+  }, [open, food, initialName]);
 
   const num = (s: string) => (s.trim() === "" ? undefined : parseDecimal(s));
   const set = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement>) => setV({ ...v, [k]: e.target.value });
@@ -327,18 +380,21 @@ function CustomFoodSheet({ open, initialName, onClose, onCreated }: { open: bool
     if (!(g > 0)) e.grams = "Nhập khối lượng khẩu phần";
     setErrs(e);
     if (Object.keys(e).length) return;
-    // Values are entered per serving; the API stores per 100 g (PRD §7).
     const k = 100 / g;
+    // Keep the other units of an edited food; only the default serving is edited here.
+    const edited = food?.servings.find((s) => s.isDefault) ?? food?.servings[0];
+    const others = (food?.servings ?? []).filter((s) => s.id !== edited?.id).map((s) => ({ label: s.label, grams: s.grams }));
+    const payload = {
+      name: v.name, energyKcal: parseDecimal(v.kcal) * k, proteinG: parseDecimal(v.p) * k, carbG: parseDecimal(v.c) * k, fatG: parseDecimal(v.f) * k,
+      fiberG: num(v.fiber) !== undefined ? num(v.fiber)! * k : undefined, sugarG: num(v.sugar) !== undefined ? num(v.sugar)! * k : undefined, sodiumMg: num(v.sodium) !== undefined ? num(v.sodium)! * k : undefined,
+      servings: [{ label: v.unit.trim() || "phần", grams: g, isDefault: true }, ...others].slice(0, 10),
+    };
     start(async () => {
       try {
-        const r = await createFoodAction({
-          name: v.name, energyKcal: parseDecimal(v.kcal) * k, proteinG: parseDecimal(v.p) * k, carbG: parseDecimal(v.c) * k, fatG: parseDecimal(v.f) * k,
-          fiberG: num(v.fiber) !== undefined ? num(v.fiber)! * k : undefined, sugarG: num(v.sugar) !== undefined ? num(v.sugar)! * k : undefined, sodiumMg: num(v.sodium) !== undefined ? num(v.sodium)! * k : undefined,
-          servings: [{ label: v.unit.trim() || "phần", grams: g, isDefault: true }],
-        });
+        const r = food ? await updateFoodAction(food.id, payload) : await createFoodAction(payload);
         if (!r.ok) return setErrs(r.fields ?? { name: r.error });
         setWarn(r.warnKcalMismatch);
-        onCreated(r.food);
+        onSaved(r.food);
       } catch (e) {
         setErrs({ name: friendlyError(e) });
       }
@@ -346,7 +402,7 @@ function CustomFoodSheet({ open, initialName, onClose, onCreated }: { open: bool
   };
 
   return (
-    <Sheet open={open} onOpenChange={(o) => !o && onClose()} title="Tạo món mới" description="Nhập dinh dưỡng cho một khẩu phần của món.">
+    <Sheet open={open} onOpenChange={(o) => !o && onClose()} title={food ? "Sửa món của tôi" : "Tạo món mới"} description={food ? "Cập nhật dinh dưỡng cho một khẩu phần; các bữa đã ghi vẫn giữ nguyên." : "Nhập dinh dưỡng cho một khẩu phần của món."}>
       <form className="grid gap-3 sm:grid-cols-2" noValidate onSubmit={(e) => { e.preventDefault(); submit(); }}>
         <div className="sm:col-span-2"><Input label="Tên món" value={v.name} onChange={set("name")} error={errs.name} /></div>
         <Input label="Đơn vị khẩu phần" value={v.unit} onChange={set("unit")} hint="VD: tô, đĩa, ly, 100 g" />
