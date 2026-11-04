@@ -1,0 +1,161 @@
+[
+  {
+    "slug": "gao-te-song",
+    "name": "Gạo tẻ (sống)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 345.4,
+    "proteinG": 7.0,
+    "carbG": 78.0,
+    "fatG": 0.6,
+    "fiberG": 0.9,
+    "sugarG": 0.1,
+    "sodiumMg": 2.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 180.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "bun-kho-song",
+    "name": "Bún khô (sống)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 352.5,
+    "proteinG": 7.0,
+    "carbG": 80.0,
+    "fatG": 0.5,
+    "fiberG": 1.0,
+    "sugarG": 0.1,
+    "sodiumMg": 20.0,
+    "servings": [
+      {
+        "label": "nắm",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-nac-heo-song",
+    "name": "Thịt nạc heo (sống)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 143.0,
+    "proteinG": 20.0,
+    "carbG": 0.0,
+    "fatG": 7.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 60.0,
+    "servings": [
+      {
+        "label": "lạng",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "uc-ga-luoc",
+    "name": "Ức gà (luộc)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 156.4,
+    "proteinG": 31.0,
+    "carbG": 0.0,
+    "fatG": 3.6,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 75.0,
+    "servings": [
+      {
+        "label": "cái",
+        "grams": 120.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "thit-bo-nac-song",
+    "name": "Thịt bò nạc (sống)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 129.0,
+    "proteinG": 21.0,
+    "carbG": 0.0,
+    "fatG": 5.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 60.0,
+    "servings": [
+      {
+        "label": "lạng",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "yen-mach-kho",
+    "name": "Yến mạch (khô)",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 379.0,
+    "proteinG": 13.0,
+    "carbG": 66.0,
+    "fatG": 7.0,
+    "fiberG": 10.0,
+    "sugarG": 1.0,
+    "sodiumMg": 5.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 10.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 40.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "pho-mai-lat",
+    "name": "Phô mai lát",
+    "category": "Nguyên liệu",
+    "isVietnamese": true,
+    "energyKcal": 290.0,
+    "proteinG": 18.0,
+    "carbG": 5.0,
+    "fatG": 22.0,
+    "fiberG": 0.0,
+    "sugarG": 2.0,
+    "sodiumMg": 1300.0,
+    "servings": [
+      {
+        "label": "lát",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  }
+]

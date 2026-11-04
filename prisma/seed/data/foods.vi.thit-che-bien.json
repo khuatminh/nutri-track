@@ -1,0 +1,687 @@
+[
+  {
+    "slug": "cha-lua",
+    "name": "Chả lụa",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 140.0,
+    "proteinG": 15.0,
+    "carbG": 2.0,
+    "fatG": 8.0,
+    "fiberG": 0.0,
+    "sugarG": 0.5,
+    "sodiumMg": 750.0,
+    "servings": [
+      {
+        "label": "lát",
+        "grams": 20.0,
+        "isDefault": true
+      },
+      {
+        "label": "khúc",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "cha-que",
+    "name": "Chả quế",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 162.0,
+    "proteinG": 15.0,
+    "carbG": 3.0,
+    "fatG": 10.0,
+    "fiberG": 0.0,
+    "sugarG": 0.8,
+    "sodiumMg": 700.0,
+    "servings": [
+      {
+        "label": "lát",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "gio-thu",
+    "name": "Giò thủ",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 223.0,
+    "proteinG": 17.0,
+    "carbG": 0.5,
+    "fatG": 17.0,
+    "fiberG": 0.0,
+    "sugarG": 0.2,
+    "sodiumMg": 800.0,
+    "servings": [
+      {
+        "label": "lát",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "xuc-xich",
+    "name": "Xúc xích",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 262.0,
+    "proteinG": 12.0,
+    "carbG": 4.0,
+    "fatG": 22.0,
+    "fiberG": 0.0,
+    "sugarG": 1.0,
+    "sodiumMg": 900.0,
+    "servings": [
+      {
+        "label": "cây",
+        "grams": 50.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "lap-xuong",
+    "name": "Lạp xưởng",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 404.0,
+    "proteinG": 20.0,
+    "carbG": 9.0,
+    "fatG": 32.0,
+    "fiberG": 0.0,
+    "sugarG": 7.0,
+    "sodiumMg": 1100.0,
+    "servings": [
+      {
+        "label": "cây",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-kho-tau",
+    "name": "Thịt kho tàu",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 250.0,
+    "proteinG": 13.0,
+    "carbG": 4.5,
+    "fatG": 20.0,
+    "fiberG": 0.2,
+    "sugarG": 3.5,
+    "sodiumMg": 620.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 40.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-kho-trung",
+    "name": "Thịt kho trứng",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 199.0,
+    "proteinG": 12.0,
+    "carbG": 4.0,
+    "fatG": 15.0,
+    "fiberG": 0.2,
+    "sugarG": 3.0,
+    "sodiumMg": 580.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-heo-luoc",
+    "name": "Thịt heo luộc",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 196.0,
+    "proteinG": 22.0,
+    "carbG": 0.0,
+    "fatG": 12.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 60.0,
+    "servings": [
+      {
+        "label": "lát",
+        "grams": 25.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-ba-roi-chien",
+    "name": "Thịt ba rọi chiên",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 395.0,
+    "proteinG": 20.0,
+    "carbG": 0.0,
+    "fatG": 35.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 120.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 40.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "thit-heo-rang-chay-canh",
+    "name": "Thịt heo rang cháy cạnh",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 258.0,
+    "proteinG": 18.0,
+    "carbG": 6.0,
+    "fatG": 18.0,
+    "fiberG": 0.0,
+    "sugarG": 5.0,
+    "sodiumMg": 650.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "suon-xao-chua-ngot",
+    "name": "Sườn xào chua ngọt",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 239.0,
+    "proteinG": 14.0,
+    "carbG": 12.0,
+    "fatG": 15.0,
+    "fiberG": 0.3,
+    "sugarG": 9.0,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "suon-nuong",
+    "name": "Sườn nướng",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 266.0,
+    "proteinG": 20.0,
+    "carbG": 6.0,
+    "fatG": 18.0,
+    "fiberG": 0.0,
+    "sugarG": 4.0,
+    "sodiumMg": 500.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 60.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "suon-rim-man-ngot",
+    "name": "Sườn rim mặn ngọt",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 274.0,
+    "proteinG": 18.0,
+    "carbG": 10.0,
+    "fatG": 18.0,
+    "fiberG": 0.0,
+    "sugarG": 8.0,
+    "sodiumMg": 560.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "thit-vien-sot-ca",
+    "name": "Thịt viên sốt cà",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 157.0,
+    "proteinG": 11.0,
+    "carbG": 8.0,
+    "fatG": 9.0,
+    "fiberG": 0.8,
+    "sugarG": 4.0,
+    "sodiumMg": 450.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "cha-trung-hap",
+    "name": "Chả trứng hấp",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 133.0,
+    "proteinG": 10.0,
+    "carbG": 3.0,
+    "fatG": 9.0,
+    "fiberG": 0.2,
+    "sugarG": 1.0,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 60.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "thit-bo-xao-hanh-tay",
+    "name": "Thịt bò xào hành tây",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 157.0,
+    "proteinG": 14.0,
+    "carbG": 5.0,
+    "fatG": 9.0,
+    "fiberG": 0.8,
+    "sugarG": 2.5,
+    "sodiumMg": 450.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bo-luc-lac",
+    "name": "Bò lúc lắc",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 196.0,
+    "proteinG": 17.0,
+    "carbG": 5.0,
+    "fatG": 12.0,
+    "fiberG": 0.5,
+    "sugarG": 2.5,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 180.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bo-kho",
+    "name": "Bò kho",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 135.0,
+    "proteinG": 13.0,
+    "carbG": 5.0,
+    "fatG": 7.0,
+    "fiberG": 0.8,
+    "sugarG": 2.5,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "bo-nuong-la-lot",
+    "name": "Bò nướng lá lốt",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 197.0,
+    "proteinG": 17.0,
+    "carbG": 3.0,
+    "fatG": 13.0,
+    "fiberG": 0.5,
+    "sugarG": 1.0,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "cuốn",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "bo-nhung-giam",
+    "name": "Bò nhúng giấm",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 117.0,
+    "proteinG": 15.0,
+    "carbG": 3.0,
+    "fatG": 5.0,
+    "fiberG": 0.3,
+    "sugarG": 2.0,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "ga-luoc",
+    "name": "Gà luộc",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 181.0,
+    "proteinG": 25.0,
+    "carbG": 0.0,
+    "fatG": 9.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 70.0,
+    "servings": [
+      {
+        "label": "đùi",
+        "grams": 150.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "ga-ran",
+    "name": "Gà rán",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 289.0,
+    "proteinG": 24.0,
+    "carbG": 10.0,
+    "fatG": 17.0,
+    "fiberG": 0.5,
+    "sugarG": 0.3,
+    "sodiumMg": 700.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ga-kho-gung",
+    "name": "Gà kho gừng",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 169.0,
+    "proteinG": 18.0,
+    "carbG": 4.0,
+    "fatG": 9.0,
+    "fiberG": 0.3,
+    "sugarG": 2.5,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ga-nuong",
+    "name": "Gà nướng",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 198.0,
+    "proteinG": 25.0,
+    "carbG": 2.0,
+    "fatG": 10.0,
+    "fiberG": 0.0,
+    "sugarG": 1.0,
+    "sodiumMg": 580.0,
+    "servings": [
+      {
+        "label": "đùi",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ga-xao-sa-ot",
+    "name": "Gà xào sả ớt",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 186.0,
+    "proteinG": 20.0,
+    "carbG": 4.0,
+    "fatG": 10.0,
+    "fiberG": 0.5,
+    "sugarG": 1.5,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-ga-chien-nuoc-mam",
+    "name": "Cánh gà chiên nước mắm",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 270.0,
+    "proteinG": 20.0,
+    "carbG": 7.0,
+    "fatG": 18.0,
+    "fiberG": 0.2,
+    "sugarG": 3.0,
+    "sodiumMg": 650.0,
+    "servings": [
+      {
+        "label": "cánh",
+        "grams": 50.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "vit-quay",
+    "name": "Vịt quay",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 336.0,
+    "proteinG": 19.0,
+    "carbG": 2.0,
+    "fatG": 28.0,
+    "fiberG": 0.0,
+    "sugarG": 1.0,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "vit-luoc",
+    "name": "Vịt luộc",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 256.0,
+    "proteinG": 19.0,
+    "carbG": 0.0,
+    "fatG": 20.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 75.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "chan-gio-ham",
+    "name": "Chân giò hầm",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 215.0,
+    "proteinG": 18.0,
+    "carbG": 2.0,
+    "fatG": 15.0,
+    "fiberG": 0.3,
+    "sugarG": 0.8,
+    "sodiumMg": 430.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "long-heo-luoc",
+    "name": "Lòng heo luộc",
+    "category": "Thịt & chế biến",
+    "isVietnamese": true,
+    "energyKcal": 148.0,
+    "proteinG": 14.0,
+    "carbG": 0.5,
+    "fatG": 10.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 90.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]

@@ -1,0 +1,49 @@
+// NutriTrack schema. Food/FoodServing introduced by QLD-20 (seed); remaining models
+// (User, FoodLog, Recipe, ...) are added by the backend tasks per ADR-0001 §2.4.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Food {
+  id             String        @id @default(cuid())
+  slug           String        @unique
+  name           String
+  nameUnaccented String        @map("name_unaccented")
+  category       String
+  isVietnamese   Boolean       @default(true) @map("is_vietnamese")
+  /// Nutrition values are per 100 g.
+  energyKcal     Float         @map("energy_kcal")
+  proteinG       Float         @map("protein_g")
+  carbG          Float         @map("carb_g")
+  fatG           Float         @map("fat_g")
+  fiberG         Float         @map("fiber_g")
+  sugarG         Float         @map("sugar_g")
+  sodiumMg       Float         @map("sodium_mg")
+  source         String
+  confidence     String
+  /// Soft delete for system foods (ADR-0001 §2.3).
+  deletedAt      DateTime?     @map("deleted_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+  servings       FoodServing[]
+
+  @@index([category])
+  @@map("foods")
+}
+
+model FoodServing {
+  id        String  @id @default(cuid())
+  foodId    String  @map("food_id")
+  food      Food    @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  label     String
+  grams     Float
+  isDefault Boolean @default(false) @map("is_default")
+
+  @@unique([foodId, label])
+  @@map("food_servings")
+}

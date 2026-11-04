@@ -1,0 +1,381 @@
+[
+  {
+    "slug": "canh-chua-ca",
+    "name": "Canh chua cá",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 47.5,
+    "proteinG": 5.0,
+    "carbG": 3.5,
+    "fatG": 1.5,
+    "fiberG": 0.7,
+    "sugarG": 2.0,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      },
+      {
+        "label": "tô",
+        "grams": 400.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-rau-muong",
+    "name": "Canh rau muống",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 21.2,
+    "proteinG": 1.5,
+    "carbG": 2.0,
+    "fatG": 0.8,
+    "fiberG": 0.8,
+    "sugarG": 0.5,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-bi-dao",
+    "name": "Canh bí đao",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 26.8,
+    "proteinG": 2.0,
+    "carbG": 2.0,
+    "fatG": 1.2,
+    "fiberG": 0.5,
+    "sugarG": 1.0,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-bau-nau-tom",
+    "name": "Canh bầu nấu tôm",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 27.0,
+    "proteinG": 2.5,
+    "carbG": 2.0,
+    "fatG": 1.0,
+    "fiberG": 0.5,
+    "sugarG": 1.0,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "canh-kho-qua-nhoi-thit",
+    "name": "Canh khổ qua nhồi thịt",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 42.0,
+    "proteinG": 3.5,
+    "carbG": 2.5,
+    "fatG": 2.0,
+    "fiberG": 0.8,
+    "sugarG": 1.0,
+    "sodiumMg": 280.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-bi-do",
+    "name": "Canh bí đỏ",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 28.5,
+    "proteinG": 1.0,
+    "carbG": 5.0,
+    "fatG": 0.5,
+    "fiberG": 0.8,
+    "sugarG": 2.0,
+    "sodiumMg": 220.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-cai-xanh-thit-bam",
+    "name": "Canh cải xanh thịt bằm",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 29.5,
+    "proteinG": 2.5,
+    "carbG": 1.5,
+    "fatG": 1.5,
+    "fiberG": 0.6,
+    "sugarG": 0.5,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-rau-ngot-thit-bam",
+    "name": "Canh rau ngót thịt bằm",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 29.5,
+    "proteinG": 2.5,
+    "carbG": 1.5,
+    "fatG": 1.5,
+    "fiberG": 0.8,
+    "sugarG": 0.3,
+    "sodiumMg": 260.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-rau-den",
+    "name": "Canh rau dền",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 19.4,
+    "proteinG": 1.5,
+    "carbG": 2.0,
+    "fatG": 0.6,
+    "fiberG": 0.8,
+    "sugarG": 0.3,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "canh-mong-toi",
+    "name": "Canh mồng tơi",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 18.5,
+    "proteinG": 1.5,
+    "carbG": 2.0,
+    "fatG": 0.5,
+    "fiberG": 0.8,
+    "sugarG": 0.3,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-cua-rau-day",
+    "name": "Canh cua rau đay",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 29.0,
+    "proteinG": 3.0,
+    "carbG": 2.0,
+    "fatG": 1.0,
+    "fiberG": 0.7,
+    "sugarG": 0.3,
+    "sodiumMg": 290.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "canh-chua-ca-loc",
+    "name": "Canh chua cá lóc",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 42.8,
+    "proteinG": 5.0,
+    "carbG": 3.0,
+    "fatG": 1.2,
+    "fiberG": 0.7,
+    "sugarG": 1.8,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "canh-suon-ham-cu-qua",
+    "name": "Canh sườn hầm củ quả",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 52.5,
+    "proteinG": 3.5,
+    "carbG": 4.0,
+    "fatG": 2.5,
+    "fiberG": 0.8,
+    "sugarG": 1.5,
+    "sodiumMg": 270.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "canh-trung-ca-chua",
+    "name": "Canh trứng cà chua",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 46.5,
+    "proteinG": 3.0,
+    "carbG": 3.0,
+    "fatG": 2.5,
+    "fiberG": 0.6,
+    "sugarG": 2.0,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "canh-mang-chua",
+    "name": "Canh măng chua",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 32.8,
+    "proteinG": 3.0,
+    "carbG": 2.5,
+    "fatG": 1.2,
+    "fiberG": 1.0,
+    "sugarG": 0.8,
+    "sodiumMg": 320.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "lau-thai",
+    "name": "Lẩu thái",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 41.5,
+    "proteinG": 4.0,
+    "carbG": 3.0,
+    "fatG": 1.5,
+    "fiberG": 0.5,
+    "sugarG": 1.5,
+    "sodiumMg": 350.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "lau-ga-la-e",
+    "name": "Lẩu gà lá é",
+    "category": "Canh & lẩu",
+    "isVietnamese": true,
+    "energyKcal": 52.5,
+    "proteinG": 5.5,
+    "carbG": 2.0,
+    "fatG": 2.5,
+    "fiberG": 0.3,
+    "sugarG": 0.5,
+    "sodiumMg": 300.0,
+    "servings": [
+      {
+        "label": "bát",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]

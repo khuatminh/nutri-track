@@ -1,0 +1,112 @@
+[
+  {
+    "slug": "hat-dieu-rang",
+    "name": "Hạt điều rang",
+    "category": "Hạt & ăn vặt",
+    "isVietnamese": true,
+    "energyKcal": 588.0,
+    "proteinG": 18.0,
+    "carbG": 30.0,
+    "fatG": 44.0,
+    "fiberG": 3.3,
+    "sugarG": 6.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "nắm",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "dau-phong-rang",
+    "name": "Đậu phộng rang",
+    "category": "Hạt & ăn vặt",
+    "isVietnamese": true,
+    "energyKcal": 609.0,
+    "proteinG": 26.0,
+    "carbG": 16.0,
+    "fatG": 49.0,
+    "fiberG": 8.5,
+    "sugarG": 4.0,
+    "sodiumMg": 5.0,
+    "servings": [
+      {
+        "label": "nắm",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "hat-dua",
+    "name": "Hạt dưa",
+    "category": "Hạt & ăn vặt",
+    "isVietnamese": true,
+    "energyKcal": 520.0,
+    "proteinG": 25.0,
+    "carbG": 15.0,
+    "fatG": 40.0,
+    "fiberG": 6.0,
+    "sugarG": 1.5,
+    "sodiumMg": 600.0,
+    "servings": [
+      {
+        "label": "nắm",
+        "grams": 20.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "me-den-vung",
+    "name": "Mè đen (vừng)",
+    "category": "Hạt & ăn vặt",
+    "isVietnamese": true,
+    "energyKcal": 614.0,
+    "proteinG": 18.0,
+    "carbG": 23.0,
+    "fatG": 50.0,
+    "fiberG": 12.0,
+    "sugarG": 0.3,
+    "sodiumMg": 11.0,
+    "servings": [
+      {
+        "label": "muỗng canh",
+        "grams": 9.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "mut-gung",
+    "name": "Mứt gừng",
+    "category": "Hạt & ăn vặt",
+    "isVietnamese": true,
+    "energyKcal": 324.7,
+    "proteinG": 0.5,
+    "carbG": 80.0,
+    "fatG": 0.3,
+    "fiberG": 2.0,
+    "sugarG": 75.0,
+    "sodiumMg": 10.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 15.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]

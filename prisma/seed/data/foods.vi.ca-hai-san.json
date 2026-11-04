@@ -1,0 +1,440 @@
+[
+  {
+    "slug": "cha-ca-chien",
+    "name": "Chả cá chiên",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 164.0,
+    "proteinG": 15.0,
+    "carbG": 8.0,
+    "fatG": 8.0,
+    "fiberG": 0.3,
+    "sugarG": 1.0,
+    "sodiumMg": 620.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 40.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-kho-to",
+    "name": "Cá kho tộ",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 160.0,
+    "proteinG": 17.0,
+    "carbG": 5.0,
+    "fatG": 8.0,
+    "fiberG": 0.2,
+    "sugarG": 3.5,
+    "sodiumMg": 620.0,
+    "servings": [
+      {
+        "label": "khúc",
+        "grams": 80.0,
+        "isDefault": true
+      },
+      {
+        "label": "chén",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-chien",
+    "name": "Cá chiên",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 200.0,
+    "proteinG": 20.0,
+    "carbG": 3.0,
+    "fatG": 12.0,
+    "fiberG": 0.1,
+    "sugarG": 0.2,
+    "sodiumMg": 180.0,
+    "servings": [
+      {
+        "label": "con nhỏ",
+        "grams": 120.0,
+        "isDefault": true
+      },
+      {
+        "label": "khúc",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-hap",
+    "name": "Cá hấp",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 118.5,
+    "proteinG": 19.0,
+    "carbG": 0.5,
+    "fatG": 4.5,
+    "fiberG": 0.0,
+    "sugarG": 0.2,
+    "sodiumMg": 100.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 250.0,
+        "isDefault": true
+      },
+      {
+        "label": "khúc",
+        "grams": 100.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-nuong-muoi-ot",
+    "name": "Cá nướng muối ớt",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 142.0,
+    "proteinG": 21.0,
+    "carbG": 1.0,
+    "fatG": 6.0,
+    "fiberG": 0.0,
+    "sugarG": 0.2,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 250.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-sot-ca-chua",
+    "name": "Cá sốt cà chua",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 138.0,
+    "proteinG": 15.0,
+    "carbG": 6.0,
+    "fatG": 6.0,
+    "fiberG": 0.7,
+    "sugarG": 3.0,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "khúc",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-loc-nuong-trui",
+    "name": "Cá lóc nướng trui",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 94.5,
+    "proteinG": 18.0,
+    "carbG": 0.0,
+    "fatG": 2.5,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 70.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 400.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "ca-thu-ran",
+    "name": "Cá thu rán",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 227.0,
+    "proteinG": 22.0,
+    "carbG": 1.0,
+    "fatG": 15.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 180.0,
+    "servings": [
+      {
+        "label": "khúc",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "ca-hoi-nuong",
+    "name": "Cá hồi nướng",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 196.0,
+    "proteinG": 22.0,
+    "carbG": 0.0,
+    "fatG": 12.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 75.0,
+    "servings": [
+      {
+        "label": "miếng",
+        "grams": 120.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "tom-rang-thit",
+    "name": "Tôm rang thịt",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 170.0,
+    "proteinG": 17.0,
+    "carbG": 3.0,
+    "fatG": 10.0,
+    "fiberG": 0.1,
+    "sugarG": 1.5,
+    "sodiumMg": 600.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "tom-luoc",
+    "name": "Tôm luộc",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 89.8,
+    "proteinG": 20.0,
+    "carbG": 0.2,
+    "fatG": 1.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 15.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "high"
+  },
+  {
+    "slug": "tom-chien-gion",
+    "name": "Tôm chiên giòn",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 262.0,
+    "proteinG": 16.0,
+    "carbG": 18.0,
+    "fatG": 14.0,
+    "fiberG": 0.6,
+    "sugarG": 0.8,
+    "sodiumMg": 520.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 30.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "tom-rim-man-ngot",
+    "name": "Tôm rim mặn ngọt",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 150.0,
+    "proteinG": 18.0,
+    "carbG": 6.0,
+    "fatG": 6.0,
+    "fiberG": 0.1,
+    "sugarG": 4.0,
+    "sodiumMg": 750.0,
+    "servings": [
+      {
+        "label": "chén",
+        "grams": 100.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "muc-xao",
+    "name": "Mực xào",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 130.0,
+    "proteinG": 15.0,
+    "carbG": 4.0,
+    "fatG": 6.0,
+    "fiberG": 0.5,
+    "sugarG": 1.5,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "muc-chien-gion",
+    "name": "Mực chiên giòn",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 233.0,
+    "proteinG": 14.0,
+    "carbG": 15.0,
+    "fatG": 13.0,
+    "fiberG": 0.5,
+    "sugarG": 0.8,
+    "sodiumMg": 480.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "ngao-hap-sa",
+    "name": "Ngao hấp sả",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 65.5,
+    "proteinG": 10.0,
+    "carbG": 3.0,
+    "fatG": 1.5,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 450.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "oc-luoc",
+    "name": "Ốc luộc",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 69.0,
+    "proteinG": 12.0,
+    "carbG": 3.0,
+    "fatG": 1.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 200.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 150.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "cua-hap",
+    "name": "Cua hấp",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 90.0,
+    "proteinG": 17.0,
+    "carbG": 1.0,
+    "fatG": 2.0,
+    "fiberG": 0.0,
+    "sugarG": 0.0,
+    "sodiumMg": 350.0,
+    "servings": [
+      {
+        "label": "con",
+        "grams": 300.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "cha-tom",
+    "name": "Chả tôm",
+    "category": "Cá & hải sản",
+    "isVietnamese": true,
+    "energyKcal": 142.0,
+    "proteinG": 14.0,
+    "carbG": 8.0,
+    "fatG": 6.0,
+    "fiberG": 0.2,
+    "sugarG": 1.0,
+    "sodiumMg": 500.0,
+    "servings": [
+      {
+        "label": "cái",
+        "grams": 40.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]

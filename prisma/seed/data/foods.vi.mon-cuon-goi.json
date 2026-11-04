@@ -1,0 +1,188 @@
+[
+  {
+    "slug": "goi-cuon",
+    "name": "Gỏi cuốn",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 96.0,
+    "proteinG": 5.5,
+    "carbG": 14.0,
+    "fatG": 2.0,
+    "fiberG": 1.0,
+    "sugarG": 1.2,
+    "sodiumMg": 250.0,
+    "servings": [
+      {
+        "label": "cuốn",
+        "grams": 70.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa (2 cuốn)",
+        "grams": 140.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "cha-gio-nem-ran",
+    "name": "Chả giò (nem rán)",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 238.0,
+    "proteinG": 8.0,
+    "carbG": 20.0,
+    "fatG": 14.0,
+    "fiberG": 1.2,
+    "sugarG": 1.5,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "cái",
+        "grams": 40.0,
+        "isDefault": true
+      },
+      {
+        "label": "đĩa (5 cái)",
+        "grams": 200.0,
+        "isDefault": false
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "nem-chua",
+    "name": "Nem chua",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 131.0,
+    "proteinG": 18.0,
+    "carbG": 8.0,
+    "fatG": 3.0,
+    "fiberG": 0.3,
+    "sugarG": 3.0,
+    "sodiumMg": 800.0,
+    "servings": [
+      {
+        "label": "cái",
+        "grams": 25.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "nem-nuong",
+    "name": "Nem nướng",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 196.0,
+    "proteinG": 14.0,
+    "carbG": 8.0,
+    "fatG": 12.0,
+    "fiberG": 0.5,
+    "sugarG": 3.0,
+    "sodiumMg": 700.0,
+    "servings": [
+      {
+        "label": "cái",
+        "grams": 50.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "goi-ga-bap-cai",
+    "name": "Gỏi gà bắp cải",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 113.0,
+    "proteinG": 11.0,
+    "carbG": 6.0,
+    "fatG": 5.0,
+    "fiberG": 1.8,
+    "sugarG": 3.5,
+    "sodiumMg": 380.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "medium"
+  },
+  {
+    "slug": "goi-ngo-sen-tom-thit",
+    "name": "Gỏi ngó sen tôm thịt",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 113.0,
+    "proteinG": 9.0,
+    "carbG": 8.0,
+    "fatG": 5.0,
+    "fiberG": 2.0,
+    "sugarG": 4.0,
+    "sodiumMg": 400.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "goi-du-du-kho-bo",
+    "name": "Gỏi đu đủ khô bò",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 127.5,
+    "proteinG": 10.0,
+    "carbG": 14.0,
+    "fatG": 3.5,
+    "fiberG": 2.0,
+    "sugarG": 9.0,
+    "sodiumMg": 450.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  },
+  {
+    "slug": "goi-bo-bop-thau",
+    "name": "Gỏi bò bóp thấu",
+    "category": "Món cuốn & gỏi",
+    "isVietnamese": true,
+    "energyKcal": 113.0,
+    "proteinG": 11.0,
+    "carbG": 6.0,
+    "fatG": 5.0,
+    "fiberG": 1.5,
+    "sugarG": 3.0,
+    "sodiumMg": 420.0,
+    "servings": [
+      {
+        "label": "đĩa",
+        "grams": 200.0,
+        "isDefault": true
+      }
+    ],
+    "source": "Ước tính tổng hợp từ Bảng TPTP Việt Nam (Viện Dinh dưỡng) và USDA FDC; kcal quy đổi Atwater từ macro; khẩu phần theo thực tế phổ biến",
+    "confidence": "low"
+  }
+]
