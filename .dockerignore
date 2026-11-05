@@ -1,0 +1,20 @@
+# Keep the image build reproducible and architecture-correct:
+# - node_modules/.next come from the build stages, never from the host (host native
+#   binaries such as Prisma engines / @node-rs/argon2 would otherwise overwrite the
+#   linux-arm64 ones installed inside the container).
+# - .env* must never enter the build context.
+.git
+.gitignore
+node_modules
+.next
+coverage
+playwright-report
+test-results
+.env
+.env.*
+*.log
+.DS_Store
+docs
+artifacts
+.claude
+.paperclip
